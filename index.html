@@ -9,11 +9,11 @@
             --bg-color: #121212;
             --card-bg: rgba(255, 255, 255, 0.05);
             --text-color: #ffffff;
-            --accent-1: #FF6B6B; /* Rojo/Fitness */
-            --accent-2: #FFD93D; /* Amarillo/Estudio */
-            --accent-3: #4D96FF; /* Azul/Agua */
-            --accent-4: #FFD700; /* Dorado/Medicina */
-            --accent-5: #6BCB77; /* Verde/Japón */
+            --accent-1: #FF6B6B;
+            --accent-2: #FFD93D;
+            --accent-3: #4D96FF;
+            --accent-4: #FFD700;
+            --accent-5: #6BCB77;
         }
 
         body {
@@ -37,7 +37,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Contenedor de las Sagas */
+        /* ESTA ERA LA CLASE IMPORTANTE QUE FALTABA USAR */
         .sagas-container {
             display: flex;
             justify-content: center;
@@ -47,7 +47,6 @@
             max-width: 1200px;
         }
 
-        /* Diseño de las Tarjetas (Sagas) */
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -58,7 +57,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centra el contenido */
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
@@ -71,16 +70,21 @@
             border-color: rgba(255, 255, 255, 0.5);
         }
 
+        /* He mejorado esto para que tu imagen se vea GRANDE y bonita */
         .card img {
-            width: 100%; /* Ajustado para que llene bien la tarjeta si es grande */
-            height: 150px; /* Altura fija para la imagen */
-            object-fit: contain; /* Para que no se recorte feo */
-            margin-bottom: 10px;
+            width: 100%;
+            height: 160px; /* Altura fija para la imagen */
+            object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
+            border-radius: 20px 20px 0 0; /* Redondea solo arriba */
+            position: absolute; /* La pegamos al techo de la carta */
+            top: 0;
+            left: 0;
         }
 
+        /* Ajustamos el texto para que no se choque con la imagen */
         .card h2 {
             font-size: 1.2rem;
-            margin: 0;
+            margin-top: 140px; /* Empujamos el texto hacia abajo */
             z-index: 2;
         }
 
@@ -91,16 +95,14 @@
             padding: 0 10px;
         }
 
-        /* Colores específicos para cada Saga (Borde inferior) */
         .saga-1 { border-bottom: 5px solid var(--accent-1); }
         .saga-2 { border-bottom: 5px solid var(--accent-2); }
         .saga-3 { border-bottom: 5px solid var(--accent-3); }
         .saga-4 { border-bottom: 5px solid var(--accent-4); }
         .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-        /* MODAL (Para mostrar las temporadas) */
         .modal {
-            display: none; /* Oculto por defecto */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -169,31 +171,31 @@
     <div class="sagas-container">
 
         <div class="card saga-1" onclick="openSaga(1)">
-            <img src="img/ascenso.jpg" alt="Saga 1">
+            <img src="img/ascenso.jpg.png" alt="Saga 1">
             <h2>SAGA 1</h2>
             <p>El despertar de la fuerza</p>
         </div>
 
         <div class="card saga-2" onclick="openSaga(2)">
-            <div style="font-size:3rem;">🧠</div>
+            <div style="font-size:3rem; margin-top: -20px;">🧠</div>
             <h2>SAGA 2</h2>
             <p>La mente maestra</p>
         </div>
 
         <div class="card saga-3" onclick="openSaga(3)">
-            <div style="font-size:3rem;">🏊</div>
+            <div style="font-size:3rem; margin-top: -20px;">🏊</div>
             <h2>SAGA 3</h2>
             <p>Nuevos horizontes</p>
         </div>
 
         <div class="card saga-4" onclick="openSaga(4)">
-            <div style="font-size:3rem;">🩺</div>
+            <div style="font-size:3rem; margin-top: -20px;">🩺</div>
             <h2>SAGA 4</h2>
             <p>El camino del sanador</p>
         </div>
 
         <div class="card saga-5" onclick="openSaga(5)">
-            <div style="font-size:3rem;">🇯🇵</div>
+            <div style="font-size:3rem; margin-top: -20px;">🇯🇵</div>
             <h2>SAGA 5</h2>
             <p>Tierra del sol naciente</p>
         </div>
@@ -214,18 +216,15 @@
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
 
-        // Función para abrir la saga y mostrar temporadas
         function openSaga(numero) {
             modalTitle.innerText = "SAGA " + numero;
             modal.style.display = 'flex';
         }
 
-        // Función para cerrar
         function closeModal() {
             modal.style.display = 'none';
         }
 
-        // Cerrar si clicamos fuera de la tarjeta
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
