@@ -37,7 +37,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ESTA ERA LA CLASE IMPORTANTE QUE FALTABA USAR */
         .sagas-container {
             display: flex;
             justify-content: center;
@@ -53,11 +52,12 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             width: 200px;
-            height: 300px;
+            /* CAMBIO 1: Aumentamos la altura total de la carta para dar espacio */
+            height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centra el contenido */
+            justify-content: center;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
@@ -70,21 +70,21 @@
             border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* He mejorado esto para que tu imagen se vea GRANDE y bonita */
         .card img {
             width: 100%;
-            height: 160px; /* Altura fija para la imagen */
-            object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
-            border-radius: 20px 20px 0 0; /* Redondea solo arriba */
-            position: absolute; /* La pegamos al techo de la carta */
+            /* CAMBIO 2: Altura de 200px para que sea cuadrada (200x200) */
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+            position: absolute;
             top: 0;
             left: 0;
         }
 
-        /* Ajustamos el texto para que no se choque con la imagen */
         .card h2 {
             font-size: 1.2rem;
-            margin-top: 140px; /* Empujamos el texto hacia abajo */
+            /* CAMBIO 3: Empujamos el texto más abajo porque la imagen ahora es más grande */
+            margin-top: 220px;
             z-index: 2;
         }
 
@@ -200,7 +200,9 @@
             <p>Tierra del sol naciente</p>
         </div>
 
-    </div> <div id="modal" class="modal">
+    </div>
+
+    <div id="modal" class="modal">
         <div class="modal-content">
             <h2 id="modal-title">Saga X</h2>
             <p>Elige una temporada:</p>
