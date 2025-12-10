@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Géminis</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-color: #ffffff;
+            --accent-1: #FF6B6B; /* Rojo/Fitness */
+            --accent-2: #FFD93D; /* Amarillo/Estudio */
+            --accent-3: #4D96FF; /* Azul/Agua */
+            --accent-4: #FFD700; /* Dorado/Medicina */
+            --accent-5: #6BCB77; /* Verde/Japón */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 40px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Contenedor de las Sagas */
+        .sagas-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        /* Diseño de las Tarjetas (Sagas) */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            width: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 201, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            z-index: 2;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+            color: #aaa;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        /* Colores específicos para cada Saga (Borde inferior) */
+        .saga-1 { border-bottom: 5px solid var(--accent-1); }
+        .saga-2 { border-bottom: 5px solid var(--accent-2); }
+        .saga-3 { border-bottom: 5px solid var(--accent-3); }
+        .saga-4 { border-bottom: 5px solid var(--accent-4); }
+        .saga-5 { border-bottom: 5px solid var(--accent-5); }
+
+        /* MODAL (Para mostrar las temporadas) */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            border: 1px solid #333;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .season-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(90deg, #333, #444);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+
+        .season-btn:hover {
+            background: linear-gradient(90deg, #00C9FF, #92FE9D);
+            color: black;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #888;
+            padding: 5px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>PROYECTO GÉMINIS</h1>
+    <p style="color: #666;">Selecciona una Saga para ver sus Temporadas</p>
+
+    <div class="sagas-container">
+        <div class="card saga-1" onclick="openSaga(1)">
+            <div style="font-size:3rem;">🏋️</div>
+            <h2>SAGA 1</h2>
+            <p>El despertar de la fuerza</p>
+        </div>
+
+        <div class="card saga-2" onclick="openSaga(2)">
+            <div style="font-size:3rem;">🧠</div>
+            <h2>SAGA 2</h2>
+            <p>La mente maestra</p>
+        </div>
+
+        <div class="card saga-3" onclick="openSaga(3)">
+            <div style="font-size:3rem;">🏊</div>
+            <h2>SAGA 3</h2>
+            <p>Nuevos horizontes</p>
+        </div>
+
+        <div class="card saga-4" onclick="openSaga(4)">
+            <div style="font-size:3rem;">🩺</div>
+            <h2>SAGA 4</h2>
+            <p>El camino del sanador</p>
+        </div>
+
+        <div class="card saga-5" onclick="openSaga(5)">
+            <div style="font-size:3rem;">🇯🇵</div>
+            <h2>SAGA 5</h2>
+            <p>Tierra del sol naciente</p>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Saga X</h2>
+            <p>Elige una temporada:</p>
+            
+            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 1')">Temporada 1 (Año 1)</button>
+            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 2')">Temporada 2 (Año 2)</button>
+
+            <button class="close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+
+        // Función para abrir la saga y mostrar temporadas
+        function openSaga(numero) {
+            modalTitle.innerText = "SAGA " + numero;
+            modal.style.display = 'flex';
+        }
+
+        // Función para cerrar
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Cerrar si clicamos fuera de la tarjeta
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
