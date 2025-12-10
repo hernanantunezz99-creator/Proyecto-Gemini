@@ -72,10 +72,10 @@
         }
 
         .card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            object-fit: contain;
+            width: 100%; /* Ajustado para que llene bien la tarjeta si es grande */
+            height: 150px; /* Altura fija para la imagen */
+            object-fit: contain; /* Para que no se recorte feo */
+            margin-bottom: 10px;
         }
 
         .card h2 {
@@ -166,11 +166,13 @@
     <h1>PROYECTO GÉMINIS</h1>
     <p style="color: #666;">Selecciona una Saga para ver sus Temporadas</p>
 
-    <div class="card saga-1" onclick="openSaga(1)">
-    <img src="img/ascenso.jpg" alt="Saga 1">
-    <h2>SAGA 1</h2>
-    <p>El despertar de la fuerza</p>
-</div>
+    <div class="sagas-container">
+
+        <div class="card saga-1" onclick="openSaga(1)">
+            <img src="img/ascenso.jpg" alt="Saga 1">
+            <h2>SAGA 1</h2>
+            <p>El despertar de la fuerza</p>
+        </div>
 
         <div class="card saga-2" onclick="openSaga(2)">
             <div style="font-size:3rem;">🧠</div>
@@ -195,9 +197,8 @@
             <h2>SAGA 5</h2>
             <p>Tierra del sol naciente</p>
         </div>
-    </div>
 
-    <div id="modal" class="modal">
+    </div> <div id="modal" class="modal">
         <div class="modal-content">
             <h2 id="modal-title">Saga X</h2>
             <p>Elige una temporada:</p>
