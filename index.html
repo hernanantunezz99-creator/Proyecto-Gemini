@@ -35,6 +35,7 @@
             background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
         }
 
         .sagas-container {
@@ -51,9 +52,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            width: 200px;
-            /* CAMBIO 1: Aumentamos la altura total de la carta para dar espacio */
-            height: 350px;
+            width: 220px; /* Un poco más ancha para que quepa el texto */
+            height: 380px; /* Más alta para los títulos nuevos */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -72,8 +72,7 @@
 
         .card img {
             width: 100%;
-            /* CAMBIO 2: Altura de 200px para que sea cuadrada (200x200) */
-            height: 200px;
+            height: 220px; /* Imagen cuadrada grande */
             object-fit: cover;
             border-radius: 20px 20px 0 0;
             position: absolute;
@@ -81,20 +80,34 @@
             left: 0;
         }
 
+        /* Estilo para el número de SAGA */
         .card h2 {
-            font-size: 1.2rem;
-            /* CAMBIO 3: Empujamos el texto más abajo porque la imagen ahora es más grande */
-            margin-top: 220px;
+            font-size: 0.9rem;
+            margin-top: 230px; /* Empujamos abajo de la imagen */
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             z-index: 2;
         }
 
-        .card p {
-            font-size: 0.8rem;
-            color: #aaa;
-            text-align: center;
-            padding: 0 10px;
+        /* Estilo para el TÍTULO (Ascenso, Dolor, etc.) */
+        .card h3 {
+            font-size: 1.4rem;
+            margin: 5px 0;
+            color: white;
+            text-transform: uppercase;
+            z-index: 2;
         }
 
+        /* Estilo para los AÑOS */
+        .card p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
+        /* Bordes de colores */
         .saga-1 { border-bottom: 5px solid var(--accent-1); }
         .saga-2 { border-bottom: 5px solid var(--accent-2); }
         .saga-3 { border-bottom: 5px solid var(--accent-3); }
@@ -171,33 +184,38 @@
     <div class="sagas-container">
 
         <div class="card saga-1" onclick="openSaga(1)">
-            <img src="img/ascenso.jpg.png" alt="Saga 1">
+            <img src="img/ascenso.jpg" alt="Saga 1">
             <h2>SAGA 1</h2>
-            <p>El despertar de la fuerza</p>
+            <h3>ASCENSO</h3>
+            <p>2026 - 2027</p>
         </div>
 
         <div class="card saga-2" onclick="openSaga(2)">
-            <div style="font-size:3rem; margin-top: -20px;">🧠</div>
+            <img src="img/dolor.jpg" alt="Saga 2">
             <h2>SAGA 2</h2>
-            <p>La mente maestra</p>
+            <h3>DOLOR</h3>
+            <p>2028 - 2029</p>
         </div>
 
         <div class="card saga-3" onclick="openSaga(3)">
-            <div style="font-size:3rem; margin-top: -20px;">🏊</div>
+            <div style="font-size:4rem; margin-top: -40px;">💀</div>
             <h2>SAGA 3</h2>
-            <p>Nuevos horizontes</p>
+            <h3>MUERTE</h3>
+            <p>2030 - 2031</p>
         </div>
 
         <div class="card saga-4" onclick="openSaga(4)">
-            <div style="font-size:3rem; margin-top: -20px;">🩺</div>
+            <div style="font-size:4rem; margin-top: -40px;">✨</div>
             <h2>SAGA 4</h2>
-            <p>El camino del sanador</p>
+            <h3>RENACIMIENTO</h3>
+            <p>2032 - 2033</p>
         </div>
 
         <div class="card saga-5" onclick="openSaga(5)">
-            <div style="font-size:3rem; margin-top: -20px;">🇯🇵</div>
+            <div style="font-size:4rem; margin-top: -40px;">🌱</div>
             <h2>SAGA 5</h2>
-            <p>Tierra del sol naciente</p>
+            <h3>VIDA</h3>
+            <p>2034 - 2036</p>
         </div>
 
     </div>
@@ -207,8 +225,8 @@
             <h2 id="modal-title">Saga X</h2>
             <p>Elige una temporada:</p>
             
-            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 1')">Temporada 1 (Año 1)</button>
-            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 2')">Temporada 2 (Año 2)</button>
+            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 1')">Temporada 1</button>
+            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 2')">Temporada 2</button>
 
             <button class="close-btn" onclick="closeModal()">Cerrar</button>
         </div>
@@ -219,6 +237,7 @@
         const modalTitle = document.getElementById('modal-title');
 
         function openSaga(numero) {
+            // Aquí puedes personalizar el título del modal según la saga si quieres
             modalTitle.innerText = "SAGA " + numero;
             modal.style.display = 'flex';
         }
