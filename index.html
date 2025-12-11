@@ -42,7 +42,7 @@
             height: auto;
             z-index: -1;
             object-fit: cover;
-            filter: brightness(50%); /* Un poco más oscuro para que la radio resalte */
+            filter: brightness(50%);
         }
 
         h1 {
@@ -61,8 +61,8 @@
             flex-wrap: wrap;
             gap: 20px;
             padding: 40px;
-            /* Dejamos espacio abajo para que no choque con la radio en pantallas pequeñas */
-            padding-bottom: 150px; 
+            /* Espacio extra abajo para que no choque con la radio */
+            padding-bottom: 120px; 
             max-width: 1200px;
         }
 
@@ -134,43 +134,43 @@
         .saga-4 { border-bottom: 5px solid var(--accent-4); }
         .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-        /* --- ESTILOS DE LA RADIO --- */
+        /* --- ESTILOS DE LA RADIO MINI --- */
         .radio-container {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            width: 280px;
-            background: rgba(0, 0, 0, 0.6);
+            width: 200px; /* Mucho más pequeño (antes era 280px) */
+            background: rgba(0, 0, 0, 0.8); /* Fondo más oscuro para que resalte */
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 15px;
-            z-index: 1000; /* Para que siempre esté encima de todo */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
             transition: 0.3s;
         }
 
         .radio-container:hover {
-            background: rgba(0, 0, 0, 0.8);
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.02);
         }
 
         .radio-title {
-            font-size: 0.9rem;
+            font-size: 0.75rem; /* Texto más pequeño */
             font-weight: 600;
-            color: #fff;
+            color: #bbb;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            margin-bottom: 2px;
         }
 
-        /* Puntito rojo que parpadea indicando "EN VIVO" */
         .live-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background-color: #ff4444;
             border-radius: 50%;
             animation: blink 1.5s infinite;
@@ -182,13 +182,13 @@
             100% { opacity: 1; }
         }
 
-        /* Contenedor del video de YouTube (Responsive) */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* Ratio 16:9 */
-            height: 0;
+            /* Forzamos una altura pequeña para que parezca solo un reproductor de audio */
+            height: 100px; 
+            width: 100%;
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .video-wrapper iframe {
@@ -210,7 +210,7 @@
             background: rgba(0, 0, 0, 0.85);
             justify-content: center;
             align-items: center;
-            z-index: 2000; /* Mayor que la radio */
+            z-index: 2000;
             backdrop-filter: blur(8px);
         }
 
@@ -278,10 +278,10 @@
     <div class="radio-container">
         <div class="radio-title">
             <span class="live-dot"></span>
-            RADIO LO-FI / STUDY
+            RADIO / MUSIC
         </div>
         <div class="video-wrapper">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/jfKfPfyJRdk?controls=1&autoplay=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S_MOd40zlYU?controls=1&autoplay=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
