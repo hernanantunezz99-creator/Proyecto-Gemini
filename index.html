@@ -48,10 +48,18 @@
         h1 {
             font-size: 3rem;
             font-weight: 600;
-            margin-top: 80px; /* Un poco más de margen arriba para no chocar con el player */
+            margin-top: 80px;
             text-transform: uppercase;
             letter-spacing: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #eee;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            font-weight: 300;
+            margin-bottom: 20px;
             text-align: center;
         }
 
@@ -60,10 +68,43 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 40px;
-            padding-bottom: 50px; 
+            padding: 20px 40px;
             max-width: 1200px;
         }
+
+        /* --- ESTILOS DE LA CARTA DE INTRODUCCIÓN (NUEVO) --- */
+        .intro-letter {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.7); /* Fondo oscuro para leer bien */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 20px 20px 100px 20px; /* Margen abajo para poder scrollear hasta el final */
+            text-align: center;
+            font-style: italic; /* Cursiva como pediste */
+            line-height: 1.8; /* Espaciado entre líneas elegante */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .intro-letter h2 {
+            font-style: normal; /* El título en normal para que destaque */
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #00C9FF, #92FE9D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .intro-letter p {
+            margin-bottom: 25px;
+            color: #ddd;
+            font-size: 1.05rem;
+        }
+        /* ---------------------------------------------------- */
 
         .card {
             background: rgba(0, 0, 0, 0.5);
@@ -133,12 +174,12 @@
         .saga-4 { border-bottom: 5px solid var(--accent-4); }
         .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-        /* --- ESTILOS DE LA RADIO MINI (VERSIÓN SUPERIOR) --- */
+        /* --- WIDGET DE RADIO --- */
         .radio-container {
             position: fixed;
-            top: 20px;     /* Ahora está arriba */
-            right: 20px;   /* A la derecha */
-            width: 160px;  /* Súper compacto */
+            top: 20px;
+            right: 20px;
+            width: 160px;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -187,7 +228,7 @@
 
         .video-wrapper {
             position: relative;
-            height: 80px; /* Altura mínima para ver los controles */
+            height: 80px;
             width: 100%;
             overflow: hidden;
             border-radius: 8px;
@@ -200,8 +241,8 @@
             width: 100%;
             height: 100%;
         }
-        /* --------------------------- */
 
+        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -285,7 +326,7 @@
     </div>
 
     <h1>PROYECTO GÉMINIS</h1>
-    <p style="color: #eee; text-shadow: 0 1px 2px rgba(0,0,0,0.5); font-weight: 300;">Selecciona una Saga para ver sus Temporadas</p>
+    <p class="subtitle">Selecciona una Saga para ver sus Temporadas</p>
 
     <div class="sagas-container">
         <div class="card saga-1" onclick="openSaga(1)">
@@ -322,6 +363,26 @@
             <h3>VIDA</h3>
             <p>2034 - 2036</p>
         </div>
+    </div>
+
+    <div class="intro-letter">
+        <h2>PROYECTO GÉMINI · Introducción 🌌</h2>
+        
+        <p>Proyecto Gémini es el mapa para llegar a un solo punto en el tiempo: el Hernán de 2036. No es una fantasía bonita ni un vision board genérico; es el retrato concreto del hombre que vas a ser cuando este ciclo termine con éxito. Un hombre que dejó atrás la culpa por procrastinar y la sensación de “algún día” para vivir en un presente donde sus decisiones generan dinero, salud, amor y aventuras casi en automático. El objetivo del ciclo es simple y brutal: si este Hernán existe en 2036, el proyecto se considera completado ✅.</p>
+
+        <p>En esa línea de meta, el Hernán de 2036 es el Emperador de los ingresos pasivos 💰. Vive de un entramado de negocios que trabajan mientras duerme: propiedades en alquiler, una residencia estudiantil siempre llena de gurises que estudian como él lo hizo, un local de masajes donde ya no pone las manos pero sí firma los cheques, un gimnasio que vibra de pesas y música, un restaurante que se vuelve punto de encuentro y un centro de entretenimiento con arcades, bolos y pool donde otras personas van a divertirse mientras él mira los números crecer. Paralelamente, sus creaciones digitales sostienen el imperio: apps útiles que la gente usa todos los días, videojuegos indie con alma de Sega Genesis que pagan facturas desde Steam y un negocio de impresión 3D que ahora manejan sus hijos mientras él solo supervisa. La vieja excusa de “no tengo plata” murió; la reemplazó una estructura que imprime dinero porque antes imprimió disciplina.</p>
+
+        <p>En el plano intelectual, el Hernán de 2036 es Doctor y Psicólogo a la vez 🧠, un profesional raro y necesario. Es un médico joven pero respetado, de esos a los que la comunidad llama por nombre de pila y no solo por el título. Al mismo tiempo es Licenciado en Psicología, capaz de leer un electrocardiograma y también un silencio incómodo en sesión. Cuando quiere, sigue atendiendo algunos pacientes, integrando cuerpo y mente en una sola mirada. Todo eso lo hace, además, en ocho idiomas: se mueve entre español, inglés, alemán, japonés, francés, ruso, portugués e italiano como quien cambia de pestaña en el navegador. Estudiar ya no es obligación: es una herramienta que le abrió el mundo 🌍.</p>
+
+        <p>En lo físico, el Hernán de 2036 es atleta estético y artista del movimiento 💪. Lleva un cuerpo preparado para competir en Men’s Physique, con un porcentaje de grasa ridículamente bajo y músculos construidos serie a serie cuando nadie miraba. La fuerza no es solo de gimnasio: domina taekwondo hasta la cinta negra, se ha curtido a golpes en Muay Thai y boxeo, entiende la eficiencia del Kenpo, la técnica del jiu jitsu y la calma quirúrgica del tiro con arco. Entre combate y combate baila salsa y bachata con seguridad, canta afinado, toca guitarra y piano como quien respira y pinta cuadros por placer, no por reconocimiento. De chico soñaba con “estar bien físicamente”; a los 36, su cuerpo es la prueba visible de una mente que no se rindió.</p>
+
+        <p>En su vida personal, el Hernán de 2036 vive una cotidianeidad espectacular 🏡. Está casado con la mujer que apostó por él cuando todavía era caos y potencial, no imperio. Tienen dos hijos que crecen en una casa enorme en Maldonado, con sótano de dos pisos lleno de consolas, máquinas arcade y proyectos raros; un patio amplio y un jardín que es casi un pequeño bosque. Conviven tres gatos y tres perros, todos parte del desorden amoroso de la familia. Afuera lo esperan una moto, dos autos y una bicicleta eléctrica que usa para escaparse a la rambla o perderse por la ciudad. Ha viajado al menos a cinco países y vuelve a Japón cada tanto, ya no como turista perdido sino como alguien que va a visitar un viejo sueño cumplido. En su tiempo libre se pone al día con los animes que marcaron generaciones, repasa películas de culto y se dedica a recorrer cafeterías por todo Uruguay, dejando reseñas detalladas mientras disfruta un buen café ☕ antes de salir a bailar.</p>
+
+        <p>Todo eso se complementa con el Hernán aventurero, el que se prometió no llegar a los 36 siendo solo un trabajador exitoso pero aburrido. En estos diez años saltó de un avión en paracaídas y se lanzó al vacío en bungee jumping para recordarle al cerebro quién manda. Vio la aurora austral desde el fin del mundo y caminó sobre el espejo del Salar de Uyuni. Llegó a Machu Picchu al amanecer después del Camino Inca, cruzó Uruguay en bicicleta, hizo trekking duro en lugares como Torres del Paine o Laguna 69 y probó el snowboard o el esquí en montañas donde el frío muerde de verdad. Se metió en África, aunque fuera en versión low cost, para ver animales salvajes sin jaulas; durmió en un desierto sin luces humanas, buceó entre arrecifes imposibles, voló en helicóptero, sobrevoló las Cataratas del Iguazú antes de recorrerlas a pie, hizo roadtrips largos sin mirar el reloj y se quedó en silencio frente a ballenas que pasaban tan cerca que el pecho le vibraba. No son caprichos turísticos: son pruebas de que vivió con intención ✈️.</p>
+
+        <p>Ese es el punto de llegada del Proyecto Gémini: un Hernán de 2036 que unió dinero, salud, mente, arte, familia y aventura en una misma vida coherente. No es un héroe perfecto, pero sí un hombre que eligió dejar de soñar “para algún día” y se organizó en ciclos, sagas, temporadas, arcos y fases para construirlo paso a paso. Cada decisión que tomes dentro del proyecto tiene una sola pregunta de fondo: ¿acerca o aleja a este Hernán de 2036?</p>
+
+        <p>Cuando la respuesta sea “lo alcanza”, sabrás que el Ciclo está completo. 🔚🌟</p>
     </div>
 
     <div id="modal" class="modal">
