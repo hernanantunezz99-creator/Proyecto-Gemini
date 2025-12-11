@@ -48,19 +48,28 @@
         h1 {
             font-size: 3rem;
             font-weight: 600;
-            margin-top: 80px;
+            /* CAMBIO: Reduje esto de 80px a 40px para subir todo el contenido */
+            margin-top: 40px; 
             text-transform: uppercase;
             letter-spacing: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             text-align: center;
+            line-height: 1.2; /* Mejor interlineado en el título */
         }
 
         .subtitle {
             color: #eee;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
             font-weight: 300;
-            margin-bottom: 20px;
+            /* CAMBIO: Ajustes para la frase larga */
+            margin-top: 10px;
+            margin-bottom: 10px; /* Menos espacio abajo */
             text-align: center;
+            font-style: italic; /* Cursiva */
+            max-width: 800px; /* Para que no se estire demasiado a los lados */
+            padding: 0 20px;
+            font-size: 0.95rem;
+            line-height: 1.5; /* Interlineado cómodo para leer */
         }
 
         .sagas-container {
@@ -68,28 +77,29 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 20px 40px;
+            /* CAMBIO: Reduje el padding superior de 40px a 10px para pegar más las cartas al texto */
+            padding: 10px 40px 40px 40px; 
             max-width: 1200px;
         }
 
-        /* --- ESTILOS DE LA CARTA DE INTRODUCCIÓN (NUEVO) --- */
+        /* --- ESTILOS DE LA CARTA DE INTRODUCCIÓN --- */
         .intro-letter {
             max-width: 900px;
-            background: rgba(0, 0, 0, 0.7); /* Fondo oscuro para leer bien */
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 50px;
-            margin: 20px 20px 100px 20px; /* Margen abajo para poder scrollear hasta el final */
+            margin: 0 20px 100px 20px;
             text-align: center;
-            font-style: italic; /* Cursiva como pediste */
-            line-height: 1.8; /* Espaciado entre líneas elegante */
+            font-style: italic;
+            line-height: 1.8;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             animation: fadeIn 1.5s ease;
         }
 
         .intro-letter h2 {
-            font-style: normal; /* El título en normal para que destaque */
+            font-style: normal;
             font-weight: 600;
             text-transform: uppercase;
             margin-bottom: 30px;
@@ -104,7 +114,6 @@
             color: #ddd;
             font-size: 1.05rem;
         }
-        /* ---------------------------------------------------- */
 
         .card {
             background: rgba(0, 0, 0, 0.5);
@@ -326,7 +335,10 @@
     </div>
 
     <h1>PROYECTO GÉMINIS</h1>
-    <p class="subtitle">Selecciona una Saga para ver sus Temporadas</p>
+    
+    <p class="subtitle">
+        “Piensa constantemente en el tipo de hombre que deseas ser y actúa en consecuencia en cada una de tus acciones. Tu carácter no se forma en los grandes momentos, sino en las decisiones pequeñas que tomas cuando nadie te está mirando.”
+    </p>
 
     <div class="sagas-container">
         <div class="card saga-1" onclick="openSaga(1)">
