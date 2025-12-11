@@ -45,31 +45,38 @@
             filter: brightness(50%);
         }
 
+        /* --- PANTALLA PRINCIPAL (MAIN MENU) --- */
+        #main-menu {
+            display: flex; /* Se muestra por defecto */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            transition: opacity 0.5s ease;
+        }
+
         h1 {
             font-size: 3rem;
             font-weight: 600;
-            /* CAMBIO: Reduje esto de 80px a 40px para subir todo el contenido */
             margin-top: 40px; 
             text-transform: uppercase;
             letter-spacing: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             text-align: center;
-            line-height: 1.2; /* Mejor interlineado en el título */
+            line-height: 1.2;
         }
 
         .subtitle {
             color: #eee;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
             font-weight: 300;
-            /* CAMBIO: Ajustes para la frase larga */
             margin-top: 10px;
-            margin-bottom: 10px; /* Menos espacio abajo */
+            margin-bottom: 10px;
             text-align: center;
-            font-style: italic; /* Cursiva */
-            max-width: 800px; /* Para que no se estire demasiado a los lados */
+            font-style: italic;
+            max-width: 800px;
             padding: 0 20px;
             font-size: 0.95rem;
-            line-height: 1.5; /* Interlineado cómodo para leer */
+            line-height: 1.5;
         }
 
         .sagas-container {
@@ -77,12 +84,138 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
-            /* CAMBIO: Reduje el padding superior de 40px a 10px para pegar más las cartas al texto */
             padding: 10px 40px 40px 40px; 
             max-width: 1200px;
         }
 
-        /* --- ESTILOS DE LA CARTA DE INTRODUCCIÓN --- */
+        /* --- PANTALLA DE TEMPORADA (OCULTA POR DEFECTO) --- */
+        #season-view {
+            display: none; /* Oculto al inicio */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .season-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .season-header h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Caja de Objetivos */
+        .objectives-box {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .objectives-box h3 {
+            color: var(--accent-1); /* Color destacado */
+            text-transform: uppercase;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .objectives-box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .objectives-box li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .objectives-box li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        /* Contenedor de Arcos */
+        .arcs-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .arcs-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Tarjeta de Arco (Más pequeña que la de Saga) */
+        .arc-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            width: 250px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .arc-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+        }
+
+        .arc-card h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .arc-card p {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        /* Botón Volver */
+        .back-btn {
+            margin-top: 50px;
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        /* --- ESTILOS GENERALES Y MODALES --- */
         .intro-letter {
             max-width: 900px;
             background: rgba(0, 0, 0, 0.7);
@@ -109,12 +242,6 @@
             letter-spacing: 2px;
         }
 
-        .intro-letter p {
-            margin-bottom: 25px;
-            color: #ddd;
-            font-size: 1.05rem;
-        }
-
         .card {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -132,188 +259,39 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 20px 20px 0 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .card h2 {
-            font-size: 0.9rem;
-            font-weight: 300;
-            margin-top: 230px;
-            color: #ddd;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            z-index: 2;
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 5px 0;
-            color: white;
-            text-transform: uppercase;
-            z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: #ccc;
-            margin: 0;
-            padding-bottom: 20px;
-        }
-
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); border-color: rgba(255, 255, 255, 0.8); }
+        .card img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; position: absolute; top: 0; left: 0; }
+        .card h2 { font-size: 0.9rem; font-weight: 300; margin-top: 230px; color: #ddd; text-transform: uppercase; letter-spacing: 2px; z-index: 2; }
+        .card h3 { font-size: 1.4rem; font-weight: 600; margin: 5px 0; color: white; text-transform: uppercase; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .card p { font-size: 0.9rem; font-weight: 300; color: #ccc; margin: 0; padding-bottom: 20px; }
         .saga-1 { border-bottom: 5px solid var(--accent-1); }
         .saga-2 { border-bottom: 5px solid var(--accent-2); }
         .saga-3 { border-bottom: 5px solid var(--accent-3); }
         .saga-4 { border-bottom: 5px solid var(--accent-4); }
         .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-        /* --- WIDGET DE RADIO --- */
+        /* WIDGET RADIO */
         .radio-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 160px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 8px;
-            z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            transition: 0.3s;
-            opacity: 0.9;
+            position: fixed; top: 20px; right: 20px; width: 160px;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+            padding: 8px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            display: flex; flex-direction: column; gap: 5px; transition: 0.3s; opacity: 0.9;
         }
+        .radio-container:hover { opacity: 1; transform: scale(1.05); background: rgba(0, 0, 0, 0.9); }
+        .radio-title { font-size: 0.65rem; font-weight: 600; color: #ccc; display: flex; justify-content: space-between; align-items: center; padding: 0 4px; }
+        .live-badge { font-size: 0.5rem; background: #ff4444; color: white; padding: 1px 4px; border-radius: 4px; font-weight: bold; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .video-wrapper { position: relative; height: 80px; width: 100%; overflow: hidden; border-radius: 8px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .radio-container:hover {
-            opacity: 1;
-            transform: scale(1.05);
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        .radio-title {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #ccc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 4px;
-        }
-
-        .live-badge {
-            font-size: 0.5rem;
-            background: #ff4444;
-            color: white;
-            padding: 1px 4px;
-            border-radius: 4px;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .video-wrapper {
-            position: relative;
-            height: 80px;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* --- MODAL --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal-content {
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-            border: 1px solid #333;
-            animation: fadeIn 0.3s ease;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .season-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: linear-gradient(90deg, #333, #444);
-            border: none;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-family: 'Poppins', sans-serif;
-            transition: 0.2s;
-        }
-
-        .season-btn:hover {
-            background: linear-gradient(90deg, #00C9FF, #92FE9D);
-            color: black;
-            font-weight: bold;
-        }
-
-        .close-btn {
-            margin-top: 20px;
-            background: transparent;
-            border: 1px solid #555;
-            color: #888;
-            padding: 5px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-        }
+        /* MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
+        .modal-content { background: #1e1e1e; padding: 40px; border-radius: 20px; text-align: center; width: 80%; max-width: 500px; border: 1px solid #333; animation: fadeIn 0.3s ease; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .season-btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: linear-gradient(90deg, #333, #444); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-family: 'Poppins', sans-serif; transition: 0.2s; }
+        .season-btn:hover { background: linear-gradient(90deg, #00C9FF, #92FE9D); color: black; font-weight: bold; }
+        .close-btn { margin-top: 20px; background: transparent; border: 1px solid #555; color: #888; padding: 5px 20px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; }
 
     </style>
 </head>
@@ -321,80 +299,85 @@
 
     <video autoplay muted loop playsinline id="video-background">
         <source src="img/fondo.mp4" type="video/mp4">
-        Tu navegador no soporta video HTML5.
     </video>
 
     <div class="radio-container">
-        <div class="radio-title">
-            MUSIC
-            <span class="live-badge">LIVE</span>
-        </div>
+        <div class="radio-title">MUSIC <span class="live-badge">LIVE</span></div>
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S_MOd40zlYU?controls=1&autoplay=1&mute=0" title="YouTube audio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
-    <h1>PROYECTO GÉMINIS</h1>
-    
-    <p class="subtitle">
-        “Piensa constantemente en el tipo de hombre que deseas ser y actúa en consecuencia en cada una de tus acciones. Tu carácter no se forma en los grandes momentos, sino en las decisiones pequeñas que tomas cuando nadie te está mirando.”
-    </p>
+    <div id="main-menu">
+        <h1>PROYECTO GÉMINIS</h1>
+        <p class="subtitle">“Piensa constantemente en el tipo de hombre que deseas ser y actúa en consecuencia...”</p>
 
-    <div class="sagas-container">
-        <div class="card saga-1" onclick="openSaga(1)">
-            <img src="img/ascenso.png" alt="Saga 1">
-            <h2>SAGA 1</h2>
-            <h3>ASCENSO</h3>
-            <p>2026 - 2027</p>
+        <div class="sagas-container">
+            <div class="card saga-1" onclick="openSaga(1)">
+                <img src="img/ascenso.png" alt="Saga 1">
+                <h2>SAGA 1</h2><h3>ASCENSO</h3><p>2026 - 2027</p>
+            </div>
+            <div class="card saga-2" onclick="openSaga(2)">
+                <img src="img/dolor.jpg" alt="Saga 2">
+                <h2>SAGA 2</h2><h3>DOLOR</h3><p>2028 - 2029</p>
+            </div>
+            <div class="card saga-3" onclick="openSaga(3)">
+                <img src="img/muerte.png" alt="Saga 3">
+                <h2>SAGA 3</h2><h3>MUERTE</h3><p>2030 - 2031</p>
+            </div>
+            <div class="card saga-4" onclick="openSaga(4)">
+                <img src="img/renacimiento.png" alt="Saga 4">
+                <h2>SAGA 4</h2><h3>RENACIMIENTO</h3><p>2032 - 2033</p>
+            </div>
+            <div class="card saga-5" onclick="openSaga(5)">
+                <img src="img/vida.png" alt="Saga 5">
+                <h2>SAGA 5</h2><h3>VIDA</h3><p>2034 - 2036</p>
+            </div>
         </div>
 
-        <div class="card saga-2" onclick="openSaga(2)">
-            <img src="img/dolor.jpg" alt="Saga 2">
-            <h2>SAGA 2</h2>
-            <h3>DOLOR</h3>
-            <p>2028 - 2029</p>
-        </div>
-
-        <div class="card saga-3" onclick="openSaga(3)">
-            <img src="img/muerte.png" alt="Saga 3">
-            <h2>SAGA 3</h2>
-            <h3>MUERTE</h3>
-            <p>2030 - 2031</p>
-        </div>
-
-        <div class="card saga-4" onclick="openSaga(4)">
-            <img src="img/renacimiento.png" alt="Saga 4">
-            <h2>SAGA 4</h2>
-            <h3>RENACIMIENTO</h3>
-            <p>2032 - 2033</p>
-        </div>
-
-        <div class="card saga-5" onclick="openSaga(5)">
-            <img src="img/vida.png" alt="Saga 5">
-            <h2>SAGA 5</h2>
-            <h3>VIDA</h3>
-            <p>2034 - 2036</p>
+        <div class="intro-letter">
+            <h2>PROYECTO GÉMINI · Introducción 🌌</h2>
+            <p>Proyecto Gémini es el mapa para llegar a un solo punto en el tiempo: el Hernán de 2036...</p>
+            <p>Cuando la respuesta sea “lo alcanza”, sabrás que el Ciclo está completo. 🔚🌟</p>
         </div>
     </div>
 
-    <div class="intro-letter">
-        <h2>PROYECTO GÉMINI</h2>
-        
-        <p>Proyecto Gémini es el mapa para llegar a un solo punto en el tiempo: el Hernán de 2036. No es una fantasía bonita ni un vision board genérico; es el retrato concreto del hombre que vas a ser cuando este ciclo termine con éxito. Un hombre que dejó atrás la culpa por procrastinar y la sensación de “algún día” para vivir en un presente donde sus decisiones generan dinero, salud, amor y aventuras casi en automático. El objetivo del ciclo es simple y brutal: si este Hernán existe en 2036, el proyecto se considera completado ✅.</p>
+    <div id="season-view">
+        <div class="season-header">
+            <h2 id="season-title">TEMPORADA 1</h2>
+            <p style="color:#aaa;">AÑO 1: CONSTRUCCIÓN DE LOS CIMIENTOS</p>
+        </div>
 
-        <p>En esa línea de meta, el Hernán de 2036 es el Emperador de los ingresos pasivos 💰. Vive de un entramado de negocios que trabajan mientras duerme: propiedades en alquiler, una residencia estudiantil siempre llena de gurises que estudian como él lo hizo, un local de masajes donde ya no pone las manos pero sí firma los cheques, un gimnasio que vibra de pesas y música, un restaurante que se vuelve punto de encuentro y un centro de entretenimiento con arcades, bolos y pool donde otras personas van a divertirse mientras él mira los números crecer. Paralelamente, sus creaciones digitales sostienen el imperio: apps útiles que la gente usa todos los días, videojuegos indie con alma de Sega Genesis que pagan facturas desde Steam y un negocio de impresión 3D que ahora manejan sus hijos mientras él solo supervisa. La vieja excusa de “no tengo plata” murió; la reemplazó una estructura que imprime dinero porque antes imprimió disciplina.</p>
+        <div class="objectives-box">
+            <h3>🎯 OBJETIVOS PRINCIPALES</h3>
+            <ul id="season-objectives">
+                <li>Establecer rutina de entrenamiento (Gym + Artes Marciales).</li>
+                <li>Generar los primeros ingresos extra con impresión 3D.</li>
+                <li>Iniciar estudios de Japonés (Nivel N5).</li>
+                <li>Leer 12 libros de desarrollo personal y finanzas.</li>
+            </ul>
+        </div>
 
-        <p>En el plano intelectual, el Hernán de 2036 es Doctor y Psicólogo a la vez 🧠, un profesional raro y necesario. Es un médico joven pero respetado, de esos a los que la comunidad llama por nombre de pila y no solo por el título. Al mismo tiempo es Licenciado en Psicología, capaz de leer un electrocardiograma y también un silencio incómodo en sesión. Cuando quiere, sigue atendiendo algunos pacientes, integrando cuerpo y mente en una sola mirada. Todo eso lo hace, además, en ocho idiomas: se mueve entre español, inglés, alemán, japonés, francés, ruso, portugués e italiano como quien cambia de pestaña en el navegador. Estudiar ya no es obligación: es una herramienta que le abrió el mundo 🌍.</p>
+        <h3 class="arcs-title">SELECCIONA UN ARCO</h3>
+        <div class="arcs-container">
+            <div class="arc-card" onclick="alert('Entrando al Arco 1...')">
+                <h4>ARCO 1</h4>
+                <p>Enero - Abril</p>
+                <div style="font-size:1.5rem; margin-top:5px;">🧱</div>
+            </div>
+            <div class="arc-card" onclick="alert('Entrando al Arco 2...')">
+                <h4>ARCO 2</h4>
+                <p>Mayo - Agosto</p>
+                <div style="font-size:1.5rem; margin-top:5px;">🌱</div>
+            </div>
+            <div class="arc-card" onclick="alert('Entrando al Arco 3...')">
+                <h4>ARCO 3</h4>
+                <p>Septiembre - Diciembre</p>
+                <div style="font-size:1.5rem; margin-top:5px;">🚀</div>
+            </div>
+        </div>
 
-        <p>En lo físico, el Hernán de 2036 es atleta estético y artista del movimiento 💪. Lleva un cuerpo preparado para competir en Men’s Physique, con un porcentaje de grasa ridículamente bajo y músculos construidos serie a serie cuando nadie miraba. La fuerza no es solo de gimnasio: domina taekwondo hasta la cinta negra, se ha curtido a golpes en Muay Thai y boxeo, entiende la eficiencia del Kenpo, la técnica del jiu jitsu y la calma quirúrgica del tiro con arco. Entre combate y combate baila salsa y bachata con seguridad, canta afinado, toca guitarra y piano como quien respira y pinta cuadros por placer, no por reconocimiento. De chico soñaba con “estar bien físicamente”; a los 36, su cuerpo es la prueba visible de una mente que no se rindió.</p>
-
-        <p>En su vida personal, el Hernán de 2036 vive una cotidianeidad espectacular 🏡. Está casado con la mujer que apostó por él cuando todavía era caos y potencial, no imperio. Tienen dos hijos que crecen en una casa enorme en Maldonado, con sótano de dos pisos lleno de consolas, máquinas arcade y proyectos raros; un patio amplio y un jardín que es casi un pequeño bosque. Conviven tres gatos y tres perros, todos parte del desorden amoroso de la familia. Afuera lo esperan una moto, dos autos y una bicicleta eléctrica que usa para escaparse a la rambla o perderse por la ciudad. Ha viajado al menos a cinco países y vuelve a Japón cada tanto, ya no como turista perdido sino como alguien que va a visitar un viejo sueño cumplido. En su tiempo libre se pone al día con los animes que marcaron generaciones, repasa películas de culto y se dedica a recorrer cafeterías por todo Uruguay, dejando reseñas detalladas mientras disfruta un buen café ☕ antes de salir a bailar.</p>
-
-        <p>Todo eso se complementa con el Hernán aventurero, el que se prometió no llegar a los 36 siendo solo un trabajador exitoso pero aburrido. En estos diez años saltó de un avión en paracaídas y se lanzó al vacío en bungee jumping para recordarle al cerebro quién manda. Vio la aurora austral desde el fin del mundo y caminó sobre el espejo del Salar de Uyuni. Llegó a Machu Picchu al amanecer después del Camino Inca, cruzó Uruguay en bicicleta, hizo trekking duro en lugares como Torres del Paine o Laguna 69 y probó el snowboard o el esquí en montañas donde el frío muerde de verdad. Se metió en África, aunque fuera en versión low cost, para ver animales salvajes sin jaulas; durmió en un desierto sin luces humanas, buceó entre arrecifes imposibles, voló en helicóptero, sobrevoló las Cataratas del Iguazú antes de recorrerlas a pie, hizo roadtrips largos sin mirar el reloj y se quedó en silencio frente a ballenas que pasaban tan cerca que el pecho le vibraba. No son caprichos turísticos: son pruebas de que vivió con intención ✈️.</p>
-
-        <p>Ese es el punto de llegada del Proyecto Gémini: un Hernán de 2036 que unió dinero, salud, mente, arte, familia y aventura en una misma vida coherente. No es un héroe perfecto, pero sí un hombre que eligió dejar de soñar “para algún día” y se organizó en ciclos, sagas, temporadas, arcos y fases para construirlo paso a paso. Cada decisión que tomes dentro del proyecto tiene una sola pregunta de fondo: ¿acerca o aleja a este Hernán de 2036?</p>
-
-        <p>Cuando la respuesta sea “lo alcanza”, sabrás que el Ciclo está completo. 🔚🌟</p>
+        <button class="back-btn" onclick="goBack()">⬅ Volver al Menú</button>
     </div>
 
     <div id="modal" class="modal">
@@ -402,8 +385,8 @@
             <h2 id="modal-title">Saga X</h2>
             <p>Elige una temporada:</p>
             
-            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 1')">Temporada 1</button>
-            <button class="season-btn" onclick="alert('Aquí irían los Arcos de la Temporada 2')">Temporada 2</button>
+            <button class="season-btn" onclick="openSeasonView(1)">Temporada 1 (Año 1)</button>
+            <button class="season-btn" onclick="openSeasonView(2)">Temporada 2 (Año 2)</button>
 
             <button class="close-btn" onclick="closeModal()">Cerrar</button>
         </div>
@@ -412,14 +395,34 @@
     <script>
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
+        const mainMenu = document.getElementById('main-menu');
+        const seasonView = document.getElementById('season-view');
 
+        // Abre el modal pequeño para elegir Temporada 1 o 2
         function openSaga(numero) {
             modalTitle.innerText = "SAGA " + numero;
             modal.style.display = 'flex';
         }
 
+        // Cierra el modal
         function closeModal() {
             modal.style.display = 'none';
+        }
+
+        // ESTA ES LA MAGIA: Oculta el menú y muestra la temporada
+        function openSeasonView(seasonNum) {
+            closeModal(); // Cierra el modal
+            mainMenu.style.display = 'none'; // Oculta lo de atrás
+            seasonView.style.display = 'flex'; // Muestra la nueva pantalla
+            
+            // Aquí podrías cambiar el texto dinámicamente si quisieras
+            document.getElementById('season-title').innerText = "TEMPORADA " + seasonNum;
+        }
+
+        // Botón volver
+        function goBack() {
+            seasonView.style.display = 'none';
+            mainMenu.style.display = 'flex';
         }
 
         window.onclick = function(event) {
