@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -97,7 +97,7 @@
             border-radius: 20px;
             padding: 50px;
             margin: 20px 20px 100px 20px;
-            text-align: center; /* Texto centrado como pediste */
+            text-align: center; 
             font-style: italic;
             line-height: 1.8;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
@@ -119,6 +119,8 @@
             margin-bottom: 25px;
             color: #ddd;
             font-size: 1.05rem;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* --- TARJETAS DE SAGA --- */
@@ -150,7 +152,7 @@
         .saga-4 { border-bottom: 5px solid var(--accent-4); }
         .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-        /* --- WIDGET RADIO (ARRIBA DERECHA) --- */
+        /* --- WIDGET RADIO --- */
         .radio-container {
             position: fixed; top: 20px; right: 20px; width: 160px;
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
@@ -167,20 +169,72 @@
 
         /* --- VISTA DE TEMPORADA --- */
         #season-view { display: none; flex-direction: column; align-items: center; width: 100%; padding: 40px; animation: fadeIn 0.5s ease; }
-        .season-header { text-align: center; margin-bottom: 40px; }
-        .season-header h2 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .objectives-box { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 30px; max-width: 800px; width: 90%; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .objectives-box h3 { color: var(--accent-1); text-transform: uppercase; margin-top: 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .objectives-box ul { list-style-type: none; padding: 0; }
-        .objectives-box li { margin: 10px 0; padding-left: 20px; position: relative; }
-        .objectives-box li::before { content: "➤"; position: absolute; left: 0; color: var(--accent-1); }
+        .season-header { text-align: center; margin-bottom: 30px; }
+        .season-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
+        /* CAJA DE OBJETIVOS */
+        .objectives-box { 
+            background: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 20px; 
+            padding: 40px; 
+            max-width: 900px; 
+            width: 95%; 
+            margin-bottom: 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            text-align: left;
+        }
+        
+        .objective-group { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .objective-group:last-child { border-bottom: none; margin-bottom: 0; }
+        
+        .objective-group h4 { 
+            font-size: 1.2rem; 
+            color: var(--accent-1); 
+            margin: 0 0 5px 0; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+        
+        .metric {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .objectives-box ul { list-style-type: none; padding: 0; }
+        .objectives-box li { 
+            margin: 8px 0; 
+            padding-left: 25px; 
+            position: relative; 
+            font-size: 0.95rem; 
+            line-height: 1.4;
+            color: #ddd;
+        }
+        .objectives-box li::before { content: "✅"; position: absolute; left: 0; font-size: 0.9rem; }
+        
+        .sub-category {
+            font-weight: 600;
+            color: #fff;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            display: block;
+            text-decoration: underline decoration-color: var(--accent-3);
+        }
+
+        /* ARCOS */
         .arcs-title { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
         .arc-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 15px; width: 250px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .arc-card:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: var(--accent-1); }
         .back-btn { margin-top: 50px; background: transparent; border: 1px solid white; color: white; padding: 10px 30px; border-radius: 50px; cursor: pointer; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         .back-btn:hover { background: white; color: black; }
+
+        /* Contenedores de contenido específico por temporada (JS los alterna) */
+        .season-content { animation: fadeIn 0.5s ease; }
 
         /* --- MODAL --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
@@ -257,37 +311,207 @@
     </div>
 
     <div id="season-view">
-        <div class="season-header">
-            <h2 id="season-title">TEMPORADA 1</h2>
-            <p style="color:#aaa;">AÑO 1: CONSTRUCCIÓN DE LOS CIMIENTOS</p>
+        
+        <div id="content-season-1" class="season-content">
+            <div class="season-header">
+                <h2>TEMPORADA 1: 2026 — "LA TRINCHERA"</h2>
+            </div>
+            <div class="objectives-box">
+                <div class="objective-group">
+                    <h4>🏥 Objetivo 1: Medicina (4º Año)</h4>
+                    <span class="metric">Métrica Global: Aprobar 4 materias (Sin dejar previas).</span>
+                    <ul>
+                        <li>Aprobar Medicina en el Primer Nivel de Atención (PNA).</li>
+                        <li>Aprobar Bases Científicas de la Patología.</li>
+                        <li>Aprobar Pediatría.</li>
+                        <li>Aprobar Ginecología y Neonatología.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🧠 Objetivo 2: Psicología (2º Año)</h4>
+                    <span class="metric">Métrica Global: Aprobar 11 materias (Completar 3º y 4º semestre).</span>
+                    <ul>
+                        <li>Aprobar Psicología Social.</li>
+                        <li>Aprobar Psicología, Sujeto y Aprendizaje.</li>
+                        <li>Aprobar Métodos y Técnicas Cualitativas.</li>
+                        <li>Aprobar Ética y Deontología.</li>
+                        <li>Aprobar Articulación de Saberes III: Clínica y Subjetividad.</li>
+                        <li>Aprobar Idiomas y Cooperación Institucional.</li>
+                        <li>Aprobar Clínica I: Fundamentos Psicoanalíticos.</li>
+                        <li>Aprobar Psicología y Salud.</li>
+                        <li>Aprobar Métodos y Técnicas Cuantitativas.</li>
+                        <li>Aprobar Diseño de Proyectos.</li>
+                        <li>Aprobar Herramientas de la Psicología Social y Clínica.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>👶 Objetivo 3: Rutina de Coparentalidad</h4>
+                    <span class="metric">Métrica Global: Vínculo sólido y cumplimiento total desde el nacimiento (Mayo).</span>
+                    <ul>
+                        <li>Acordar verbalmente pautas de crianza y visitas con la madre.</li>
+                        <li>Pagar el 100% de los aportes económicos mensuales en fecha.</li>
+                        <li>Asistir al 100% de los controles pediátricos obligatorios.</li>
+                        <li>Sacar 1 foto semanal del bebé para crear un Timelapse de crecimiento.</li>
+                        <li>Estimular/Enseñar una habilidad o juego nuevo cada semana.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🗣️ Objetivo 4: Idiomas</h4>
+                    <span class="metric">Métrica Global: Certificación C1 en Inglés y Base B1 en Alemán.</span>
+                    <ul>
+                        <li>Inglés: Obtener el Certificado C1 (Advanced) antes de fin de año.</li>
+                        <li>Inglés: Leer 2 papers médicos/académicos por semana (~100 al año).</li>
+                        <li>Inglés: Realizar 1 práctica de escritura (writing/essay) al mes.</li>
+                        <li>Alemán: Mantener racha de 365 días en Duolingo/Busuu.</li>
+                        <li>Alemán: Completar módulos nivel B1 y alcanzar 1.500 palabras.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>💻 Objetivo 5: Programación Básica Sólida</h4>
+                    <span class="metric">Métrica Global: Lógica dominada y 2 proyectos funcionales.</span>
+                    <ul>
+                        <li>Dominar sintaxis de Python y JavaScript.</li>
+                        <li>Comprender estructura HTML/CSS.</li>
+                        <li>Familiarizarse con un framework (Flask o React básico).</li>
+                        <li>Subir 2 proyectos funcionales a GitHub.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🏋️ Objetivo 6: Rutina de Entrenamiento</h4>
+                    <span class="metric">Métrica Global: Frecuencia 5-6 días/sem y Cargas de Fuerza ×1.75.</span>
+                    <ul>
+                        <span class="sub-category">Tren Superior (Empuje):</span>
+                        <li>Aperturas: 95 kg</li>
+                        <li>Pecho Inclinado: 85 kg</li>
+                        <li>Press Militar Máq: 85 kg</li>
+                        <li>Tríceps Máq: 110 kg</li>
+                        <span class="sub-category">Tren Superior (Tracción):</span>
+                        <li>Jalón Polea: 75 kg</li>
+                        <li>Remo Máquina: 100 kg</li>
+                        <li>Curl Bíceps (Mancuerna): 15 kg c/u</li>
+                        <span class="sub-category">Tren Inferior:</span>
+                        <li>Prensa Pierna: 170 kg</li>
+                        <li>Extensión: 100 kg</li>
+                        <li>Hip Thrust: 110 kg</li>
+                        <span class="sub-category">Calistenia (PDFa 2026):</span>
+                        <li>Completar rutina: 5 min Plancha, 20 Dominadas, 100 Flexiones.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>💸 Objetivo 7: Autosuficiencia Económica</h4>
+                    <span class="metric">Métrica Global: Negocios validados y título obtenido.</span>
+                    <ul>
+                        <li>3D: Crear marca, logo y catálogo de 10 productos.</li>
+                        <li>3D: Mantener ritmo de producción de 2–3 lotes semanales.</li>
+                        <li>3D: Lograr ingreso de $100 USD/mes hacia fin de año.</li>
+                        <li>Masoterapia: Pagar deuda de cuotas y obtener Diploma Oficial.</li>
+                        <li>Masoterapia: Completar 20 sesiones de práctica.</li>
+                    </ul>
+                </div>
+                <h3 class="arcs-title">ARCOS 2026</h3>
+                <div class="arcs-container">
+                    <div class="arc-card" onclick="alert('Arco 1...')"><h4>ARCO 1</h4><p>Enero - Abril</p><div style="font-size:1.5rem; margin-top:5px;">🧱</div></div>
+                    <div class="arc-card" onclick="alert('Arco 2...')"><h4>ARCO 2</h4><p>Mayo - Agosto</p><div style="font-size:1.5rem; margin-top:5px;">🌱</div></div>
+                    <div class="arc-card" onclick="alert('Arco 3...')"><h4>ARCO 3</h4><p>Septiembre - Diciembre</p><div style="font-size:1.5rem; margin-top:5px;">🚀</div></div>
+                </div>
+            </div>
         </div>
 
-        <div class="objectives-box">
-            <h3>🎯 OBJETIVOS PRINCIPALES</h3>
-            <ul id="season-objectives">
-                <li>Establecer rutina de entrenamiento (Gym + Artes Marciales).</li>
-                <li>Generar los primeros ingresos extra con impresión 3D.</li>
-                <li>Iniciar estudios de Japonés (Nivel N5).</li>
-                <li>Leer 12 libros de desarrollo personal y finanzas.</li>
-            </ul>
-        </div>
-
-        <h3 class="arcs-title">SELECCIONA UN ARCO</h3>
-        <div class="arcs-container">
-            <div class="arc-card" onclick="alert('Entrando al Arco 1...')">
-                <h4>ARCO 1</h4>
-                <p>Enero - Abril</p>
-                <div style="font-size:1.5rem; margin-top:5px;">🧱</div>
+        <div id="content-season-2" class="season-content" style="display:none;">
+            <div class="season-header">
+                <h2>TEMPORADA 2: 2027 — "EL DESPEGUE"</h2>
             </div>
-            <div class="arc-card" onclick="alert('Entrando al Arco 2...')">
-                <h4>ARCO 2</h4>
-                <p>Mayo - Agosto</p>
-                <div style="font-size:1.5rem; margin-top:5px;">🌱</div>
-            </div>
-            <div class="arc-card" onclick="alert('Entrando al Arco 3...')">
-                <h4>ARCO 3</h4>
-                <p>Septiembre - Diciembre</p>
-                <div style="font-size:1.5rem; margin-top:5px;">🚀</div>
+            <div class="objectives-box">
+                <div class="objective-group">
+                    <h4>🏥 Objetivo 1: Medicina (5º Año - Clínica)</h4>
+                    <span class="metric">Métrica Global: Aprobar las materias clínicas y actuar como médico en formación.</span>
+                    <ul>
+                        <li>Aprobar UC19: Clínica Médica (Sin recursar).</li>
+                        <li>Aprobar UC20: Patología Médica y Terapéutica (Sin recursar).</li>
+                        <li>Elaborar Cuaderno de Guardia con 50 casos clínicos analizados.</li>
+                        <li>Preparar 3 presentaciones clínicas completas por materia.</li>
+                        <li>Completar banco personal de 300 preguntas de medicina interna.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🧠 Objetivo 2: Psicología (3º Año)</h4>
+                    <span class="metric">Métrica Global: Aprobar 3º año completo e integrar saberes.</span>
+                    <ul>
+                        <li>Aprobar Psicopatología I y II.</li>
+                        <li>Aprobar Evaluación Psicológica.</li>
+                        <li>Aprobar Psicología Educacional, de la Salud y Laboral.</li>
+                        <li>Aprobar Articulación de Saberes IV: Estado y Sociedad.</li>
+                        <li>Aprobar Métodos de Investigación Avanzada.</li>
+                        <li>Redactar Trabajo Final de Integración (Medicina + Psicología).</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>👶 Objetivo 3: Paternidad (Consolidación)</h4>
+                    <span class="metric">Métrica Global: Rutina inquebrantable y educación activa.</span>
+                    <ul>
+                        <li>Consolidar rutina de convivencia efectiva: 2–3 días fijos por semana.</li>
+                        <li>Pagar el 100% de los aportes económicos mensuales en fecha.</li>
+                        <li>Asistir al 100% de reuniones escolares y controles médicos.</li>
+                        <li>Continuar el Timelapse semanal para completar el año 2.</li>
+                        <li>Lograr 100 sesiones de juego de calidad (sin pantallas).</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🗣️ Objetivo 4: Idiomas (Maestría)</h4>
+                    <span class="metric">Métrica Global: Nivel C2 en Inglés y Nivel B1 en Alemán.</span>
+                    <ul>
+                        <li>Inglés: Obtener Certificación C2 (Proficiency) o equivalente.</li>
+                        <li>Inglés: Leer 3 papers/semana con fluidez total.</li>
+                        <li>Alemán: Alcanzar y consolidar el Nivel B1 (Independiente).</li>
+                        <li>Alemán: Vocabulario activo de 2.000 palabras.</li>
+                        <li>Alemán: Mantener conversación de 10 min sin traductor.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>💻 Objetivo 5: Programación (Publicación)</h4>
+                    <span class="metric">Métrica Global: Publicar software real y usable.</span>
+                    <ul>
+                        <li>Publicar la App de Stickers (versión estable) en tienda/web.</li>
+                        <li>Alcanzar 1.000 descargas o usuarios únicos en la App.</li>
+                        <li>Desarrollar 3–5 proyectos funcionales en GitHub para portafolio.</li>
+                        <li>Aplicar programación a una herramienta médica propia.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>🏋️ Objetivo 6: Rutina de Entrenamiento (Poder)</h4>
+                    <span class="metric">Métrica Global: Fuerza Avanzada (Cargas Fin 2027) y Estética definida.</span>
+                    <ul>
+                        <span class="sub-category">Tren Superior (Empuje):</span>
+                        <li>Aperturas: 110 kg / Pecho Inclinado: 100 kg</li>
+                        <li>Press Militar Máq: 120 kg / Tríceps Máq: 160 kg</li>
+                        <span class="sub-category">Tren Superior (Tracción):</span>
+                        <li>Jalón Polea: 100 kg / Remo Máquina: 140 kg</li>
+                        <li>Remo Polea: 115 kg / Predicador Máq: 40 kg</li>
+                        <span class="sub-category">Tren Inferior:</span>
+                        <li>Prensa: 200 kg / Extensión: 130 kg / Hip Thrust: 160 kg</li>
+                        <span class="sub-category">Calistenia (PDFa 2027):</span>
+                        <li>Plancha: 7:30 min / Dominadas: 30 / Flexiones: 150.</li>
+                    </ul>
+                </div>
+                <div class="objective-group">
+                    <h4>💸 Objetivo 7: Autosuficiencia (La Cosecha)</h4>
+                    <span class="metric">Métrica Global: Ingresos recurrentes y clientes estables.</span>
+                    <ul>
+                        <span class="sub-category">A. Producción 3D:</span>
+                        <li>Mantener catálogo de 15 productos activos.</li>
+                        <li>Lograr 3 clientes recurrentes (tiendas/revendedores).</li>
+                        <li>Ingreso: Superar los $200 USD/mes sostenidos.</li>
+                        <span class="sub-category">B. Masoterapia:</span>
+                        <li>Cartera: Tener 5 clientes fijos mensuales ($150 USD/mes).</li>
+                        <li>Establecer 1 día fijo a la semana de "Consultorio".</li>
+                    </ul>
+                </div>
+                <h3 class="arcs-title">ARCOS 2027</h3>
+                <div class="arcs-container">
+                    <div class="arc-card" onclick="alert('Arco 1 2027...')"><h4>ARCO 1</h4><p>Enero - Abril</p><div style="font-size:1.5rem; margin-top:5px;">🏗️</div></div>
+                    <div class="arc-card" onclick="alert('Arco 2 2027...')"><h4>ARCO 2</h4><p>Mayo - Agosto</p><div style="font-size:1.5rem; margin-top:5px;">📈</div></div>
+                    <div class="arc-card" onclick="alert('Arco 3 2027...')"><h4>ARCO 3</h4><p>Septiembre - Diciembre</p><div style="font-size:1.5rem; margin-top:5px;">🎓</div></div>
+                </div>
             </div>
         </div>
 
@@ -309,6 +533,10 @@
         const modalTitle = document.getElementById('modal-title');
         const mainMenu = document.getElementById('main-menu');
         const seasonView = document.getElementById('season-view');
+        
+        // Bloques de contenido
+        const contentS1 = document.getElementById('content-season-1');
+        const contentS2 = document.getElementById('content-season-2');
 
         function openSaga(numero) {
             modalTitle.innerText = "SAGA " + numero;
@@ -323,7 +551,15 @@
             closeModal();
             mainMenu.style.display = 'none';
             seasonView.style.display = 'flex';
-            document.getElementById('season-title').innerText = "TEMPORADA " + seasonNum;
+            
+            // Lógica para mostrar solo el contenido de la temporada elegida
+            if (seasonNum === 1) {
+                contentS1.style.display = 'block';
+                contentS2.style.display = 'none';
+            } else if (seasonNum === 2) {
+                contentS1.style.display = 'none';
+                contentS2.style.display = 'block';
+            }
         }
 
         function goBack() {
