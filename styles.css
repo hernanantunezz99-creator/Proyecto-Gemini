@@ -1,100 +1,154 @@
 :root {
+    /* Colores Principales */
     --text-color: #ffffff;
     --accent-1: #FF6B6B;
     --accent-2: #FFD93D;
     --accent-3: #4D96FF;
     --accent-4: #FFD700;
     --accent-5: #6BCB77;
+    
     /* Variables Carta Antigua */
     --paper-color: #f4e1c1; 
     --ink-color: #4a3b2a;   
 }
 
 body {
-    margin: 0; font-family: 'Poppins', sans-serif;
-    color: var(--text-color); display: flex; flex-direction: column;
-    align-items: center; min-height: 100vh;
-    background-color: #121212; overflow-x: hidden;
+    margin: 0; 
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color); 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    min-height: 100vh;
+    background-color: #121212; 
+    overflow-x: hidden;
 }
 
+/* --- VIDEO DE FONDO --- */
 #video-background {
-    position: fixed; right: 0; bottom: 0;
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto; z-index: -1;
-    object-fit: cover; filter: brightness(50%);
+    position: fixed; 
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto; 
+    z-index: -1;
+    object-fit: cover; 
+    filter: brightness(50%);
 }
 
+/* --- MENÚ PRINCIPAL --- */
 #main-menu {
-    display: flex; flex-direction: column; align-items: center;
-    width: 100%; transition: opacity 0.5s ease;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    width: 100%; 
+    transition: opacity 0.5s ease;
 }
 
 h1 {
-    font-size: 3rem; font-weight: 600; margin-top: 40px;
-    text-transform: uppercase; letter-spacing: 5px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); text-align: center;
+    font-size: 3rem; 
+    font-weight: 600; 
+    margin-top: 40px;
+    text-transform: uppercase; 
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+    text-align: center;
 }
 
 .subtitle {
-    color: #eee; text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    font-weight: 300; margin-top: 15px; margin-bottom: 10px;
-    text-align: center; font-style: italic; max-width: 800px;
-    padding: 0 20px; font-size: 1rem;
+    color: #eee; 
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    font-weight: 300; 
+    margin-top: 15px; 
+    margin-bottom: 10px;
+    text-align: center; 
+    font-style: italic; 
+    max-width: 800px;
+    padding: 0 20px; 
+    font-size: 1rem;
 }
 
 .sagas-container {
-    display: flex; justify-content: center; flex-wrap: wrap;
-    gap: 20px; padding: 20px 40px; max-width: 1200px;
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap;
+    gap: 20px; 
+    padding: 20px 40px; 
+    max-width: 1200px;
 }
 
-/* --- ESTILO CARTA MANUSCRITA --- */
+/* --- CARTA DE INTRODUCCIÓN (Estilo Manuscrito) --- */
 .intro-letter {
     max-width: 900px;
     background-color: var(--paper-color);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3), inset 0 0 20px rgba(165, 136, 86, 0.1);
-    border-radius: 8px; padding: 60px; 
+    border-radius: 8px; 
+    padding: 60px; 
     margin: 40px 20px 100px 20px;
     text-align: left;
-    font-family: 'Dancing Script', cursive; /* Fuente manuscrita */
-    font-size: 1.4rem; line-height: 1.8;
+    
+    /* Fuente Cursiva */
+    font-family: 'Dancing Script', cursive; 
+    font-size: 1.4rem; 
+    line-height: 1.8;
     color: var(--ink-color);
-    transform: rotate(-1deg);
+    
+    transform: rotate(-1deg); /* Rotación para realismo */
     animation: fadeIn 1.5s ease;
 }
 
 .intro-letter h2 {
-    font-weight: 700; text-transform: uppercase; margin-bottom: 40px;
-    color: var(--ink-color); text-align: center;
-    border-bottom: 2px dashed var(--ink-color); padding-bottom: 15px;
-    background: none; -webkit-text-fill-color: initial; /* Resetea el degradado anterior */
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-bottom: 40px;
+    color: var(--ink-color); 
+    text-align: center;
+    border-bottom: 2px dashed var(--ink-color); 
+    padding-bottom: 15px;
+    background: none; 
+    -webkit-text-fill-color: initial;
 }
 
 .intro-letter p {
-    margin-bottom: 25px; color: var(--ink-color);
+    margin-bottom: 25px; 
+    color: var(--ink-color);
     font-family: 'Dancing Script', cursive;
-    text-align: justify; text-justify: inter-word;
+    text-align: justify; 
+    text-justify: inter-word;
 }
 
-/* Tarjetas */
+/* --- TARJETAS DE SAGA --- */
 .card {
-    background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px); border-radius: 20px;
-    width: 220px; height: 380px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; cursor: pointer;
-    transition: 0.3s; position: relative; overflow: hidden;
+    background: rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px); 
+    border-radius: 20px;
+    width: 220px; 
+    height: 380px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    transition: 0.3s; 
+    position: relative; 
+    overflow: hidden;
 }
 .card:hover { transform: translateY(-10px); border-color: rgba(255, 255, 255, 0.8); }
 .card img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; position: absolute; top: 0; left: 0; }
 .card h2 { font-size: 0.9rem; margin-top: 230px; color: #ddd; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
 .card h3 { font-size: 1.4rem; font-weight: 600; color: white; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
 .card p { font-size: 0.9rem; color: #ccc; margin: 0; padding-bottom: 20px; font-family: 'Poppins', sans-serif; }
+/* Bordes de color por saga */
 .saga-1 { border-bottom: 5px solid var(--accent-1); }
 .saga-2 { border-bottom: 5px solid var(--accent-2); }
 .saga-3 { border-bottom: 5px solid var(--accent-3); }
 .saga-4 { border-bottom: 5px solid var(--accent-4); }
 .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-/* Radio */
+/* --- WIDGET RADIO --- */
 .radio-container {
     position: fixed; top: 20px; right: 20px; width: 160px;
     background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
@@ -106,51 +160,117 @@ h1 {
 .live-badge { font-size: 0.5rem; background: #ff4444; color: white; padding: 1px 4px; border-radius: 4px; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
-/* Vista Temporada */
-#season-view { display: none; flex-direction: column; align-items: center; width: 100%; padding: 40px; animation: fadeIn 0.5s ease; }
+/* --- VISTA TEMPORADA --- */
+#season-view { 
+    display: none; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%; 
+    padding: 40px; 
+    animation: fadeIn 0.5s ease; 
+}
 .season-header { text-align: center; margin-bottom: 30px; }
 .season-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
+/* Caja contenedora */
 .objectives-box { 
-    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; 
-    padding: 30px; max-width: 1600px; width: 98%; margin-bottom: 50px; 
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 20px; 
+    padding: 30px; 
+    max-width: 1600px; 
+    width: 98%; 
+    margin-bottom: 50px; 
 }
-.objectives-box h3 { color: var(--accent-1); text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 20px; }
-
-.objectives-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; align-items: start; }
-@media (max-width: 1400px) { .objectives-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .objectives-grid { grid-template-columns: 1fr; } }
-
-.objective-group { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-.objective-group h4 { 
-    font-size: 0.75rem; 
+.objectives-box h3 { 
     color: var(--accent-1); 
-    margin: 0 0 3px 0; 
+    text-transform: uppercase; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+}
+
+/* Grilla Principal (4 Columnas de tarjetas) */
+.objectives-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    text-align: left; 
+    align-items: start; 
+}
+
+/* Tarjeta individual de objetivo */
+.objective-group { 
+    background: rgba(255,255,255,0.03); 
+    padding: 15px; 
+    border-radius: 10px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+}
+.objective-group h4 { 
+    font-size: 0.8rem; 
+    color: var(--accent-1); 
+    margin: 0 0 5px 0; 
     text-transform: uppercase; 
     font-weight: 800; 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 3px;
+    margin-bottom: 8px;
 }
-.metric { font-size: 0.75rem; color: #aaa; font-style: italic; margin-bottom: 12px; display: block; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px; }
+.metric { 
+    font-size: 0.7rem; 
+    color: #aaa; 
+    font-style: italic; 
+    margin-bottom: 10px; 
+    display: block; 
+}
 
-.objectives-box ul { list-style: none; padding: 0; }
+/* LISTA INTERNA (Checkboxes) - DISEÑO COMPACTO 2 COLUMNAS */
+.objectives-box ul { 
+    list-style: none; 
+    padding: 0; 
+    display: grid; /* Magia: pone los items en grilla */
+    grid-template-columns: 1fr 1fr; /* 2 columnas internas */
+    gap: 5px 10px;
+}
+
 .objectives-box li { 
-    margin: 3px 0; /* Menos margen vertical */
-    font-size: 0.6rem; /* Letra bien pequeña (aprox 9-10px) */
-    line-height: 1.2;
+    margin: 0; 
+    font-size: 0.65rem; /* Letra bien chica */
+    line-height: 1.1; 
     color: #ddd; 
     display: flex; 
-    align-items: flex-start; 
-    gap: 6px; 
+    align-items: center; 
+    gap: 5px; 
+    background: rgba(255,255,255,0.05); /* Fondo suave */
+    padding: 3px 5px;
+    border-radius: 4px;
 }
-.objectives-box input[type="checkbox"] { margin-top: 3px; cursor: pointer; accent-color: var(--accent-5); }
-.task-completed { text-decoration: line-through; color: #555 !important; }
-.sub-category { font-weight: 700; color: #fff; margin-top: 12px; font-size: 0.75rem; text-decoration: underline decoration-color: var(--accent-3); }
 
+.objectives-box input[type="checkbox"] { 
+    margin: 0; 
+    cursor: pointer; 
+    accent-color: var(--accent-5); 
+    transform: scale(0.9);
+}
+
+.task-completed { text-decoration: line-through; color: #666 !important; }
+
+/* Responsive para la grilla principal */
+@media (max-width: 1400px) { .objectives-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { 
+    .objectives-grid { grid-template-columns: 1fr; } 
+    /* En celular, volvemos a lista de 1 columna interna para que no se apriete */
+    .objectives-box ul { grid-template-columns: 1fr; }
+}
+
+/* --- ARCOS --- */
 .arcs-title { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px;}
 .arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
 .arc-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 15px; width: 250px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
 .arc-card:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: var(--accent-1); }
 
+/* --- BOTONES Y MODAL --- */
 .back-btn { margin-top: 50px; background: transparent; border: 1px solid white; color: white; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s; }
 .back-btn:hover { background: white; color: black; }
 
@@ -159,4 +279,3 @@ h1 {
 .season-btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: linear-gradient(90deg, #333, #444); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-family: 'Poppins', sans-serif; transition: 0.2s; }
 .season-btn:hover { background: linear-gradient(90deg, #00C9FF, #92FE9D); color: black; font-weight: bold; }
 .close-btn { margin-top: 20px; background: transparent; border: 1px solid #555; color: #888; padding: 5px 20px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; }
-
