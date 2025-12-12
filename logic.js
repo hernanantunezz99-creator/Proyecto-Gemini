@@ -23,13 +23,13 @@ window.toggleTask = function(checkbox, uniqueId) {
     }
 }
 
-// --- NAVEGACIÓN ---
+// --- NAVEGACIÓN Y VARIABLES DOM ---
 const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
 const mainMenu = document.getElementById('main-menu');
 const seasonView = document.getElementById('season-view');
+const arcView = document.getElementById('arc-view'); // NUEVO
 
-// 1. ABRIR MODAL DE SAGA (Selección de Temporada)
+// 1. ABRIR MODAL DE SAGA
 window.openSaga = function(sagaNum) {
     playSfx(sfxOn);
     modal.style.display = 'flex';
@@ -60,65 +60,25 @@ window.openSaga = function(sagaNum) {
     `;
 }
 
-// 2. ABRIR DETALLE DE ARCO (En el mismo Modal)
-window.openArcDetails = function(seasonNum, arcIndex) {
-    playSfx(sfxOn);
-    modal.style.display = 'flex';
-    const modalContent = document.querySelector('.modal-content');
-    
-    const arcData = DATOS_ARCOS[seasonNum][arcIndex];
-    
-    // Generamos las tareas del arco
-    let contentHTML = '';
-    
-    if (arcData.objetivos && arcData.objetivos.length > 0) {
-        // Usamos la misma lógica de checkbox, con un ID especial 'arc'
-        arcData.objetivos.forEach((obj, objInd) => {
-            let tasksHTML = '';
-            obj.tareas.forEach((t, tInd) => {
-                const uniqueId = `s${seasonNum}-a${arcIndex}-o${objInd}-t${tInd}`;
-                const isChecked = localStorage.getItem(uniqueId) === 'true';
-                const checkedAttr = isChecked ? 'checked' : '';
-                const classAttr = isChecked ? 'task-completed' : '';
-                
-                tasksHTML += `
-                    <li style="justify-content: flex-start; text-align: left; margin-bottom: 8px;">
-                        <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
-                        <span class="${classAttr}" style="font-size: 0.8rem;">${t}</span>
-                    </li>
-                `;
-            });
-            
-            contentHTML += `
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left;">
-                    <h4 style="color: var(--accent-2); margin-top: 0;">${obj.titulo}</h4>
-                    <ul style="list-style: none; padding: 0;">${tasksHTML}</ul>
-                </div>
-            `;
-        });
-    } else {
-        contentHTML = '<p style="color: #999;">No hay objetivos detallados para este arco aún.</p>';
-    }
-
-    modalContent.innerHTML = `
-        <h2>${arcData.titulo}</h2>
-        <p style="color: #aaa; margin-bottom: 20px;">${arcData.sub}</p>
-        <div style="max-height: 400px; overflow-y: auto;">
-            ${contentHTML}
-        </div>
-        <button class="close-btn" onclick="closeModal()">Cerrar</button>
-    `;
-}
-
 window.closeModal = function() {
     playSfx(sfxOff);
     modal.style.display = 'none';
 }
 
-window.goBack = function() {
+// 2. NAVEGACIÓN ENTRE VISTAS
+// Volver de Temporada a Menú
+window.goBackToMenu = function() {
     playSfx(sfxOff);
     seasonView.style.display = 'none';
     mainMenu.style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+// Volver de Arco a Temporada
+window.closeArcView = function() {
+    playSfx(sfxOff);
+    arcView.style.display = 'none';
+    seasonView.style.display = 'flex'; // Reactivamos la vista anterior
     window.scrollTo(0, 0);
 }
 
@@ -126,36 +86,74 @@ window.onclick = function(event) {
     if (event.target == modal) window.closeModal();
 }
 
-// --- HELPER HTML ---
-function renderObjectiveGroup(objectivesArray, seasonNum, typePrefix) {
+// --- HELPER HTML (Renderiza listas de tareas) ---
+function renderTasksHTML(tasks, uniqueIdPrefix) {
     let html = '';
-    objectivesArray.forEach((obj, objIndex) => {
-        let tareasHTML = '';
-        obj.tareas.forEach((tarea, taskIndex) => {
-            const uniqueId = `s${seasonNum}-${typePrefix}-o${objIndex}-t${taskIndex}`;
-            const isChecked = localStorage.getItem(uniqueId) === 'true';
-            const checkedAttr = isChecked ? 'checked' : '';
-            const classAttr = isChecked ? 'task-completed' : '';
-            const textoTarea = typeof tarea === 'string' ? tarea : tarea.texto;
-
-            tareasHTML += `
-                <li>
-                    <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
-                    <span class="${classAttr}">${textoTarea}</span>
-                </li>`;
-        });
+    tasks.forEach((tarea, i) => {
+        // ID único para localStorage
+        const uniqueId = `${uniqueIdPrefix}-t${i}`;
+        const isChecked = localStorage.getItem(uniqueId) === 'true';
+        const checkedAttr = isChecked ? 'checked' : '';
+        const classAttr = isChecked ? 'task-completed' : '';
+        const texto = typeof tarea === 'string' ? tarea : tarea.texto;
 
         html += `
-            <div class="objective-group ${typePrefix === 'sec' ? 'secondary-card' : ''} animate-item">
-                <h4>${obj.titulo}</h4>
-                <span class="metric">${obj.metrica}</span>
-                <ul>${tareasHTML}</ul>
-            </div>`;
+            <li>
+                <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
+                <span class="${classAttr}">${texto}</span>
+            </li>`;
     });
     return html;
 }
 
-// --- RENDERIZADO DE TEMPORADA ---
+// --- RENDERIZADO DE VISTA DE ARCO (NUEVA FUNCIÓN) ---
+window.openArcView = function(seasonNum, arcIndex) {
+    playSfx(sfxOn);
+    // Ocultamos Temporada, Mostramos Arco
+    seasonView.style.display = 'none';
+    arcView.style.display = 'flex';
+    window.scrollTo(0, 0);
+
+    const arcData = DATOS_ARCOS[seasonNum][arcIndex];
+
+    // Renderizar los objetivos específicos del Arco
+    let objectivesHTML = '';
+    if (arcData.objetivos && arcData.objetivos.length > 0) {
+        arcData.objetivos.forEach((obj, objInd) => {
+            // Prefijo ID: s1-a0-o0 (Season 1, Arc 0, Obj 0)
+            const prefix = `s${seasonNum}-a${arcIndex}-o${objInd}`;
+            const tasks = renderTasksHTML(obj.tareas, prefix);
+            
+            objectivesHTML += `
+                <div class="objective-group animate-item">
+                    <h4 style="color: var(--accent-2); border-color: var(--accent-2);">${obj.titulo}</h4>
+                    <ul>${tasks}</ul>
+                </div>
+            `;
+        });
+    } else {
+        objectivesHTML = '<p style="color:#888; text-align:center; width:100%;">No hay objetivos cargados para este arco.</p>';
+    }
+
+    arcView.innerHTML = `
+        <button class="back-btn-fixed" onclick="closeArcView()">⬅ VOLVER A TEMPORADA</button>
+
+        <div class="season-header">
+            <h2 style="color: var(--accent-1);">${arcData.titulo}</h2>
+            <p style="color: #ccc; font-style: italic; margin-top: -10px;">${arcData.sub}</p>
+            <div style="font-size: 3rem; margin-top: 10px;">${arcData.icono}</div>
+        </div>
+        
+        <div class="objectives-box">
+            <h3>🎯 OBJETIVOS DEL ARCO</h3>
+            <div class="objectives-grid">
+                ${objectivesHTML}
+            </div>
+        </div>
+    `;
+}
+
+// --- RENDERIZADO DE VISTA DE TEMPORADA ---
 window.openSeasonView = function(seasonNum) {
     modal.style.display = 'none'; 
     playSfx(sfxOn); 
@@ -168,19 +166,31 @@ window.openSeasonView = function(seasonNum) {
 
     if (!seasonData) return;
 
-    const primaryHTML = renderObjectiveGroup(seasonData.objetivos, seasonNum, 'pri');
-    
-    let secondaryHTML = '';
-    if (seasonData.objetivosSecundarios) {
-        secondaryHTML = renderObjectiveGroup(seasonData.objetivosSecundarios, seasonNum, 'sec');
-    }
+    // Helper interno para grupos de la temporada
+    const renderGroup = (arr, type) => {
+        let html = '';
+        arr.forEach((obj, idx) => {
+            const prefix = `s${seasonNum}-${type}-o${idx}`;
+            const tasks = renderTasksHTML(obj.tareas, prefix);
+            html += `
+                <div class="objective-group ${type === 'sec' ? 'secondary-card' : ''} animate-item">
+                    <h4>${obj.titulo}</h4>
+                    <span class="metric">${obj.metrica}</span>
+                    <ul>${tasks}</ul>
+                </div>`;
+        });
+        return html;
+    };
 
-    // Renderizado de Arcos (Con onclick apuntando a openArcDetails)
+    const primaryHTML = renderGroup(seasonData.objetivos, 'pri');
+    const secondaryHTML = seasonData.objetivosSecundarios ? renderGroup(seasonData.objetivosSecundarios, 'sec') : '';
+
+    // Render Arcos (Ahora llama a openArcView)
     let arcsHTML = '';
     if (arcsData) {
         arcsData.forEach((arc, index) => {
             arcsHTML += `
-                <div class="arc-card animate-item" onclick="openArcDetails(${seasonNum}, ${index})">
+                <div class="arc-card animate-item" onclick="openArcView(${seasonNum}, ${index})">
                     <h4>${arc.titulo}</h4>
                     <p>${arc.sub}</p>
                     <div style="font-size:1.5rem; margin-top:5px;">${arc.icono}</div>
@@ -189,12 +199,12 @@ window.openSeasonView = function(seasonNum) {
     }
 
     seasonView.innerHTML = `
-        <button class="back-btn-fixed" onclick="goBack()">⬅ MENÚ</button>
+        <button class="back-btn-fixed" onclick="goBackToMenu()">⬅ MENÚ PRINCIPAL</button>
 
         <div class="season-header"><h2>${seasonData.titulo}</h2></div>
         
         <div class="objectives-box">
-            <h3 class="arcs-title" style="margin-top: 0;">ARCOS</h3>
+            <h3 class="arcs-title" style="margin-top: 0;">ARCOS (Fases)</h3>
             <div class="arcs-container" style="margin-bottom: 40px;">${arcsHTML}</div>
 
             <div style="margin: 30px 0; border-top: 1px dashed rgba(255,255,255,0.2);"></div>
