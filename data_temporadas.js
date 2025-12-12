@@ -2,103 +2,71 @@ const DATOS_TEMPORADAS = {
     1: {
         titulo: 'TEMPORADA 1: 2026 — "LA TRINCHERA"',
         objetivos: [
-            // --- FILA 1 ---
+            // FILA 1
             {
                 titulo: "🏥 Objetivo 1: Medicina (4º)",
-                metrica: "Métrica: Aprobar 4 materias (Sin previas).",
+                metrica: "Métrica: 4 materias (Sin previas).",
                 tareas: [
-                    "Aprobar Medicina en el Primer Nivel de Atención (PNA).",
-                    "Aprobar Bases Científicas de la Patología.",
-                    "Aprobar Pediatría.",
-                    "Aprobar Ginecología y Neonatología."
+                    "Medicina PNA, Bases Patología, Pediatría, Ginecología y Neonatología."
                 ]
             },
             {
                 titulo: "🧠 Objetivo 2: Psicología (2º)",
-                metrica: "Métrica: Aprobar 11 materias (3º/4º sem).",
+                metrica: "Métrica: 11 materias (3º/4º sem).",
                 tareas: [
-                    "Aprobar Psicología Social.",
-                    "Aprobar Psicología, Sujeto y Aprendizaje.",
-                    "Aprobar Métodos y Técnicas Cualitativas.",
-                    "Aprobar Ética y Deontología.",
-                    "Aprobar Articulación de Saberes III: Clínica y Subjetividad.",
-                    "Aprobar Idiomas y Cooperación Institucional.",
-                    "Aprobar Clínica I: Fundamentos Psicoanalíticos.",
-                    "Aprobar Psicología y Salud.",
-                    "Aprobar Métodos y Técnicas Cuantitativas.",
-                    "Aprobar Diseño de Proyectos.",
-                    "Aprobar Herramientas de la Psicología Social y Clínica."
+                    "Psico Social, Sujeto y Aprendizaje, Métodos Cualitativos, Ética.",
+                    "Articulación III, Idiomas, Clínica I, Psico y Salud.",
+                    "Métodos Cuantitativos, Diseño Proyectos, Herramientas Psico Social."
                 ]
             },
             {
                 titulo: "👶 Objetivo 3: Coparentalidad",
-                metrica: "Métrica: Vínculo sólido y cumplimiento.",
+                metrica: "Métrica: Vínculo sólido.",
                 tareas: [
-                    "Acordar verbalmente pautas de crianza y visitas.",
-                    "Pagar el 100% de los aportes económicos mensuales en fecha.",
-                    "Asistir al 100% de los controles pediátricos obligatorios.",
-                    "Sacar 1 foto semanal del bebé para crear un Timelapse.",
-                    "Estimular/Enseñar una habilidad o juego nuevo cada semana."
+                    "Acordar pautas crianza, Pagar 100% aportes, Asistir 100% controles.",
+                    "Timelapse semanal, Estimular 1 habilidad/semana."
                 ]
             },
             {
                 titulo: "🗣️ Objetivo 4: Idiomas",
                 metrica: "Métrica: C1 Inglés / B1 Alemán.",
                 tareas: [
-                    "Inglés: Obtener el Certificado C1 (Advanced).",
-                    "Inglés: Leer 2 papers médicos/académicos por semana.",
-                    "Inglés: Realizar 1 práctica de escritura (writing/essay) al mes.",
-                    "Alemán: Mantener racha de 365 días en Duolingo/Busuu.",
-                    "Alemán: Completar módulos nivel B1 y alcanzar 1.500 palabras."
+                    "Inglés: Certificado C1, 100 papers leídos, 1 essay/mes.",
+                    "Alemán: Racha 365 días, Nivel B1, 1.500 palabras."
                 ]
             },
-
-            // --- FILA 2 ---
+            // FILA 2
             {
                 titulo: "💻 Objetivo 5: Programación",
-                metrica: "Métrica: Lógica dominada y 2 proyectos.",
+                metrica: "Métrica: Lógica y 2 proyectos.",
                 tareas: [
-                    "Dominar sintaxis de Python y JavaScript.",
-                    "Comprender estructura HTML/CSS.",
-                    "Familiarizarse con un framework (Flask o React básico).",
-                    "Subir 2 proyectos funcionales a GitHub (Calculadora y App Stickers)."
+                    "Sintaxis Python/JS, HTML/CSS, Flask/React.",
+                    "GitHub: Calculadora médica y App Stickers."
                 ]
             },
             {
                 titulo: "💸 Objetivo 6: Economía",
                 metrica: "Métrica: Negocios validados.",
                 tareas: [
-                    "3D: Crear marca, logo y catálogo de 10 productos.",
-                    "3D: Mantener ritmo de producción de 2–3 lotes semanales.",
-                    "3D: Lograr ingreso de $100 USD/mes hacia fin de año.",
-                    "Masoterapia: Pagar deuda de cuotas y obtener Diploma Oficial.",
-                    "Masoterapia: Completar 20 sesiones de práctica."
+                    "3D: Marca, catálogo 10 prod, $100 USD/mes.",
+                    "Masoterapia: Diploma Oficial, 20 sesiones práctica."
                 ]
             },
             {
                 titulo: "🏋️ Objetivo 7: Fuerza (Gym)",
-                metrica: "Métrica: Cargas ×1.75 (Base 2025).",
+                metrica: "Métrica: Cargas ×1.75.",
                 tareas: [
-                    "Aperturas: 95 kg",
-                    "Pecho Inclinado: 85 kg",
-                    "Press Militar Máq: 85 kg",
-                    "Tríceps Máq: 110 kg",
-                    "Jalón Polea: 75 kg",
-                    "Remo Máquina: 100 kg",
-                    "Curl Bíceps (Mancuerna): 15 kg c/u",
-                    "Prensa Pierna: 170 kg",
-                    "Extensión: 100 kg",
-                    "Hip Thrust: 110 kg"
+                    "Empuje: Apert 95, Militar 85, Trí 110.",
+                    "Tracción: Jalón 75, Remo 100, Bíceps 15.",
+                    "Pierna: Prensa 170, Ext 100, Hip Thrust 110."
                 ]
             },
             {
                 titulo: "🤸 Objetivo 8: Calistenia",
-                metrica: "Métrica: Dominio corporal (PDFa 2026).",
+                metrica: "Métrica: Dominio corporal.",
                 tareas: [
-                    "Completar rutina completa según plan.",
-                    "Resistencia: 5 min Plancha.",
-                    "Fuerza: 20 Dominadas.",
-                    "Volumen: 100 Flexiones."
+                    "Rutina PDFa 2026: 5 min Plancha.",
+                    "Fuerza/Volumen: 20 Dominadas, 100 Flexiones."
                 ]
             }
         ]
@@ -106,104 +74,72 @@ const DATOS_TEMPORADAS = {
     2: {
         titulo: 'TEMPORADA 2: 2027 — "EL DESPEGUE"',
         objetivos: [
-            // --- FILA 1 ---
+            // FILA 1
             {
                 titulo: "🏥 Objetivo 1: Medicina (5º)",
-                metrica: "Métrica: Aprobar Clínica y actuar como médico.",
+                metrica: "Métrica: Clínica aprobada.",
                 tareas: [
-                    "Aprobar UC19: Clínica Médica (Sin recursar).",
-                    "Aprobar UC20: Patología Médica y Terapéutica (Sin recursar).",
-                    "Elaborar Cuaderno de Guardia con 50 casos clínicos analizados.",
-                    "Preparar 3 presentaciones clínicas completas por materia (Total: 6).",
-                    "Completar banco personal de 300 preguntas de medicina interna."
+                    "Clínica Médica, Patología Médica, Cuaderno 50 casos.",
+                    "6 Presentaciones clínicas, Banco 300 preguntas."
                 ]
             },
             {
                 titulo: "🧠 Objetivo 2: Psicología (3º)",
                 metrica: "Métrica: Año 3 completo.",
                 tareas: [
-                    "Aprobar Psicopatología I y II.",
-                    "Aprobar Evaluación Psicológica.",
-                    "Aprobar Psicología Educacional.",
-                    "Aprobar Psicología de la Salud.",
-                    "Aprobar Psicología Laboral.",
-                    "Aprobar Articulación de Saberes IV: Estado y Políticas.",
-                    "Aprobar Métodos de Investigación Avanzada.",
-                    "Redactar Trabajo Final de Integración."
+                    "Psicopatología I y II, Evaluación Psicológica.",
+                    "Psico Educacional, Salud, Laboral, Estado y Sociedad.",
+                    "Métodos Investigación, Trabajo Final Integración."
                 ]
             },
             {
                 titulo: "👶 Objetivo 3: Paternidad",
-                metrica: "Métrica: Rutina sólida (Niño 1-2 años).",
+                metrica: "Métrica: Rutina sólida.",
                 tareas: [
-                    "Consolidar rutina de convivencia efectiva: 2–3 días fijos por semana.",
-                    "Pagar el 100% de los aportes económicos mensuales en fecha.",
-                    "Asistir al 100% de reuniones escolares y controles médicos.",
-                    "Continuar el Timelapse semanal para completar el año 2.",
-                    "Lograr 100 sesiones de juego de calidad (sin pantallas)."
+                    "Convivencia 2–3 días/sem, Aportes al día.",
+                    "100% Reuniones/Médico, Timelapse Año 2, 100 sesiones juego."
                 ]
             },
             {
                 titulo: "🗣️ Objetivo 4: Idiomas",
-                metrica: "Métrica: C2 Inglés / B1 Sólido Alemán.",
+                metrica: "Métrica: C2 Inglés / B1+ Alemán.",
                 tareas: [
-                    "Inglés: Obtener Certificación C2 (Proficiency) o equivalente.",
-                    "Inglés: Leer 3 papers/semana con fluidez total.",
-                    "Alemán: Alcanzar y consolidar el Nivel B1 (Independiente).",
-                    "Alemán: Vocabulario activo de 2.000 palabras.",
-                    "Alemán: Mantener conversación de 10 minutos sin traductor.",
-                    "Alemán: Leer artículos de Deutsche Welle con 70% de comprensión."
+                    "Inglés: Certificado C2, 3 papers/semana.",
+                    "Alemán: B1 Sólido, 2.000 palabras, Conversación 10 min."
                 ]
             },
-
-            // --- FILA 2 ---
+            // FILA 2
             {
                 titulo: "💻 Objetivo 5: Programación",
                 metrica: "Métrica: Publicación Real.",
                 tareas: [
-                    "Publicar la App de Stickers (versión estable).",
-                    "Alcanzar 1.000 descargas o usuarios únicos.",
-                    "Desarrollar 3–5 proyectos funcionales en GitHub.",
-                    "Aplicar programación a una herramienta médica propia."
+                    "Publicar App Stickers (1.000 descargas).",
+                    "3-5 proyectos GitHub, Herramienta médica propia."
                 ]
             },
             {
                 titulo: "💸 Objetivo 6: Economía",
                 metrica: "Métrica: Ingresos recurrentes.",
                 tareas: [
-                    "3D: Mantener catálogo de 15 productos activos.",
-                    "3D: Lograr 3 clientes recurrentes (tiendas o revendedores).",
-                    "3D: Superar los $200 USD/mes de forma sostenida.",
-                    "Masoterapia: Tener 5 clientes fijos mensuales ($150 USD).",
-                    "Masoterapia: Establecer 1 día fijo a la semana de Consultorio."
+                    "3D: 15 productos, 3 revendedores, >$200 USD.",
+                    "Maso: 5 clientes fijos, 1 día Consultorio."
                 ]
             },
             {
                 titulo: "🏋️ Objetivo 7: Fuerza (Gym)",
-                metrica: "Métrica: Cargas Avanzadas (Fin 2027).",
+                metrica: "Métrica: Cargas Avanzadas.",
                 tareas: [
-                    "Aperturas: 110 kg",
-                    "Pecho Inclinado: 100 kg",
-                    "Press Militar Máq: 120 kg",
-                    "Tríceps Máq: 160 kg",
-                    "Jalón Polea: 100 kg",
-                    "Remo Máquina: 140 kg",
-                    "Remo Polea: 115 kg",
-                    "Predicador Máq: 40 kg",
-                    "Prensa Pierna: 200 kg",
-                    "Extensión: 130 kg",
-                    "Hip Thrust: 160 kg",
-                    "Aductores/Abductores: 100 kg"
+                    "Empuje: Apert 110, Militar 120, Trí 160.",
+                    "Tracción: Jalón 100, Remo 140/115.",
+                    "Pierna: Prensa 200, Hip Thrust 160, Aductores 100."
                 ]
             },
             {
                 titulo: "🤸 Objetivo 8: Calistenia",
-                metrica: "Métrica: Resistencia de Élite (PDFa 2027).",
+                metrica: "Métrica: Resistencia Élite.",
                 tareas: [
-                    "Completar rutina avanzada.",
-                    "Plancha: 7 min 30 s.",
-                    "Dominadas: 30 reps.",
-                    "Flexiones: 150 reps."
+                    "Rutina PDFa 2027: 7:30 min Plancha.",
+                    "Fuerza/Volumen: 30 Dominadas, 150 Flexiones."
                 ]
             }
         ]
