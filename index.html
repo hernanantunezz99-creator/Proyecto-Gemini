@@ -172,15 +172,14 @@
         .season-header { text-align: center; margin-bottom: 30px; }
         .season-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
-        /* CAJA DE OBJETIVOS (MODO 3 COLUMNAS) */
+        /* CAJA DE OBJETIVOS (MODO 4 COLUMNAS) */
         .objectives-box { 
             background: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(10px); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
             border-radius: 20px; 
             padding: 30px; 
-            /* Hacemos la caja más ancha para las 3 columnas */
-            max-width: 1200px; 
+            max-width: 1400px; /* Más ancho para 4 columnas */
             width: 95%; 
             margin-bottom: 50px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
@@ -196,19 +195,20 @@
             font-size: 1.1rem;
         }
 
-        /* GRID DE 3 COLUMNAS */
+        /* GRID DE 4 COLUMNAS */
         .objectives-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Columnas */
-            gap: 20px; /* Espacio entre columnas */
+            grid-template-columns: repeat(4, 1fr); /* 4 Columnas */
+            gap: 20px;
             text-align: left;
         }
         
-        /* En pantallas pequeñas, volver a 1 columna */
-        @media (max-width: 900px) {
-            .objectives-grid {
-                grid-template-columns: 1fr;
-            }
+        /* RESPONSIVE: */
+        @media (max-width: 1200px) {
+            .objectives-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columnas en pantallas medianas */
+        }
+        @media (max-width: 700px) {
+            .objectives-grid { grid-template-columns: 1fr; } /* 1 columna en celular */
         }
         
         .objective-group { 
@@ -219,7 +219,7 @@
         }
         
         .objective-group h4 { 
-            font-size: 0.95rem; /* Letra más chica título */
+            font-size: 0.9rem;
             color: var(--accent-1); 
             margin: 0 0 5px 0; 
             text-transform: uppercase; 
@@ -227,7 +227,7 @@
         }
         
         .metric {
-            font-size: 0.75rem; /* Letra más chica métrica */
+            font-size: 0.7rem;
             color: #aaa;
             font-style: italic;
             margin-bottom: 10px;
@@ -235,15 +235,33 @@
         }
 
         .objectives-box ul { list-style-type: none; padding: 0; }
+        
+        /* ESTILO PARA LOS CHECKBOXES */
         .objectives-box li { 
-            margin: 4px 0; 
-            padding-left: 18px; 
-            position: relative; 
-            font-size: 0.8rem; /* Letra más chica lista */
+            margin: 6px 0; 
+            font-size: 0.8rem;
             line-height: 1.3;
             color: #ddd;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
         }
-        .objectives-box li::before { content: "✅"; position: absolute; left: 0; font-size: 0.7rem; top: 2px; }
+
+        /* El input checkbox real */
+        .objectives-box input[type="checkbox"] {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--accent-5); /* Color verde al marcar */
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Clase para cuando está completado */
+        .task-completed {
+            text-decoration: line-through;
+            color: #666 !important;
+            transition: color 0.3s;
+        }
         
         .sub-category {
             font-weight: 600;
@@ -255,7 +273,6 @@
             text-decoration: underline decoration-color: var(--accent-3);
         }
 
-        /* ARCOS */
         .arcs-title { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
         .arc-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 15px; width: 250px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
@@ -349,26 +366,26 @@
                 <div class="objectives-grid">
                     
                     <div class="objective-group">
-                        <h4>🏥 Objetivo 1: Medicina (4º Año)</h4>
+                        <h4>🏥 Objetivo 1: Medicina (4º)</h4>
                         <span class="metric">Métrica: Aprobar 4 materias (Sin previas).</span>
                         <ul>
-                            <li>Medicina PNA.</li>
-                            <li>Bases Patología.</li>
-                            <li>Pediatría.</li>
-                            <li>Ginecología y Neonatología.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Medicina PNA.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Bases Patología.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Pediatría.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Ginecología y Neonatología.</span></li>
                         </ul>
                     </div>
                     
                     <div class="objective-group">
-                        <h4>🧠 Objetivo 2: Psicología (2º Año)</h4>
+                        <h4>🧠 Objetivo 2: Psicología (2º)</h4>
                         <span class="metric">Métrica: Aprobar 11 materias (3º/4º sem).</span>
                         <ul>
-                            <li>Psicología Social / Salud.</li>
-                            <li>Sujeto y Aprendizaje.</li>
-                            <li>Métodos Cualitativos/Cuanti.</li>
-                            <li>Ética y Deontología.</li>
-                            <li>Articulación III / Clínica I.</li>
-                            <li>Idiomas / Diseño Proyectos.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Psicología Social / Salud.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Sujeto y Aprendizaje.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Métodos Cualitativos/Cuanti.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Ética y Deontología.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Articulación III / Clínica I.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Idiomas / Diseño Proyectos.</span></li>
                         </ul>
                     </div>
                     
@@ -376,11 +393,11 @@
                         <h4>👶 Objetivo 3: Coparentalidad</h4>
                         <span class="metric">Métrica: Cumplimiento total.</span>
                         <ul>
-                            <li>Acordar pautas crianza.</li>
-                            <li>Aportes económicos 100%.</li>
-                            <li>Controles pediátricos 100%.</li>
-                            <li>Timelapse semanal foto.</li>
-                            <li>Estimulación semanal.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Acordar pautas crianza.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Aportes económicos 100%.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Controles pediátricos 100%.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Timelapse semanal foto.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Estimulación semanal.</span></li>
                         </ul>
                     </div>
 
@@ -388,11 +405,11 @@
                         <h4>🗣️ Objetivo 4: Idiomas</h4>
                         <span class="metric">Métrica: C1 Inglés / B1 Alemán.</span>
                         <ul>
-                            <li>Inglés: Certificado C1.</li>
-                            <li>Inglés: 100 papers leídos.</li>
-                            <li>Inglés: 1 essay mensual.</li>
-                            <li>Alemán: Racha 365 días.</li>
-                            <li>Alemán: 1.500 palabras.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Inglés: Certificado C1.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Inglés: 100 papers leídos.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Inglés: 1 essay mensual.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Alemán: Racha 365 días.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Alemán: 1.500 palabras.</span></li>
                         </ul>
                     </div>
 
@@ -400,10 +417,10 @@
                         <h4>💻 Objetivo 5: Programación</h4>
                         <span class="metric">Métrica: 2 proyectos funcionales.</span>
                         <ul>
-                            <li>Sintaxis Py/JS.</li>
-                            <li>HTML/CSS Estructura.</li>
-                            <li>Flask/React básico.</li>
-                            <li>Calc Médica & App Stickers.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Sintaxis Py/JS.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>HTML/CSS Estructura.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Flask/React básico.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Calc Médica & App Stickers.</span></li>
                         </ul>
                     </div>
 
@@ -411,10 +428,10 @@
                         <h4>💸 Objetivo 7: Economía</h4>
                         <span class="metric">Métrica: Negocios validados.</span>
                         <ul>
-                            <li>3D: Catálogo 10 productos.</li>
-                            <li>3D: $100 USD/mes.</li>
-                            <li>Maso: Diploma Oficial.</li>
-                            <li>Maso: 20 sesiones práctica.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>3D: Catálogo 10 productos.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>3D: $100 USD/mes.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Maso: Diploma Oficial.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Maso: 20 sesiones práctica.</span></li>
                         </ul>
                     </div>
 
@@ -423,15 +440,15 @@
                         <span class="metric">Métrica: 6 días/sem y Fuerza x1.75.</span>
                         <ul>
                             <span class="sub-category">Empuje:</span>
-                            <li>Aperturas: 95 kg</li>
-                            <li>Militar: 85 kg / Tríceps: 110 kg</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Aperturas: 95 kg</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Militar 85 / Trí 110</span></li>
                             <span class="sub-category">Tracción:</span>
-                            <li>Jalón: 75 kg / Remo: 100 kg</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Jalón 75 / Remo 100</span></li>
                             <span class="sub-category">Pierna:</span>
-                            <li>Prensa: 170 kg / Ext: 100 kg</li>
-                            <li>Hip Thrust: 110 kg</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Prensa 170 / Ext 100</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Hip Thrust: 110 kg</span></li>
                             <span class="sub-category">Calistenia:</span>
-                            <li>5' Plancha / 20 Dom / 100 Flex</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>5' Plancha / 20 Dom</span></li>
                         </ul>
                     </div>
                     
@@ -457,10 +474,10 @@
                         <h4>🏥 Objetivo 1: Medicina (5º)</h4>
                         <span class="metric">Métrica: Aprobar Clínica.</span>
                         <ul>
-                            <li>Clínica Médica / Patología.</li>
-                            <li>Cuaderno 50 casos.</li>
-                            <li>6 Presentaciones clínicas.</li>
-                            <li>Banco 300 preguntas.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Clínica Médica / Patología.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Cuaderno 50 casos.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>6 Presentaciones clínicas.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Banco 300 preguntas.</span></li>
                         </ul>
                     </div>
 
@@ -468,12 +485,12 @@
                         <h4>🧠 Objetivo 2: Psicología (3º)</h4>
                         <span class="metric">Métrica: Año 3 completo.</span>
                         <ul>
-                            <li>Psicopatología I y II.</li>
-                            <li>Eval. Psicológica / Educ.</li>
-                            <li>Salud / Laboral.</li>
-                            <li>Estado y Sociedad.</li>
-                            <li>Métodos Investigación.</li>
-                            <li>Trabajo Final Integración.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Psicopatología I y II.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Eval. Psicológica / Educ.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Salud / Laboral.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Estado y Sociedad.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Métodos Investigación.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Trabajo Final Integración.</span></li>
                         </ul>
                     </div>
                     
@@ -481,11 +498,11 @@
                         <h4>👶 Objetivo 3: Paternidad</h4>
                         <span class="metric">Métrica: Rutina sólida.</span>
                         <ul>
-                            <li>Convivencia 2-3 días/sem.</li>
-                            <li>Aportes 100% fecha.</li>
-                            <li>100% Reuniones/Médico.</li>
-                            <li>Timelapse Año 2.</li>
-                            <li>100 sesiones juego.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Convivencia 2-3 días/sem.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Aportes 100% fecha.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>100% Reuniones/Médico.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Timelapse Año 2.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>100 sesiones juego.</span></li>
                         </ul>
                     </div>
 
@@ -493,11 +510,11 @@
                         <h4>🗣️ Objetivo 4: Idiomas</h4>
                         <span class="metric">Métrica: C2 Inglés / B1 Alemán.</span>
                         <ul>
-                            <li>Inglés: Certificado C2.</li>
-                            <li>Inglés: 3 papers/semana.</li>
-                            <li>Alemán: Nivel B1 consolidado.</li>
-                            <li>Alemán: 2.000 palabras.</li>
-                            <li>Alemán: Conversación 10 min.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Inglés: Certificado C2.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Inglés: 3 papers/semana.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Alemán: Nivel B1 consolidado.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Alemán: 2.000 palabras.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Alemán: Conversación 10 min.</span></li>
                         </ul>
                     </div>
 
@@ -505,10 +522,10 @@
                         <h4>💻 Objetivo 5: Programación</h4>
                         <span class="metric">Métrica: Publicación Real.</span>
                         <ul>
-                            <li>Publicar App Stickers.</li>
-                            <li>1.000 descargas.</li>
-                            <li>3-5 proyectos GitHub.</li>
-                            <li>Herramienta médica propia.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Publicar App Stickers.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>1.000 descargas.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>3-5 proyectos GitHub.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Herramienta médica propia.</span></li>
                         </ul>
                     </div>
                     
@@ -516,10 +533,10 @@
                         <h4>💸 Objetivo 7: Autosuficiencia</h4>
                         <span class="metric">Métrica: Ingresos recurrentes.</span>
                         <ul>
-                            <li>3D: 15 productos activos.</li>
-                            <li>3D: 3 revendedores ($200/mes).</li>
-                            <li>Maso: 5 clientes fijos ($150/mes).</li>
-                            <li>Maso: 1 día Consultorio.</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>3D: 15 productos activos.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>3D: 3 revendedores.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Maso: 5 clientes fijos.</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Maso: 1 día Consultorio.</span></li>
                         </ul>
                     </div>
 
@@ -528,16 +545,16 @@
                         <span class="metric">Métrica: Fuerza Avanzada.</span>
                         <ul>
                             <span class="sub-category">Empuje:</span>
-                            <li>Apert: 110 / Inc: 100</li>
-                            <li>Militar: 120 / Trí: 160</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Apert: 110 / Inc: 100</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Militar 120 / Trí 160</span></li>
                             <span class="sub-category">Tracción:</span>
-                            <li>Jalón: 100 / Remo: 140</li>
-                            <li>Remo Pol: 115</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Jalón 100 / Remo 140</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Remo Pol: 115</span></li>
                             <span class="sub-category">Pierna:</span>
-                            <li>Prensa: 200 / Ext: 130</li>
-                            <li>Hip Thrust: 160</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Prensa 200 / Ext 130</span></li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>Hip Thrust: 160</span></li>
                             <span class="sub-category">Calistenia:</span>
-                            <li>7:30 Plancha / 30 Dom / 150 Flex</li>
+                            <li><input type="checkbox" onclick="toggleTask(this)"><span>7:30 Plancha / 30 Dom</span></li>
                         </ul>
                     </div>
 
@@ -571,6 +588,46 @@
         
         const contentS1 = document.getElementById('content-season-1');
         const contentS2 = document.getElementById('content-season-2');
+        
+        // Sonido "Ding" en Base64 para que no tengas que subir archivo
+        // Es un sonido corto y agradable de éxito
+        const successSound = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"); 
+        // Nota: He acortado el string base64 real por limpieza, pero abajo te pongo una función que genera un "beep" simple
+        // o si prefieres, usaré un truco de AudioContext para no depender de archivos externos largos.
+
+        // MEJOR OPCIÓN: Usar AudioContext para generar el sonido matemáticamente (Cero archivos externos)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSuccessSound() {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(500, audioCtx.currentTime); // Tono inicial
+            oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1); // Sube tono (Ding!)
+            
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime); // Volumen
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4); // Se desvanece
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.5);
+        }
+
+        function toggleTask(checkbox) {
+            const span = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                span.classList.add('task-completed');
+                playSuccessSound();
+            } else {
+                span.classList.remove('task-completed');
+            }
+        }
 
         function openSaga(numero) {
             modalTitle.innerText = "SAGA " + numero;
