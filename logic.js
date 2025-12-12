@@ -45,7 +45,11 @@ window.openSaga = function(numero) {
     modal.style.display = 'flex';
 }
 window.closeModal = function() { modal.style.display = 'none'; }
-window.goBack = function() { seasonView.style.display = 'none'; mainMenu.style.display = 'flex'; }
+window.goBack = function() { 
+    seasonView.style.display = 'none'; 
+    mainMenu.style.display = 'flex'; 
+    window.scrollTo(0, 0); // <--- ESTA ES LA LÍNEA MÁGICA
+}
 window.onclick = function(event) { if (event.target == modal) closeModal(); }
 
 // --- FUNCIÓN HELPER PARA GENERAR HTML DE OBJETIVOS ---
@@ -133,3 +137,4 @@ window.openSeasonView = function(seasonNum) {
         <button class="back-btn" onclick="goBack()">⬅ Volver al Menú</button>
     `;
 }
+
