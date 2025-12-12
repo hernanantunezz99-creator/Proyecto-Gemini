@@ -1,236 +1,281 @@
-/* =========================================
-   1. VARIABLES & CONFIGURACIÓN (Root)
-   ========================================= */
 :root {
-  /* Paleta de Colores */
-  --primary-color: #2563eb;       /* Azul vibrante */
-  --primary-hover: #1d4ed8;
-  --secondary-color: #64748b;     /* Gris azulado */
-  --accent-color: #f59e0b;        /* Ámbar para destaques */
-  --danger-color: #ef4444;
-  --success-color: #22c55e;
-
-  /* Fondos y Textos */
-  --bg-body: #f8fafc;             /* Fondo muy claro */
-  --bg-card: #ffffff;
-  --text-main: #0f172a;           /* Casi negro para lectura */
-  --text-muted: #64748b;          /* Texto secundario */
-  --border-color: #e2e8f0;
-
-  /* Espaciado y Dimensiones */
-  --container-width: 1200px;
-  --border-radius: 8px;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-
-  /* Tipografía */
-  --font-main: system-ui, -apple-system, sans-serif;
-  --font-mono: 'Courier New', monospace;
-  
-  /* Sombras */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-/* Modo Oscuro (Opcional - automático si el sistema lo pide) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-body: #0f172a;
-    --bg-card: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --border-color: #334155;
-  }
-}
-
-/* =========================================
-   2. RESET & BASE (Normalización)
-   ========================================= */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    /* Colores Principales */
+    --text-color: #ffffff;
+    --accent-1: #FF6B6B;
+    --accent-2: #FFD93D;
+    --accent-3: #4D96FF;
+    --accent-4: #FFD700;
+    --accent-5: #6BCB77;
+    
+    /* Variables Carta Antigua */
+    --paper-color: #f4e1c1; 
+    --ink-color: #4a3b2a;   
 }
 
 body {
-  font-family: var(--font-main);
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+    margin: 0; 
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color); 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    min-height: 100vh;
+    background-color: #121212; 
+    overflow-x: hidden;
 }
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
+/* --- VIDEO DE FONDO --- */
+#video-background {
+    position: fixed; 
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto; 
+    z-index: -1;
+    object-fit: cover; 
+    filter: brightness(50%);
 }
 
-input, button, textarea, select {
-  font: inherit;
+/* --- MENÚ PRINCIPAL --- */
+#main-menu {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    width: 100%; 
+    transition: opacity 0.5s ease;
 }
 
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.2s ease;
+h1 {
+    font-size: 3rem; 
+    font-weight: 600; 
+    margin-top: 40px;
+    text-transform: uppercase; 
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+    text-align: center;
 }
 
-a:hover {
-  text-decoration: underline;
-  color: var(--primary-hover);
+.subtitle {
+    color: #eee; 
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    font-weight: 300; 
+    margin-top: 15px; 
+    margin-bottom: 10px;
+    text-align: center; 
+    font-style: italic; 
+    max-width: 800px;
+    padding: 0 20px; 
+    font-size: 1rem;
 }
 
-/* =========================================
-   3. LAYOUT & UTILIDADES
-   ========================================= */
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--spacing-md);
-  padding-right: var(--spacing-md);
+.sagas-container {
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap;
+    gap: 20px; 
+    padding: 20px 40px; 
+    max-width: 1200px;
 }
 
-.grid {
-  display: grid;
-  gap: var(--spacing-md);
+/* --- CARTA DE INTRODUCCIÓN (Estilo Manuscrito) --- */
+.intro-letter {
+    max-width: 900px;
+    background-color: var(--paper-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3), inset 0 0 20px rgba(165, 136, 86, 0.1);
+    border-radius: 8px; 
+    padding: 60px; 
+    margin: 40px 20px 100px 20px;
+    text-align: left;
+    
+    /* Fuente Cursiva */
+    font-family: 'Dancing Script', cursive; 
+    font-size: 1.4rem; 
+    line-height: 1.8;
+    color: var(--ink-color);
+    
+    transform: rotate(-1deg); /* Rotación para realismo */
+    animation: fadeIn 1.5s ease;
 }
 
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-
-.flex {
-  display: flex;
-  gap: var(--spacing-md);
+.intro-letter h2 {
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-bottom: 40px;
+    color: var(--ink-color); 
+    text-align: center;
+    border-bottom: 2px dashed var(--ink-color); 
+    padding-bottom: 15px;
+    background: none; 
+    -webkit-text-fill-color: initial;
 }
 
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.intro-letter p {
+    margin-bottom: 25px; 
+    color: var(--ink-color);
+    font-family: 'Dancing Script', cursive;
+    text-align: justify; 
+    text-justify: inter-word;
 }
 
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.text-center { text-align: center; }
-.mt-1 { margin-top: var(--spacing-md); }
-.mt-2 { margin-top: var(--spacing-lg); }
-
-/* =========================================
-   4. COMPONENTES UI
-   ========================================= */
-
-/* Botones */
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-.btn-outline:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-/* Tarjetas (Cards) */
+/* --- TARJETAS DE SAGA --- */
 .card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-/* Formularios */
-.form-group {
-  margin-bottom: var(--spacing-md);
-}
-
-.form-label {
-  display: block;
-  margin-bottom: var(--spacing-sm);
-  font-weight: 500;
-  color: var(--text-main);
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  background-color: var(--bg-card);
-  color: var(--text-main);
-}
-
-.form-input:focus {
-  outline: 2px solid var(--primary-color);
-  border-color: transparent;
-}
-
-/* Tablas */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: var(--spacing-md);
-}
-
-th, td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
-th {
-  background-color: rgba(0,0,0,0.02);
-  font-weight: 600;
-}
-
-/* =========================================
-   5. RESPONSIVE (Media Queries)
-   ========================================= */
-@media (max-width: 768px) {
-  :root {
-    --spacing-lg: 1.5rem; /* Reducir espaciado en móviles */
-  }
-
-  .flex {
+    background: rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px); 
+    border-radius: 20px;
+    width: 220px; 
+    height: 380px; 
+    display: flex; 
     flex-direction: column;
-  }
-  
-  .flex-between {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    transition: 0.3s; 
+    position: relative; 
+    overflow: hidden;
 }
+.card:hover { transform: translateY(-10px); border-color: rgba(255, 255, 255, 0.8); }
+.card img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; position: absolute; top: 0; left: 0; }
+.card h2 { font-size: 0.9rem; margin-top: 230px; color: #ddd; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
+.card h3 { font-size: 1.4rem; font-weight: 600; color: white; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
+.card p { font-size: 0.9rem; color: #ccc; margin: 0; padding-bottom: 20px; font-family: 'Poppins', sans-serif; }
+/* Bordes de color por saga */
+.saga-1 { border-bottom: 5px solid var(--accent-1); }
+.saga-2 { border-bottom: 5px solid var(--accent-2); }
+.saga-3 { border-bottom: 5px solid var(--accent-3); }
+.saga-4 { border-bottom: 5px solid var(--accent-4); }
+.saga-5 { border-bottom: 5px solid var(--accent-5); }
+
+/* --- WIDGET RADIO --- */
+.radio-container {
+    position: fixed; top: 20px; right: 20px; width: 160px;
+    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+    padding: 8px; z-index: 1000;
+}
+.radio-container:hover { transform: scale(1.05); background: rgba(0, 0, 0, 0.9); }
+.radio-title { font-size: 0.65rem; font-weight: 600; color: #ccc; display: flex; justify-content: space-between; font-family: 'Poppins', sans-serif;}
+.live-badge { font-size: 0.5rem; background: #ff4444; color: white; padding: 1px 4px; border-radius: 4px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* --- VISTA TEMPORADA --- */
+#season-view { 
+    display: none; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%; 
+    padding: 40px; 
+    animation: fadeIn 0.5s ease; 
+}
+.season-header { text-align: center; margin-bottom: 30px; }
+.season-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+/* Caja contenedora */
+.objectives-box { 
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 20px; 
+    padding: 30px; 
+    max-width: 1600px; 
+    width: 98%; 
+    margin-bottom: 50px; 
+}
+.objectives-box h3 { 
+    color: var(--accent-1); 
+    text-transform: uppercase; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+}
+
+/* Grilla Principal (4 Columnas de tarjetas) */
+.objectives-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    text-align: left; 
+    align-items: start; 
+}
+
+/* Tarjeta individual de objetivo */
+.objective-group { 
+    background: rgba(255,255,255,0.03); 
+    padding: 15px; 
+    border-radius: 10px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+}
+.objective-group h4 { 
+    font-size: 0.8rem; 
+    color: var(--accent-1); 
+    margin: 0 0 5px 0; 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+}
+.metric { 
+    font-size: 0.7rem; 
+    color: #aaa; 
+    font-style: italic; 
+    margin-bottom: 10px; 
+    display: block; 
+}
+
+/* LISTA INTERNA (Checkboxes) - DISEÑO COMPACTO 2 COLUMNAS */
+.objectives-box ul { 
+    list-style: none; 
+    padding: 0; 
+    display: grid; /* Magia: pone los items en grilla */
+    grid-template-columns: 1fr 1fr; /* 2 columnas internas */
+    gap: 5px 10px;
+}
+
+.objectives-box li { 
+    margin: 0; 
+    font-size: 0.65rem; /* Letra bien chica */
+    line-height: 1.1; 
+    color: #ddd; 
+    display: flex; 
+    align-items: center; 
+    gap: 5px; 
+    background: rgba(255,255,255,0.05); /* Fondo suave */
+    padding: 3px 5px;
+    border-radius: 4px;
+}
+
+.objectives-box input[type="checkbox"] { 
+    margin: 0; 
+    cursor: pointer; 
+    accent-color: var(--accent-5); 
+    transform: scale(0.9);
+}
+
+.task-completed { text-decoration: line-through; color: #666 !important; }
+
+/* Responsive para la grilla principal */
+@media (max-width: 1400px) { .objectives-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { 
+    .objectives-grid { grid-template-columns: 1fr; } 
+    /* En celular, volvemos a lista de 1 columna interna para que no se apriete */
+    .objectives-box ul { grid-template-columns: 1fr; }
+}
+
+/* --- ARCOS --- */
+.arcs-title { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px;}
+.arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.arc-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 15px; width: 250px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+.arc-card:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: var(--accent-1); }
+
+/* --- BOTONES Y MODAL --- */
+.back-btn { margin-top: 50px; background: transparent; border: 1px solid white; color: white; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s; }
+.back-btn:hover { background: white; color: black; }
+
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
+.modal-content { background: #1e1e1e; padding: 40px; border-radius: 20px; text-align: center; width: 80%; max-width: 500px; border: 1px solid #333; }
+.season-btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: linear-gradient(90deg, #333, #444); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-family: 'Poppins', sans-serif; transition: 0.2s; }
+.season-btn:hover { background: linear-gradient(90deg, #00C9FF, #92FE9D); color: black; font-weight: bold; }
+.close-btn { margin-top: 20px; background: transparent; border: 1px solid #555; color: #888; padding: 5px 20px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; }
