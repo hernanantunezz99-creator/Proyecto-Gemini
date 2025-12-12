@@ -4,55 +4,81 @@ const sfxCancel = new Audio('img/cancelar.mp3');
 const sfxOn = new Audio('img/on.mp3');
 const sfxOff = new Audio('img/off.mp3');
 
-// Función auxiliar para reiniciar el audio si se hace clic rápido
 function playSfx(audioObj) {
     audioObj.currentTime = 0;
-    audioObj.play().catch(err => console.warn("Interacción requerida para audio:", err));
+    audioObj.play().catch(err => console.warn("Audio error:", err));
 }
 
-// --- LÓGICA DE GUARDADO (LOCALSTORAGE) ---
+// --- LÓGICA DE GUARDADO ---
 window.toggleTask = function(checkbox, uniqueId) {
     const span = checkbox.nextElementSibling;
-    
     if (checkbox.checked) {
         span.classList.add('task-completed');
-        playSfx(sfxCheck); // SONIDO CHECK
+        playSfx(sfxCheck);
         localStorage.setItem(uniqueId, 'true');
     } else {
         span.classList.remove('task-completed');
-        playSfx(sfxCancel); // SONIDO CANCELAR
+        playSfx(sfxCancel);
         localStorage.setItem(uniqueId, 'false');
     }
 }
 
 // --- NAVEGACIÓN ---
 const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
 const mainMenu = document.getElementById('main-menu');
 const seasonView = document.getElementById('season-view');
 
-// Abrir Modal de Saga
-window.openSaga = function(numero) {
-    playSfx(sfxOn); // SONIDO ON
-    modalTitle.innerText = "SAGA " + numero;
+// ABRIR MODAL DE SAGA (Lógica Dinámica)
+window.openSaga = function(sagaNum) {
+    playSfx(sfxOn);
     modal.style.display = 'flex';
+    
+    const modalContent = document.querySelector('.modal-content');
+    
+    // Generamos el contenido según la saga
+    let buttonsHTML = '';
+    
+    if (sagaNum === 1) {
+        // SAGA 1: Activa
+        buttonsHTML = `
+            <p>Elige una temporada:</p>
+            <button class="season-btn" onclick="openSeasonView(1)">Temporada 1 (2026)</button>
+            <button class="season-btn" onclick="openSeasonView(2)">Temporada 2 (2027)</button>
+        `;
+    } else {
+        // SAGAS FUTURAS: Coming Soon
+        // Calculamos los años y números de temporada teóricos
+        const startYear = 2026 + (sagaNum - 1) * 2;
+        const s1 = (sagaNum - 1) * 2 + 1;
+        const s2 = s1 + 1;
+        
+        buttonsHTML = `
+            <p style="color: #888;">Futuro bloqueado:</p>
+            <button class="season-btn disabled-btn">Temporada ${s1} (${startYear}) — Coming Soon</button>
+            <button class="season-btn disabled-btn">Temporada ${s2} (${startYear + 1}) — Coming Soon</button>
+        `;
+    }
+
+    // Inyectamos el HTML completo del modal
+    modalContent.innerHTML = `
+        <h2 id="modal-title">SAGA ${sagaNum}</h2>
+        ${buttonsHTML}
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    `;
 }
 
-// Cerrar Modal
 window.closeModal = function() {
-    playSfx(sfxOff); // SONIDO OFF
+    playSfx(sfxOff);
     modal.style.display = 'none';
 }
 
-// Volver al Menú Principal
 window.goBack = function() {
-    playSfx(sfxOff); // SONIDO OFF
+    playSfx(sfxOff);
     seasonView.style.display = 'none';
     mainMenu.style.display = 'flex';
-    window.scrollTo(0, 0); // Scroll arriba
+    window.scrollTo(0, 0);
 }
 
-// Detectar clic fuera del modal
 window.onclick = function(event) {
     if (event.target == modal) window.closeModal();
 }
@@ -99,16 +125,12 @@ window.openSeasonView = function(seasonNum) {
 
     if (!seasonData) return;
 
-    // 1. Renderizar Primarios
     const primaryHTML = renderObjectiveGroup(seasonData.objetivos, seasonNum, 'pri');
-
-    // 2. Renderizar Secundarios
     let secondaryHTML = '';
     if (seasonData.objetivosSecundarios) {
         secondaryHTML = renderObjectiveGroup(seasonData.objetivosSecundarios, seasonNum, 'sec');
     }
 
-    // 3. Renderizar Arcos
     let arcsHTML = '';
     if (arcsData) {
         arcsData.forEach(arc => {
@@ -121,8 +143,10 @@ window.openSeasonView = function(seasonNum) {
         });
     }
 
-    // 4. Inyectar HTML (ORDEN CAMBIADO: Arcos Primero)
+    // Renderizamos con el botón FIXED arriba
     seasonView.innerHTML = `
+        <button class="back-btn-fixed" onclick="goBack()">⬅ MENÚ</button>
+
         <div class="season-header"><h2>${seasonData.titulo}</h2></div>
         
         <div class="objectives-box">
@@ -132,17 +156,12 @@ window.openSeasonView = function(seasonNum) {
             <div style="margin: 30px 0; border-top: 1px dashed rgba(255,255,255,0.2);"></div>
 
             <h3>🎯 OBJETIVOS PRIMARIOS</h3>
-            <div class="objectives-grid">
-                ${primaryHTML}
-            </div>
+            <div class="objectives-grid">${primaryHTML}</div>
 
             <div style="margin: 50px 0; border-top: 1px dashed rgba(255,255,255,0.2);"></div>
 
             <h3>⚔️ OBJETIVOS SECUNDARIOS</h3>
-            <div class="objectives-grid">
-                ${secondaryHTML}
-            </div>
+            <div class="objectives-grid">${secondaryHTML}</div>
         </div>
-        <button class="back-btn" onclick="goBack()">⬅ Volver al Menú</button>
     `;
 }
