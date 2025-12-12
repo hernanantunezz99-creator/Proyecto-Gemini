@@ -1,15 +1,15 @@
 :root {
     /* Colores Principales */
     --text-color: #ffffff;
-    --accent-1: #FF6B6B;
-    --accent-2: #FFD93D;
-    --accent-3: #4D96FF;
-    --accent-4: #FFD700;
-    --accent-5: #6BCB77;
+    --accent-1: #FF6B6B; /* Rojo/Coral para énfasis */
+    --accent-2: #FFD93D; /* Amarillo */
+    --accent-3: #4D96FF; /* Azul */
+    --accent-4: #FFD700; /* Dorado/Amarillo */
+    --accent-5: #6BCB77; /* Verde para completado */
     
     /* Variables Carta Antigua */
     --paper-color: #f4e1c1; 
-    --ink-color: #4a3b2a;   
+    --ink-color: #4a3b2a; 
 }
 
 body {
@@ -206,43 +206,48 @@ h1 {
     padding: 15px; 
     border-radius: 10px; 
     border: 1px solid rgba(255,255,255,0.05); 
+    transition: border-color 0.3s;
 }
+
+/* --- AJUSTES ESPECÍFICOS PARA TÍTULOS Y MÉTRICAS DE OBJETIVOS --- */
 .objective-group h4 { 
-    font-size: 0.8rem; 
-    color: var(--accent-1); 
+    font-size: 1rem; /* Aumentamos tamaño de título del objetivo */
+    color: var(--accent-3); /* Usamos un color diferente para destacar el título */
     margin: 0 0 5px 0; 
     text-transform: uppercase; 
     font-weight: 800; 
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--accent-3); /* Línea de color de acento */
     padding-bottom: 3px;
     margin-bottom: 8px;
+    letter-spacing: 1px;
 }
 .metric { 
-    font-size: 0.7rem; 
-    color: #aaa; 
-    font-style: italic; 
+    font-size: 0.75rem; /* Levemente más grande */
+    color: var(--accent-2); /* Destacamos la métrica con otro color */
+    font-style: normal; /* Quitamos itálica para más formalidad */
     margin-bottom: 10px; 
     display: block; 
+    font-weight: 600;
 }
 
 /* LISTA INTERNA (Checkboxes) - DISEÑO COMPACTO 2 COLUMNAS */
 .objectives-box ul { 
     list-style: none; 
     padding: 0; 
-    display: grid; /* Magia: pone los items en grilla */
-    grid-template-columns: 1fr 1fr; /* 2 columnas internas */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 5px 10px;
 }
 
 .objectives-box li { 
     margin: 0; 
-    font-size: 0.65rem; /* Letra bien chica */
-    line-height: 1.1; 
+    font-size: 0.7rem; /* Levemente más grande que antes */
+    line-height: 1.2; 
     color: #ddd; 
     display: flex; 
     align-items: center; 
     gap: 5px; 
-    background: rgba(255,255,255,0.05); /* Fondo suave */
+    background: rgba(255,255,255,0.05); 
     padding: 3px 5px;
     border-radius: 4px;
 }
@@ -262,13 +267,64 @@ h1 {
     .objectives-grid { grid-template-columns: 1fr; } 
     /* En celular, volvemos a lista de 1 columna interna para que no se apriete */
     .objectives-box ul { grid-template-columns: 1fr; }
+    .objective-group h4 { font-size: 0.9rem; } /* Ajuste de título para móviles */
 }
 
 /* --- ARCOS --- */
-.arcs-title { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px;}
-.arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
-.arc-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 15px; width: 250px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-.arc-card:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: var(--accent-1); }
+.arcs-title { 
+    font-size: 1.8rem; /* Título de Arcos más grande */
+    margin-bottom: 25px; 
+    text-transform: uppercase; 
+    letter-spacing: 3px;
+    margin-top: 40px; /* Separación de los objetivos */
+    color: var(--accent-1); /* Color del título de Arcos */
+    border-bottom: 2px solid var(--accent-1);
+    padding-bottom: 10px;
+}
+
+.arcs-container { 
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 30px; /* Más espacio entre las tarjetas */
+    margin-bottom: 20px;
+}
+
+.arc-card { 
+    background: rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px); 
+    border-radius: 15px; 
+    width: 250px; 
+    height: 150px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+}
+.arc-card:hover { 
+    background: rgba(255, 255, 255, 0.2); 
+    transform: translateY(-8px); /* Más levantado */
+    border-color: var(--accent-1); 
+    box-shadow: 0 8px 15px rgba(255, 107, 107, 0.5); /* Sombra de color de acento */
+}
+.arc-card h4 {
+    font-size: 1.1rem; /* Título del Arco más grande */
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+}
+.arc-card p {
+    font-size: 0.9rem; /* Subtítulo legible */
+    color: #ccc;
+    margin: 0;
+}
+.arc-card div {
+    font-size: 2.2rem !important; /* Icono más grande */
+}
 
 /* --- BOTONES Y MODAL --- */
 .back-btn { margin-top: 50px; background: transparent; border: 1px solid white; color: white; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s; }
