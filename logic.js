@@ -1,5 +1,6 @@
 // --- SONIDO (ARCHIVOS) ---
 const sfxCheck = new Audio('img/check.mp3');
+const sfxCancel = new Audio('img/cancelar.mp3'); // Nuevo sonido
 const sfxOn = new Audio('img/on.mp3');
 const sfxOff = new Audio('img/off.mp3');
 
@@ -15,10 +16,11 @@ window.toggleTask = function(checkbox, uniqueId) {
     
     if (checkbox.checked) {
         span.classList.add('task-completed');
-        playSfx(sfxCheck); // SONIDO CHECK
+        playSfx(sfxCheck); // SONIDO CHECK (Completar)
         localStorage.setItem(uniqueId, 'true');
     } else {
         span.classList.remove('task-completed');
+        playSfx(sfxCancel); // SONIDO CANCELAR (Desmarcar)
         localStorage.setItem(uniqueId, 'false');
     }
 }
@@ -31,20 +33,20 @@ const seasonView = document.getElementById('season-view');
 
 // Abrir Modal de Saga
 window.openSaga = function(numero) {
-    playSfx(sfxOn); // SONIDO ON (Entrar)
+    playSfx(sfxOn); // SONIDO ON
     modalTitle.innerText = "SAGA " + numero;
     modal.style.display = 'flex';
 }
 
 // Cerrar Modal (Botón Cerrar o clic fuera)
 window.closeModal = function() {
-    playSfx(sfxOff); // SONIDO OFF (Retroceder/Salir)
+    playSfx(sfxOff); // SONIDO OFF
     modal.style.display = 'none';
 }
 
 // Volver al Menú Principal
 window.goBack = function() {
-    playSfx(sfxOff); // SONIDO OFF (Retroceder)
+    playSfx(sfxOff); // SONIDO OFF
     seasonView.style.display = 'none';
     mainMenu.style.display = 'flex';
     window.scrollTo(0, 0); // Scroll arriba
@@ -90,7 +92,7 @@ window.openSeasonView = function(seasonNum) {
     // ya que estamos yendo hacia adelante (ON).
     modal.style.display = 'none'; 
     
-    playSfx(sfxOn); // SONIDO ON (Entrar)
+    playSfx(sfxOn); // SONIDO ON
     mainMenu.style.display = 'none';
     seasonView.style.display = 'flex';
     window.scrollTo(0, 0); // Asegurar scroll arriba al entrar
