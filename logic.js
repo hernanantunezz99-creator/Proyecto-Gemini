@@ -1,6 +1,6 @@
 // --- SONIDO (ARCHIVOS) ---
 const sfxCheck = new Audio('img/check.mp3');
-const sfxCancel = new Audio('img/cancelar.mp3'); // Nuevo sonido
+const sfxCancel = new Audio('img/cancelar.mp3');
 const sfxOn = new Audio('img/on.mp3');
 const sfxOff = new Audio('img/off.mp3');
 
@@ -16,11 +16,11 @@ window.toggleTask = function(checkbox, uniqueId) {
     
     if (checkbox.checked) {
         span.classList.add('task-completed');
-        playSfx(sfxCheck); // SONIDO CHECK (Completar)
+        playSfx(sfxCheck); // SONIDO CHECK
         localStorage.setItem(uniqueId, 'true');
     } else {
         span.classList.remove('task-completed');
-        playSfx(sfxCancel); // SONIDO CANCELAR (Desmarcar)
+        playSfx(sfxCancel); // SONIDO CANCELAR
         localStorage.setItem(uniqueId, 'false');
     }
 }
@@ -38,7 +38,7 @@ window.openSaga = function(numero) {
     modal.style.display = 'flex';
 }
 
-// Cerrar Modal (Botón Cerrar o clic fuera)
+// Cerrar Modal
 window.closeModal = function() {
     playSfx(sfxOff); // SONIDO OFF
     modal.style.display = 'none';
@@ -52,12 +52,12 @@ window.goBack = function() {
     window.scrollTo(0, 0); // Scroll arriba
 }
 
-// Detectar clic fuera del modal para cerrar
+// Detectar clic fuera del modal
 window.onclick = function(event) {
     if (event.target == modal) window.closeModal();
 }
 
-// --- FUNCIÓN HELPER PARA GENERAR HTML DE OBJETIVOS ---
+// --- HELPER HTML ---
 function renderObjectiveGroup(objectivesArray, seasonNum, typePrefix) {
     let html = '';
     objectivesArray.forEach((obj, objIndex) => {
@@ -88,14 +88,11 @@ function renderObjectiveGroup(objectivesArray, seasonNum, typePrefix) {
 
 // --- RENDERIZADO DE TEMPORADA ---
 window.openSeasonView = function(seasonNum) {
-    // Cerramos el modal manualmente sin usar window.closeModal() para evitar que suene "OFF"
-    // ya que estamos yendo hacia adelante (ON).
     modal.style.display = 'none'; 
-    
-    playSfx(sfxOn); // SONIDO ON
+    playSfx(sfxOn); 
     mainMenu.style.display = 'none';
     seasonView.style.display = 'flex';
-    window.scrollTo(0, 0); // Asegurar scroll arriba al entrar
+    window.scrollTo(0, 0); 
 
     const seasonData = DATOS_TEMPORADAS[seasonNum];
     const arcsData = DATOS_ARCOS[seasonNum];
@@ -105,7 +102,7 @@ window.openSeasonView = function(seasonNum) {
     // 1. Renderizar Primarios
     const primaryHTML = renderObjectiveGroup(seasonData.objetivos, seasonNum, 'pri');
 
-    // 2. Renderizar Secundarios (si existen)
+    // 2. Renderizar Secundarios
     let secondaryHTML = '';
     if (seasonData.objetivosSecundarios) {
         secondaryHTML = renderObjectiveGroup(seasonData.objetivosSecundarios, seasonNum, 'sec');
@@ -124,11 +121,16 @@ window.openSeasonView = function(seasonNum) {
         });
     }
 
-    // 4. Inyectar en el DOM
+    // 4. Inyectar HTML (ORDEN CAMBIADO: Arcos Primero)
     seasonView.innerHTML = `
         <div class="season-header"><h2>${seasonData.titulo}</h2></div>
         
         <div class="objectives-box">
+            <h3 class="arcs-title" style="margin-top: 0;">ARCOS</h3>
+            <div class="arcs-container" style="margin-bottom: 40px;">${arcsHTML}</div>
+
+            <div style="margin: 30px 0; border-top: 1px dashed rgba(255,255,255,0.2);"></div>
+
             <h3>🎯 OBJETIVOS PRIMARIOS</h3>
             <div class="objectives-grid">
                 ${primaryHTML}
@@ -140,9 +142,6 @@ window.openSeasonView = function(seasonNum) {
             <div class="objectives-grid">
                 ${secondaryHTML}
             </div>
-            
-            <h3 class="arcs-title">ARCOS</h3>
-            <div class="arcs-container">${arcsHTML}</div>
         </div>
         <button class="back-btn" onclick="goBack()">⬅ Volver al Menú</button>
     `;
