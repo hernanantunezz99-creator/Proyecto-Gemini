@@ -25,33 +25,27 @@ window.toggleTask = function(checkbox, uniqueId) {
 
 // --- NAVEGACIÓN ---
 const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
 const mainMenu = document.getElementById('main-menu');
 const seasonView = document.getElementById('season-view');
 
-// ABRIR MODAL DE SAGA (Lógica Dinámica)
+// 1. ABRIR MODAL DE SAGA (Selección de Temporada)
 window.openSaga = function(sagaNum) {
     playSfx(sfxOn);
     modal.style.display = 'flex';
-    
     const modalContent = document.querySelector('.modal-content');
     
-    // Generamos el contenido según la saga
     let buttonsHTML = '';
-    
     if (sagaNum === 1) {
-        // SAGA 1: Activa
         buttonsHTML = `
             <p>Elige una temporada:</p>
             <button class="season-btn" onclick="openSeasonView(1)">Temporada 1 (2026)</button>
             <button class="season-btn" onclick="openSeasonView(2)">Temporada 2 (2027)</button>
         `;
     } else {
-        // SAGAS FUTURAS: Coming Soon
-        // Calculamos los años y números de temporada teóricos
         const startYear = 2026 + (sagaNum - 1) * 2;
         const s1 = (sagaNum - 1) * 2 + 1;
         const s2 = s1 + 1;
-        
         buttonsHTML = `
             <p style="color: #888;">Futuro bloqueado:</p>
             <button class="season-btn disabled-btn">Temporada ${s1} (${startYear}) — Coming Soon</button>
@@ -59,10 +53,59 @@ window.openSaga = function(sagaNum) {
         `;
     }
 
-    // Inyectamos el HTML completo del modal
     modalContent.innerHTML = `
         <h2 id="modal-title">SAGA ${sagaNum}</h2>
         ${buttonsHTML}
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    `;
+}
+
+// 2. ABRIR DETALLE DE ARCO (En el mismo Modal)
+window.openArcDetails = function(seasonNum, arcIndex) {
+    playSfx(sfxOn);
+    modal.style.display = 'flex';
+    const modalContent = document.querySelector('.modal-content');
+    
+    const arcData = DATOS_ARCOS[seasonNum][arcIndex];
+    
+    // Generamos las tareas del arco
+    let contentHTML = '';
+    
+    if (arcData.objetivos && arcData.objetivos.length > 0) {
+        // Usamos la misma lógica de checkbox, con un ID especial 'arc'
+        arcData.objetivos.forEach((obj, objInd) => {
+            let tasksHTML = '';
+            obj.tareas.forEach((t, tInd) => {
+                const uniqueId = `s${seasonNum}-a${arcIndex}-o${objInd}-t${tInd}`;
+                const isChecked = localStorage.getItem(uniqueId) === 'true';
+                const checkedAttr = isChecked ? 'checked' : '';
+                const classAttr = isChecked ? 'task-completed' : '';
+                
+                tasksHTML += `
+                    <li style="justify-content: flex-start; text-align: left; margin-bottom: 8px;">
+                        <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
+                        <span class="${classAttr}" style="font-size: 0.8rem;">${t}</span>
+                    </li>
+                `;
+            });
+            
+            contentHTML += `
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left;">
+                    <h4 style="color: var(--accent-2); margin-top: 0;">${obj.titulo}</h4>
+                    <ul style="list-style: none; padding: 0;">${tasksHTML}</ul>
+                </div>
+            `;
+        });
+    } else {
+        contentHTML = '<p style="color: #999;">No hay objetivos detallados para este arco aún.</p>';
+    }
+
+    modalContent.innerHTML = `
+        <h2>${arcData.titulo}</h2>
+        <p style="color: #aaa; margin-bottom: 20px;">${arcData.sub}</p>
+        <div style="max-height: 400px; overflow-y: auto;">
+            ${contentHTML}
+        </div>
         <button class="close-btn" onclick="closeModal()">Cerrar</button>
     `;
 }
@@ -126,16 +169,18 @@ window.openSeasonView = function(seasonNum) {
     if (!seasonData) return;
 
     const primaryHTML = renderObjectiveGroup(seasonData.objetivos, seasonNum, 'pri');
+    
     let secondaryHTML = '';
     if (seasonData.objetivosSecundarios) {
         secondaryHTML = renderObjectiveGroup(seasonData.objetivosSecundarios, seasonNum, 'sec');
     }
 
+    // Renderizado de Arcos (Con onclick apuntando a openArcDetails)
     let arcsHTML = '';
     if (arcsData) {
-        arcsData.forEach(arc => {
+        arcsData.forEach((arc, index) => {
             arcsHTML += `
-                <div class="arc-card animate-item" onclick="alert('${arc.titulo}...')">
+                <div class="arc-card animate-item" onclick="openArcDetails(${seasonNum}, ${index})">
                     <h4>${arc.titulo}</h4>
                     <p>${arc.sub}</p>
                     <div style="font-size:1.5rem; margin-top:5px;">${arc.icono}</div>
@@ -143,7 +188,6 @@ window.openSeasonView = function(seasonNum) {
         });
     }
 
-    // Renderizamos con el botón FIXED arriba
     seasonView.innerHTML = `
         <button class="back-btn-fixed" onclick="goBack()">⬅ MENÚ</button>
 
