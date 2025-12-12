@@ -1,23 +1,12 @@
-// --- SONIDO ---
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+// --- SONIDO (ARCHIVOS) ---
+const sfxCheck = new Audio('img/check.mp3');
+const sfxOn = new Audio('img/on.mp3');
+const sfxOff = new Audio('img/off.mp3');
 
-function playSuccessSound() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime); 
-    oscillator.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-    
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); 
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.3);
+// Función auxiliar para reiniciar el audio si se hace clic rápido
+function playSfx(audioObj) {
+    audioObj.currentTime = 0;
+    audioObj.play().catch(err => console.warn("Interacción requerida para audio:", err));
 }
 
 // --- LÓGICA DE GUARDADO (LOCALSTORAGE) ---
@@ -26,7 +15,7 @@ window.toggleTask = function(checkbox, uniqueId) {
     
     if (checkbox.checked) {
         span.classList.add('task-completed');
-        playSuccessSound();
+        playSfx(sfxCheck); // SONIDO CHECK
         localStorage.setItem(uniqueId, 'true');
     } else {
         span.classList.remove('task-completed');
@@ -40,17 +29,31 @@ const modalTitle = document.getElementById('modal-title');
 const mainMenu = document.getElementById('main-menu');
 const seasonView = document.getElementById('season-view');
 
+// Abrir Modal de Saga
 window.openSaga = function(numero) {
+    playSfx(sfxOn); // SONIDO ON (Entrar)
     modalTitle.innerText = "SAGA " + numero;
     modal.style.display = 'flex';
 }
-window.closeModal = function() { modal.style.display = 'none'; }
-window.goBack = function() { 
-    seasonView.style.display = 'none'; 
-    mainMenu.style.display = 'flex'; 
-    window.scrollTo(0, 0); // <--- ESTA ES LA LÍNEA MÁGICA
+
+// Cerrar Modal (Botón Cerrar o clic fuera)
+window.closeModal = function() {
+    playSfx(sfxOff); // SONIDO OFF (Retroceder/Salir)
+    modal.style.display = 'none';
 }
-window.onclick = function(event) { if (event.target == modal) closeModal(); }
+
+// Volver al Menú Principal
+window.goBack = function() {
+    playSfx(sfxOff); // SONIDO OFF (Retroceder)
+    seasonView.style.display = 'none';
+    mainMenu.style.display = 'flex';
+    window.scrollTo(0, 0); // Scroll arriba
+}
+
+// Detectar clic fuera del modal para cerrar
+window.onclick = function(event) {
+    if (event.target == modal) window.closeModal();
+}
 
 // --- FUNCIÓN HELPER PARA GENERAR HTML DE OBJETIVOS ---
 function renderObjectiveGroup(objectivesArray, seasonNum, typePrefix) {
@@ -83,9 +86,14 @@ function renderObjectiveGroup(objectivesArray, seasonNum, typePrefix) {
 
 // --- RENDERIZADO DE TEMPORADA ---
 window.openSeasonView = function(seasonNum) {
-    closeModal();
+    // Cerramos el modal manualmente sin usar window.closeModal() para evitar que suene "OFF"
+    // ya que estamos yendo hacia adelante (ON).
+    modal.style.display = 'none'; 
+    
+    playSfx(sfxOn); // SONIDO ON (Entrar)
     mainMenu.style.display = 'none';
     seasonView.style.display = 'flex';
+    window.scrollTo(0, 0); // Asegurar scroll arriba al entrar
 
     const seasonData = DATOS_TEMPORADAS[seasonNum];
     const arcsData = DATOS_ARCOS[seasonNum];
@@ -114,7 +122,7 @@ window.openSeasonView = function(seasonNum) {
         });
     }
 
-    // 4. Inyectar en el DOM con el Divisor
+    // 4. Inyectar en el DOM
     seasonView.innerHTML = `
         <div class="season-header"><h2>${seasonData.titulo}</h2></div>
         
@@ -137,4 +145,3 @@ window.openSeasonView = function(seasonNum) {
         <button class="back-btn" onclick="goBack()">⬅ Volver al Menú</button>
     `;
 }
-
