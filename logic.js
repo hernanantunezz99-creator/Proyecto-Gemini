@@ -9,7 +9,7 @@ function playSfx(audioObj) {
     audioObj.play().catch(err => console.warn("Audio error:", err));
 }
 
-// --- GUARDADO ---
+// --- GUARDADO BOOLEANO (CHECKBOX NORMAL) ---
 window.toggleTask = function(checkbox, uniqueId) {
     const span = checkbox.nextElementSibling;
     if (checkbox.checked) {
@@ -20,6 +20,49 @@ window.toggleTask = function(checkbox, uniqueId) {
         span.classList.remove('task-completed');
         playSfx(sfxCancel);
         localStorage.setItem(uniqueId, 'false');
+    }
+}
+
+// --- NUEVO: GUARDADO DE PROGRESO (BARRA) ---
+window.incrementProgress = function(uniqueId, max) {
+    // 1. Obtener valor actual (0 si no existe)
+    let current = parseInt(localStorage.getItem(uniqueId) || "0");
+    
+    // 2. Incrementar
+    current++;
+
+    // 3. Si se pasa del máximo, volver a 0 (Reset)
+    if (current > max) {
+        current = 0;
+        playSfx(sfxCancel); // Sonido de reinicio
+    } else if (current === max) {
+        playSfx(sfxCheck); // Sonido de victoria al completar
+    } else {
+        playSfx(sfxOn); // Sonido de "tap" normal al sumar
+    }
+
+    // 4. Guardar y actualizar visualmente
+    localStorage.setItem(uniqueId, current);
+    updateProgressBarUI(uniqueId, current, max);
+}
+
+// Helper para actualizar la barra visualmente sin recargar todo
+function updateProgressBarUI(uniqueId, current, max) {
+    const barFill = document.getElementById(`bar-fill-${uniqueId}`);
+    const barText = document.getElementById(`bar-text-${uniqueId}`);
+    
+    if (barFill && barText) {
+        const percent = (current / max) * 100;
+        barFill.style.width = `${percent}%`;
+        barText.innerText = `${current}/${max}`;
+        
+        // Cambio de color si está completo
+        if (current === max) {
+            barFill.classList.add('completed-fill');
+            barText.innerText = "¡COMPLETADO!";
+        } else {
+            barFill.classList.remove('completed-fill');
+        }
     }
 }
 
@@ -74,19 +117,38 @@ window.closeArcView = function() {
     window.scrollTo(0, 0);
 }
 
-// --- RENDERIZADO TAREAS (HELPER MODIFICADO) ---
-// Ahora si isReadOnly es true, NO imprime el <input type="checkbox">
+// --- RENDERIZADO TAREAS ---
 function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     let html = '';
     tasks.forEach((tarea, i) => {
         const uniqueId = `${uniqueIdPrefix}-t${i}`;
-        const texto = typeof tarea === 'string' ? tarea : tarea.texto;
+        
+        // CASO 1: BARRA DE PROGRESO (Si tiene propiedad 'total')
+        if (typeof tarea === 'object' && tarea.total) {
+            const max = tarea.total;
+            const current = parseInt(localStorage.getItem(uniqueId) || "0");
+            const percent = (current / max) * 100;
+            const isFull = current === max;
+            const label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
+            const fillClass = isFull ? 'completed-fill' : '';
 
-        if (isReadOnly) {
-            // MODO SOLO TEXTO (Para Fechas)
+            html += `
+                <li class="progress-container" onclick="incrementProgress('${uniqueId}', ${max})">
+                    <div class="progress-track">
+                        <div id="bar-fill-${uniqueId}" class="progress-fill ${fillClass}" style="width: ${percent}%"></div>
+                        <span id="bar-text-${uniqueId}" class="progress-text">${label}</span>
+                    </div>
+                </li>
+            `;
+        } 
+        // CASO 2: SOLO TEXTO (Fechas)
+        else if (isReadOnly) {
+            const texto = typeof tarea === 'string' ? tarea : tarea.texto;
             html += `<li class="readonly-task">${texto}</li>`;
-        } else {
-            // MODO CHECKBOX (Normal)
+        } 
+        // CASO 3: CHECKBOX NORMAL
+        else {
+            const texto = typeof tarea === 'string' ? tarea : tarea.texto;
             const isChecked = localStorage.getItem(uniqueId) === 'true';
             const checkedAttr = isChecked ? 'checked' : '';
             const classAttr = isChecked ? 'task-completed' : '';
@@ -109,8 +171,6 @@ window.openArcView = function(seasonNum, arcIndex) {
     window.scrollTo(0, 0);
 
     const arcData = DATOS_ARCOS[seasonNum][arcIndex];
-    
-    // 1. Detectar si es el Arco 0 (para activar modo Excel horizontal)
     const isExcelArc = (seasonNum === 1 && arcIndex === 0);
     const gridClass = isExcelArc ? 'objectives-grid excel-mode' : 'objectives-grid';
 
@@ -118,12 +178,9 @@ window.openArcView = function(seasonNum, arcIndex) {
     if (arcData.objetivos && arcData.objetivos.length > 0) {
         arcData.objetivos.forEach((obj, objInd) => {
             const prefix = `s${seasonNum}-a${arcIndex}-o${objInd}`;
-            
-            // 2. DETECCIÓN ROBUSTA: Si el título contiene "FECHA" o es la primera columna del Arco 0
             const tituloUpper = obj.titulo ? obj.titulo.toUpperCase() : "";
             const isDateColumn = (tituloUpper.includes("FECHA") || (isExcelArc && objInd === 0));
             
-            // Pasamos el parámetro 'true' si es fecha
             const tasks = renderTasksHTML(obj.tareas, prefix, isDateColumn);
             
             objectivesHTML += `
@@ -178,7 +235,6 @@ window.openSeasonView = function(seasonNum) {
         let html = '';
         arr.forEach((obj, idx) => {
             const prefix = `s${seasonNum}-${type}-o${idx}`;
-            // Aquí siempre es falso el readonly (checkboxes normales)
             html += `
                 <div class="objective-group ${type === 'sec' ? 'secondary-card' : ''} animate-item">
                     <h4>${obj.titulo}</h4>
