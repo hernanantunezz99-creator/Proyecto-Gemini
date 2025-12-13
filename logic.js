@@ -74,8 +74,8 @@ window.closeArcView = function() {
     window.scrollTo(0, 0);
 }
 
-// --- RENDERIZADO TAREAS (Helper Modificado) ---
-// Ahora acepta un parámetro 'isReadOnly'
+// --- RENDERIZADO TAREAS (HELPER MODIFICADO) ---
+// Ahora si isReadOnly es true, NO imprime el <input type="checkbox">
 function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     let html = '';
     tasks.forEach((tarea, i) => {
@@ -83,10 +83,10 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
         const texto = typeof tarea === 'string' ? tarea : tarea.texto;
 
         if (isReadOnly) {
-            // Renderizar SOLO TEXTO (para las fechas)
+            // MODO SOLO TEXTO (Para Fechas)
             html += `<li class="readonly-task">${texto}</li>`;
         } else {
-            // Renderizar CHECKBOX (normal)
+            // MODO CHECKBOX (Normal)
             const isChecked = localStorage.getItem(uniqueId) === 'true';
             const checkedAttr = isChecked ? 'checked' : '';
             const classAttr = isChecked ? 'task-completed' : '';
@@ -110,7 +110,7 @@ window.openArcView = function(seasonNum, arcIndex) {
 
     const arcData = DATOS_ARCOS[seasonNum][arcIndex];
     
-    // DETECCIÓN: Arco 0 de la Temporada 1
+    // 1. Detectar si es el Arco 0 (para activar modo Excel horizontal)
     const isExcelArc = (seasonNum === 1 && arcIndex === 0);
     const gridClass = isExcelArc ? 'objectives-grid excel-mode' : 'objectives-grid';
 
@@ -119,9 +119,11 @@ window.openArcView = function(seasonNum, arcIndex) {
         arcData.objetivos.forEach((obj, objInd) => {
             const prefix = `s${seasonNum}-a${arcIndex}-o${objInd}`;
             
-            // Si es Excel y es la columna 0 (Fechas), activamos modo lectura
-            const isDateColumn = (isExcelArc && objInd === 0);
+            // 2. DETECCIÓN ROBUSTA: Si el título contiene "FECHA" o es la primera columna del Arco 0
+            const tituloUpper = obj.titulo ? obj.titulo.toUpperCase() : "";
+            const isDateColumn = (tituloUpper.includes("FECHA") || (isExcelArc && objInd === 0));
             
+            // Pasamos el parámetro 'true' si es fecha
             const tasks = renderTasksHTML(obj.tareas, prefix, isDateColumn);
             
             objectivesHTML += `
@@ -176,11 +178,12 @@ window.openSeasonView = function(seasonNum) {
         let html = '';
         arr.forEach((obj, idx) => {
             const prefix = `s${seasonNum}-${type}-o${idx}`;
+            // Aquí siempre es falso el readonly (checkboxes normales)
             html += `
                 <div class="objective-group ${type === 'sec' ? 'secondary-card' : ''} animate-item">
                     <h4>${obj.titulo}</h4>
                     <span class="metric">${obj.metrica}</span>
-                    <ul>${renderTasksHTML(obj.tareas, prefix)}</ul>
+                    <ul>${renderTasksHTML(obj.tareas, prefix, false)}</ul>
                 </div>`;
         });
         return html;
