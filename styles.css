@@ -369,3 +369,25 @@ h1 {
 .objective-group:nth-child(2) { animation-delay: 0.2s; }
 .objective-group:nth-child(3) { animation-delay: 0.3s; }
 .objective-group:nth-child(4) { animation-delay: 0.4s; }
+
+/* --- TAREAS DE SOLO LECTURA (FECHAS) --- */
+.readonly-task {
+    font-weight: bold;
+    color: var(--accent-1) !important; /* Color destacado (Rojo/Coral) */
+    justify-content: center; /* Centrado */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.1) !important; /* Fondo un poco más claro */
+    cursor: default; /* Cursor normal */
+    
+    /* IMPORTANTE: Mantener mismas medidas que 'li' normal para alinear filas */
+    margin: 0;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    padding: 3px 5px; 
+    border-radius: 4px;
+    height: 100%; /* Asegura consistencia */
+    min-height: 23px; /* Altura mínima igual a la de los checkboxes */
+    display: flex;
+    align-items: center;
+}
