@@ -1,12 +1,13 @@
 const DATOS_ARCOS = {
     1: [
         // ==========================================
-        //       ARCO 0: EL PRELUDIO (EXCEL)
+        //       ARCO 0: EL PRELUDIO
         // ==========================================
         { 
             titulo: "ARCO 0: El Preludio", 
             sub: "13 Dic - 30 Dic 2025", 
             icono: "✨", 
+            imagen: "img/arco0.png", // <--- NUEVA IMAGEN
             objetivos: [
                 // COL 1: FECHAS
                 {
@@ -122,6 +123,7 @@ const DATOS_ARCOS = {
             titulo: "ARCO 1: Base + Arranque", 
             sub: "Enero - Abril", 
             icono: "🧱",
+            imagen: "img/arco1.png", // <--- NUEVA IMAGEN
             objetivos: [
                 {
                     titulo: "🏥 Medicina (Arranque)",
@@ -159,6 +161,7 @@ const DATOS_ARCOS = {
             titulo: "ARCO 2: Parciales + Consolidación", 
             sub: "Mayo - Agosto", 
             icono: "🌱",
+            imagen: "img/arco2.png", // <--- NUEVA IMAGEN
             objetivos: [
                 {
                     titulo: "🏥 Medicina (Parciales)",
@@ -199,6 +202,7 @@ const DATOS_ARCOS = {
             titulo: "ARCO 3: Cierre + Simulacros", 
             sub: "Sept - Dic", 
             icono: "🚀",
+            imagen: "img/arco3.png", // <--- NUEVA IMAGEN
             objetivos: [
                 {
                     titulo: "🏥 Medicina (Finales)",
