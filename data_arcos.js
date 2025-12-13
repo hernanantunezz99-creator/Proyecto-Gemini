@@ -1,19 +1,144 @@
 const DATOS_ARCOS = {
     1: [
-        // --- NUEVO ARCO 0 ---
+        // --- ARCO 0: EL PRELUDIO (13/12 - 30/12) ---
         { 
             titulo: "ARCO 0: El Preludio", 
             sub: "13 Dic - 30 Dic 2025", 
-            icono: "✨", // Icono de inicio/chispa
-            objetivos: [] // Esperando tus detalles...
+            icono: "✨", 
+            objetivos: [
+                // COLUMNA 1: FECHAS (Referencia)
+                {
+                    titulo: "📅 Calendario",
+                    tareas: [
+                        "13/12 - Sábado", "14/12 - Domingo", "15/12 - Lunes", "16/12 - Martes",
+                        "17/12 - Miércoles", "18/12 - Jueves", "19/12 - Viernes", "20/12 - Sábado",
+                        "21/12 - Domingo", "22/12 - Lunes", "23/12 - Martes", "24/12 - Miércoles",
+                        "25/12 - Jueves", "26/12 - Viernes", "27/12 - Sábado", "28/12 - Domingo",
+                        "29/12 - Lunes", "30/12 - Martes"
+                    ]
+                },
+                // COLUMNA 2: EJERCICIO
+                {
+                    titulo: "🏋️ Ejercicio",
+                    tareas: [
+                        "Ejercicio Día 1", "Ejercicio Día 2", "Ejercicio Día 3", "Ejercicio Día 4",
+                        "Ejercicio Día 5", "Ejercicio Día 6", "Ejercicio Día 7", "Ejercicio Día 8",
+                        "Ejercicio Día 9", "Ejercicio Día 10", "Ejercicio Día 11", "Ejercicio Día 12",
+                        "Ejercicio Día 13", "Ejercicio Día 14", "Ejercicio Día 15", "Ejercicio Día 16",
+                        "Ejercicio Día 17", "Ejercicio Día 18"
+                    ]
+                },
+                // COLUMNA 3: DREMRD
+                {
+                    titulo: "📝 DREMRD",
+                    tareas: [
+                        "13/12: 12 Preguntas", "14/12: 12 Preguntas", "15/12: 12 Preguntas", "16/12: 12 Preguntas",
+                        "17/12: 12 Preguntas", "18/12: 12 Preguntas", "19/12: 12 Preguntas", "20/12: 12 Preguntas",
+                        "21/12: 12 Preguntas", "22/12: 12 Preguntas", "23/12: 12 Preguntas", "24/12: 12 Preguntas",
+                        "25/12: 12 Preguntas", "26/12: 12 Preguntas", "27/12: 12 Preguntas", "28/12: 12 Preguntas",
+                        "29/12: 12 Preguntas", "30/12: 12 Preguntas"
+                    ]
+                },
+                // COLUMNA 4: CARDIO-RESP (Progresión Específica)
+                {
+                    titulo: "🫀 Cardio-Resp",
+                    tareas: [
+                        "13/12: 15 videos", 
+                        "14/12: 30 videos", 
+                        "15/12: 45 videos", 
+                        "16/12: 60 videos", 
+                        "17/12: 75 videos", 
+                        "18/12: 88 videos (FINAL)"
+                    ]
+                },
+                // COLUMNA 5: MKP
+                {
+                    titulo: "🛒 MKP",
+                    tareas: [
+                        "MKP Racha 1", "MKP Racha 2", "MKP Racha 3", "MKP Racha 4",
+                        "MKP Racha 5", "MKP Racha 6", "MKP Racha 7", "MKP Racha 8",
+                        "MKP Racha 9", "MKP Racha 10", "MKP Racha 11", "MKP Racha 12",
+                        "MKP Racha 13", "MKP Racha 14", "MKP Racha 15", "MKP Racha 16",
+                        "MKP Racha 17", "MKP Racha 18"
+                    ]
+                },
+                // COLUMNA 6: HPDFa
+                {
+                    titulo: "📄 HPDFa",
+                    tareas: [
+                        "HPDFa Racha 1", "HPDFa Racha 2", "HPDFa Racha 3", "HPDFa Racha 4",
+                        "HPDFa Racha 5", "HPDFa Racha 6", "HPDFa Racha 7", "HPDFa Racha 8",
+                        "HPDFa Racha 9", "HPDFa Racha 10", "HPDFa Racha 11", "HPDFa Racha 12",
+                        "HPDFa Racha 13", "HPDFa Racha 14", "HPDFa Racha 15", "HPDFa Racha 16",
+                        "HPDFa Racha 17", "HPDFa Racha 18"
+                    ]
+                },
+                // COLUMNA 7: STICKERLY (Pares)
+                {
+                    titulo: "📱 Sticker.ly",
+                    tareas: [
+                        "13/12: Paquetes 3 y 4",
+                        "14/12: Paquetes 5 y 6",
+                        "15/12: Paquetes 7 y 8",
+                        "16/12: Paquetes 9 y 10",
+                        "17/12: Paquetes 11 y 12",
+                        "18/12: Paquetes 13 y 14",
+                        "19/12: Paquetes 15 y 16 (FINAL)"
+                    ]
+                },
+                // COLUMNA 8: WhatStickers (K)
+                {
+                    titulo: "🇰🇷 WS (Kevin)",
+                    tareas: [
+                        "13/12: 1 Pack", "14/12: 2 Packs", "15/12: 3 Packs", "16/12: 4 Packs",
+                        "17/12: 5 Packs", "18/12: 6 Packs", "19/12: 7 Packs", "20/12: 8 Packs",
+                        "21/12: 9 Packs", "22/12: 10 Packs", "23/12: 11 Packs", "24/12: 12 Packs",
+                        "25/12: 13 Packs", "26/12: 14 Packs", "27/12: 15 Packs", "28/12: 16 Packs",
+                        "29/12: 17 Packs", "30/12: 18 Packs"
+                    ]
+                },
+                // COLUMNA 9: WhatStickers (S)
+                {
+                    titulo: "🇸 WS (Seba)",
+                    tareas: [
+                        "13/12: 1 Pack", "14/12: 2 Packs", "15/12: 3 Packs", "16/12: 4 Packs",
+                        "17/12: 5 Packs", "18/12: 6 Packs", "19/12: 7 Packs", "20/12: 8 Packs",
+                        "21/12: 9 Packs", "22/12: 10 Packs", "23/12: 11 Packs", "24/12: 12 Packs",
+                        "25/12: 13 Packs", "26/12: 14 Packs", "27/12: 15 Packs", "28/12: 16 Packs",
+                        "29/12: 17 Packs", "30/12: 18 Packs"
+                    ]
+                },
+                // COLUMNA 10: DUOLINGO
+                {
+                    titulo: "🦉 Duolingo",
+                    tareas: [
+                        "13/12: Racha 27", "14/12: Racha 28", "15/12: Racha 29", "16/12: Racha 30",
+                        "17/12: Racha 31", "18/12: Racha 32", "19/12: Racha 33", "20/12: Racha 34",
+                        "21/12: Racha 35", "22/12: Racha 36", "23/12: Racha 37", "24/12: Racha 38",
+                        "25/12: Racha 39", "26/12: Racha 40", "27/12: Racha 41", "28/12: Racha 42",
+                        "29/12: Racha 43", "30/12: Racha 44"
+                    ]
+                },
+                 // COLUMNA 11: ALEMÁN (Agregada según título)
+                 {
+                    titulo: "🇩🇪 Alemán",
+                    tareas: [
+                        "13/12: Práctica", "14/12: Práctica", "15/12: Práctica", "16/12: Práctica",
+                        "17/12: Práctica", "18/12: Práctica", "19/12: Práctica", "20/12: Práctica",
+                        "21/12: Práctica", "22/12: Práctica", "23/12: Práctica", "24/12: Práctica",
+                        "25/12: Práctica", "26/12: Práctica", "27/12: Práctica", "28/12: Práctica",
+                        "29/12: Práctica", "30/12: Práctica"
+                    ]
+                }
+            ]
         },
-        // --- ARCOS EXISTENTES (Ya detallados) ---
+
+        // --- ARCOS 1, 2, 3 (MANTENIDOS IGUAL) ---
         { 
             titulo: "ARCO 1: Base + Arranque", 
             sub: "Enero - Abril", 
             icono: "🧱",
             objetivos: [
-                // MEDICINA
                 {
                     titulo: "🏥 Medicina (Arranque)",
                     tareas: [
@@ -25,7 +150,6 @@ const DATOS_ARCOS = {
                         "Preparar bloque evaluación (UCGYN Clínica I: 28/04)."
                     ]
                 },
-                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (3er Semestre)",
                     tareas: [
@@ -49,7 +173,6 @@ const DATOS_ARCOS = {
             sub: "Mayo - Agosto", 
             icono: "🌱",
             objetivos: [
-                // MEDICINA
                 {
                     titulo: "🏥 Medicina (Parciales)",
                     tareas: [
@@ -62,7 +185,6 @@ const DATOS_ARCOS = {
                         "Resumen maestro 10–15 págs/materia (High-Yield)."
                     ]
                 },
-                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (Cierre 3º + Inicio 4º)",
                     tareas: [
@@ -87,7 +209,6 @@ const DATOS_ARCOS = {
             sub: "Sept - Dic", 
             icono: "🚀",
             objetivos: [
-                // MEDICINA
                 {
                     titulo: "🏥 Medicina (Finales)",
                     tareas: [
@@ -103,7 +224,6 @@ const DATOS_ARCOS = {
                         "📅 08/12: Examen UCGYN / 13/12 MPNA / 16/12 BCP."
                     ]
                 },
-                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (Cierre 4to Semestre)",
                     tareas: [
