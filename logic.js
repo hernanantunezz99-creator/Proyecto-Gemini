@@ -25,8 +25,12 @@ window.toggleTask = function(checkbox, uniqueId) {
 
 // --- NUEVO: GUARDADO DE PROGRESO (BARRA) ---
 window.incrementProgress = function(uniqueId, max) {
-    // 1. Obtener valor actual (0 si no existe)
-    let current = parseInt(localStorage.getItem(uniqueId) || "0");
+    // 1. Obtener valor actual, protegiendo contra NaN
+    let stored = localStorage.getItem(uniqueId);
+    let current = parseInt(stored);
+    
+    // Si no es un número (ej: es "true" de la versión vieja o null), empezamos en 0
+    if (isNaN(current)) current = 0;
     
     // 2. Incrementar
     current++;
@@ -54,14 +58,14 @@ function updateProgressBarUI(uniqueId, current, max) {
     if (barFill && barText) {
         const percent = (current / max) * 100;
         barFill.style.width = `${percent}%`;
-        barText.innerText = `${current}/${max}`;
         
-        // Cambio de color si está completo
+        // Texto dinámico
         if (current === max) {
             barFill.classList.add('completed-fill');
             barText.innerText = "¡COMPLETADO!";
         } else {
             barFill.classList.remove('completed-fill');
+            barText.innerText = `${current}/${max}`;
         }
     }
 }
@@ -126,16 +130,25 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
         // CASO 1: BARRA DE PROGRESO (Si tiene propiedad 'total')
         if (typeof tarea === 'object' && tarea.total) {
             const max = tarea.total;
-            const current = parseInt(localStorage.getItem(uniqueId) || "0");
+            
+            // Protección contra NaN al renderizar
+            let current = parseInt(localStorage.getItem(uniqueId));
+            if (isNaN(current)) current = 0;
+
             const percent = (current / max) * 100;
             const isFull = current === max;
+            
+            // Si está lleno, mostramos "COMPLETADO", sino "X/15"
             const label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
             const fillClass = isFull ? 'completed-fill' : '';
+
+            // Importante: El ancho debe ser porcentual válido
+            const widthStyle = isNaN(percent) ? "0%" : `${percent}%`;
 
             html += `
                 <li class="progress-container" onclick="incrementProgress('${uniqueId}', ${max})">
                     <div class="progress-track">
-                        <div id="bar-fill-${uniqueId}" class="progress-fill ${fillClass}" style="width: ${percent}%"></div>
+                        <div id="bar-fill-${uniqueId}" class="progress-fill ${fillClass}" style="width: ${widthStyle}"></div>
                         <span id="bar-text-${uniqueId}" class="progress-text">${label}</span>
                     </div>
                 </li>
