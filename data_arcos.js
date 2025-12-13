@@ -1,5 +1,13 @@
 const DATOS_ARCOS = {
     1: [
+        // --- NUEVO ARCO 0 ---
+        { 
+            titulo: "ARCO 0: El Preludio", 
+            sub: "13 Dic - 30 Dic 2025", 
+            icono: "✨", // Icono de inicio/chispa
+            objetivos: [] // Esperando tus detalles...
+        },
+        // --- ARCOS EXISTENTES (Ya detallados) ---
         { 
             titulo: "ARCO 1: Base + Arranque", 
             sub: "Enero - Abril", 
@@ -17,7 +25,7 @@ const DATOS_ARCOS = {
                         "Preparar bloque evaluación (UCGYN Clínica I: 28/04)."
                     ]
                 },
-                // PSICOLOGÍA (DETALLADO)
+                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (3er Semestre)",
                     tareas: [
@@ -54,7 +62,7 @@ const DATOS_ARCOS = {
                         "Resumen maestro 10–15 págs/materia (High-Yield)."
                     ]
                 },
-                // PSICOLOGÍA (DETALLADO)
+                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (Cierre 3º + Inicio 4º)",
                     tareas: [
@@ -95,7 +103,7 @@ const DATOS_ARCOS = {
                         "📅 08/12: Examen UCGYN / 13/12 MPNA / 16/12 BCP."
                     ]
                 },
-                // PSICOLOGÍA (DETALLADO)
+                // PSICOLOGÍA
                 {
                     titulo: "🧠 Psicología (Cierre 4to Semestre)",
                     tareas: [
@@ -112,7 +120,7 @@ const DATOS_ARCOS = {
             ]
         }
     ],
-    // TEMPORADA 2 (Placeholder por ahora)
+    // TEMPORADA 2
     2: [
         { titulo: "ARCO 1", sub: "Enero - Abril", icono: "🏗️", objetivos: [] },
         { titulo: "ARCO 2", sub: "Mayo - Agosto", icono: "📈", objetivos: [] },
