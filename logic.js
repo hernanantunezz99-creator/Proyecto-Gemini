@@ -1,4 +1,8 @@
-// --- SONIDO ---
+// ==========================================
+//       LOGIC.JS - COMPLETO Y DEFINITIVO
+// ==========================================
+
+// --- 1. SONIDOS ---
 const sfxCheck = new Audio('img/check.mp3');
 const sfxCancel = new Audio('img/cancelar.mp3');
 const sfxOn = new Audio('img/on.mp3');
@@ -9,7 +13,9 @@ function playSfx(audioObj) {
     audioObj.play().catch(err => console.warn("Audio error:", err));
 }
 
-// --- GUARDADO BOOLEANO (CHECKBOX NORMAL) ---
+// --- 2. SISTEMA DE GUARDADO ---
+
+// A. Tareas Normales (Checkboxes)
 window.toggleTask = function(checkbox, uniqueId) {
     const span = checkbox.nextElementSibling;
     if (checkbox.checked) {
@@ -23,42 +29,47 @@ window.toggleTask = function(checkbox, uniqueId) {
     }
 }
 
-// --- NUEVO: GUARDADO DE PROGRESO (BARRA) ---
+// B. Barras de Progreso (Cardio)
 window.incrementProgress = function(uniqueId, max, acumulado = 0) {
     let stored = localStorage.getItem(uniqueId);
     let current = parseInt(stored);
     
+    // Protección contra errores (NaN)
     if (isNaN(current)) current = 0;
     
     current++;
 
+    // Lógica de ciclo y sonidos
     if (current > max) {
         current = 0;
-        playSfx(sfxCancel); 
+        playSfx(sfxCancel); // Reinicio
     } else if (current === max) {
-        playSfx(sfxCheck); 
+        playSfx(sfxCheck); // Completado
     } else {
-        playSfx(sfxOn); 
+        playSfx(sfxOn); // Progreso normal
     }
 
     localStorage.setItem(uniqueId, current);
     updateProgressBarUI(uniqueId, current, max, acumulado);
 }
 
-// Helper para actualizar visualmente
+// Helper para actualizar la barra visualmente
 function updateProgressBarUI(uniqueId, current, max, acumulado) {
     const barFill = document.getElementById(`bar-fill-${uniqueId}`);
     const barText = document.getElementById(`bar-text-${uniqueId}`);
     
     if (barFill && barText) {
         const percent = (current / max) * 100;
-        barFill.style.width = `${percent}%`;
+        // Evitar que el width sea NaN%
+        const widthVal = isNaN(percent) ? 0 : percent;
+        barFill.style.width = `${widthVal}%`;
         
         if (current === max) {
             barFill.classList.add('completed-fill');
             barText.innerText = "¡COMPLETADO!";
         } else {
             barFill.classList.remove('completed-fill');
+            // Texto: "0/15" o "0/15 (30)" si hay acumulado
             let text = `${current}/${max}`;
             if (acumulado > 0) text += ` (${acumulado})`;
             barText.innerText = text;
@@ -66,13 +77,13 @@ function updateProgressBarUI(uniqueId, current, max, acumulado) {
     }
 }
 
-// --- VARIABLES ---
+// --- 3. VARIABLES GLOBALES ---
 const modal = document.getElementById('modal');
 const mainMenu = document.getElementById('main-menu');
 const seasonView = document.getElementById('season-view');
 const arcView = document.getElementById('arc-view');
 
-// --- MODAL SAGA ---
+// --- 4. MODAL SAGA (Menú Principal) ---
 window.openSaga = function(sagaNum) {
     playSfx(sfxOn);
     modal.style.display = 'flex';
@@ -102,7 +113,7 @@ window.openSaga = function(sagaNum) {
 window.closeModal = function() { playSfx(sfxOff); modal.style.display = 'none'; }
 window.onclick = function(event) { if (event.target == modal) window.closeModal(); }
 
-// --- NAVEGACIÓN ---
+// --- 5. NAVEGACIÓN GENERAL ---
 window.goBackToMenu = function() {
     playSfx(sfxOff);
     seasonView.style.display = 'none';
@@ -117,13 +128,13 @@ window.closeArcView = function() {
     window.scrollTo(0, 0);
 }
 
-// --- RENDERIZADO TAREAS ---
+// --- 6. RENDERIZADOR DE TAREAS (El cerebro visual) ---
 function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     let html = '';
     tasks.forEach((tarea, i) => {
         const uniqueId = `${uniqueIdPrefix}-t${i}`;
         
-        // CASO 1: BARRA DE PROGRESO
+        // CASO A: BARRA DE PROGRESO (Si tiene propiedad 'total')
         if (typeof tarea === 'object' && tarea.total) {
             const max = tarea.total;
             const acumulado = tarea.acumulado || 0; 
@@ -134,6 +145,7 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
             const percent = (current / max) * 100;
             const isFull = current === max;
             
+            // Texto de la barra
             let label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
             if (!isFull && acumulado > 0) label += ` (${acumulado})`;
 
@@ -149,12 +161,12 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
                 </li>
             `;
         } 
-        // CASO 2: SOLO TEXTO (Fechas)
+        // CASO B: SOLO TEXTO (Para columnas de Fechas)
         else if (isReadOnly) {
             const texto = typeof tarea === 'string' ? tarea : tarea.texto;
             html += `<li class="readonly-task">${texto}</li>`;
         } 
-        // CASO 3: CHECKBOX NORMAL
+        // CASO C: CHECKBOX NORMAL
         else {
             const texto = typeof tarea === 'string' ? tarea : tarea.texto;
             const isChecked = localStorage.getItem(uniqueId) === 'true';
@@ -171,7 +183,7 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     return html;
 }
 
-// --- VISTA ARCO ---
+// --- 7. VISTA DE ARCO (Grid Excel) ---
 window.openArcView = function(seasonNum, arcIndex) {
     playSfx(sfxOn);
     seasonView.style.display = 'none';
@@ -179,6 +191,8 @@ window.openArcView = function(seasonNum, arcIndex) {
     window.scrollTo(0, 0);
 
     const arcData = DATOS_ARCOS[seasonNum][arcIndex];
+    
+    // Detectar si es el Arco 0 para aplicar estilo "Tabla Excel"
     const isExcelArc = (seasonNum === 1 && arcIndex === 0);
     const gridClass = isExcelArc ? 'objectives-grid excel-mode' : 'objectives-grid';
 
@@ -186,6 +200,8 @@ window.openArcView = function(seasonNum, arcIndex) {
     if (arcData.objetivos && arcData.objetivos.length > 0) {
         arcData.objetivos.forEach((obj, objInd) => {
             const prefix = `s${seasonNum}-a${arcIndex}-o${objInd}`;
+            
+            // Detectar si es columna de fechas (por título o posición en Arco 0)
             const tituloUpper = obj.titulo ? obj.titulo.toUpperCase() : "";
             const isDateColumn = (tituloUpper.includes("FECHA") || (isExcelArc && objInd === 0));
             
@@ -214,7 +230,7 @@ window.openArcView = function(seasonNum, arcIndex) {
     `;
 }
 
-// --- VISTA TEMPORADA (Aquí aplicamos las IMÁGENES DE FONDO) ---
+// --- 8. VISTA DE TEMPORADA (Botones con Imágenes) ---
 window.openSeasonView = function(seasonNum) {
     modal.style.display = 'none';
     playSfx(sfxOn);
@@ -227,33 +243,38 @@ window.openSeasonView = function(seasonNum) {
 
     if (!seasonData) return;
 
+    // Generar botones de Arcos
     let arcsHTML = '';
     if (arcsData) {
         arcsData.forEach((arc, index) => {
-            // Si tiene imagen, la usamos de fondo con un degradado oscuro para que se lea el texto
             let cardStyle = '';
             let iconHTML = '';
             
+            // Título corto para el botón (ej: "ARCO 0")
+            const shortTitle = `ARCO ${index}`;
+
             if (arc.imagen) {
+                // Imagen de fondo limpia (sin filtro oscuro)
                 cardStyle = `
-                    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('${arc.imagen}');
+                    background-image: url('${arc.imagen}');
                     background-size: cover;
                     background-position: center;
                 `;
             } else {
-                // Si no tiene imagen, usamos el ícono emoji
+                // Si no hay imagen, usar el icono emoji
                 iconHTML = `<div style="font-size:1.5rem; margin-top:5px;">${arc.icono}</div>`;
             }
 
             arcsHTML += `
                 <div class="arc-card animate-item" onclick="openArcView(${seasonNum}, ${index})" style="${cardStyle}">
-                    <h4>${arc.titulo}</h4>
+                    <h4>${shortTitle}</h4>
                     <p>${arc.sub}</p>
                     ${iconHTML}
                 </div>`;
         });
     }
 
+    // Generar Objetivos Generales
     const renderGroup = (arr, type) => {
         let html = '';
         arr.forEach((obj, idx) => {
