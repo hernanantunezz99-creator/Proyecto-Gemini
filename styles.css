@@ -1,11 +1,11 @@
 :root {
     /* Colores Principales */
     --text-color: #ffffff;
-    --accent-1: #FF6B6B; /* Rojo/Coral para énfasis */
+    --accent-1: #FF6B6B; /* Rojo/Coral */
     --accent-2: #FFD93D; /* Amarillo */
     --accent-3: #4D96FF; /* Azul */
-    --accent-4: #FFD700; /* Dorado/Amarillo */
-    --accent-5: #6BCB77; /* Verde para completado */
+    --accent-4: #FFD700; /* Dorado */
+    --accent-5: #6BCB77; /* Verde */
     
     /* Variables Carta Antigua */
     --paper-color: #f4e1c1; 
@@ -79,7 +79,7 @@ h1 {
     max-width: 1200px;
 }
 
-/* --- CARTA DE INTRODUCCIÓN (Estilo Manuscrito) --- */
+/* --- CARTA DE INTRODUCCIÓN --- */
 .intro-letter {
     max-width: 900px;
     background-color: var(--paper-color);
@@ -88,14 +88,11 @@ h1 {
     padding: 60px; 
     margin: 40px 20px 100px 20px;
     text-align: left;
-    
-    /* Fuente Cursiva */
     font-family: 'Dancing Script', cursive; 
     font-size: 1.4rem; 
     line-height: 1.8;
     color: var(--ink-color);
-    
-    transform: rotate(-1deg); /* Rotación para realismo */
+    transform: rotate(-1deg);
     animation: fadeIn 1.5s ease;
 }
 
@@ -141,55 +138,34 @@ h1 {
 .card h2 { font-size: 0.9rem; margin-top: 230px; color: #ddd; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
 .card h3 { font-size: 1.4rem; font-weight: 600; color: white; text-transform: uppercase; font-family: 'Poppins', sans-serif; }
 .card p { font-size: 0.9rem; color: #ccc; margin: 0; padding-bottom: 20px; font-family: 'Poppins', sans-serif; }
-/* Bordes de color por saga */
+
 .saga-1 { border-bottom: 5px solid var(--accent-1); }
 .saga-2 { border-bottom: 5px solid var(--accent-2); }
 .saga-3 { border-bottom: 5px solid var(--accent-3); }
 .saga-4 { border-bottom: 5px solid var(--accent-4); }
 .saga-5 { border-bottom: 5px solid var(--accent-5); }
 
-/* --- WIDGET RADIO (Versión Mini) --- */
+/* --- WIDGET RADIO (Compacto) --- */
 .radio-container {
     position: fixed; 
     top: 20px; 
     right: 20px; 
-    width: 120px; /* Reducido de 160px */
+    width: 120px; 
     background: rgba(0, 0, 0, 0.6); 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: 8px; /* Bordes un poco más cerrados */
-    padding: 5px; /* Menos padding */
+    border-radius: 8px; 
+    padding: 5px; 
     z-index: 1000;
     transition: 0.3s;
 }
-
-.radio-container:hover { 
-    transform: scale(1.05); 
-    background: rgba(0, 0, 0, 0.9); 
-}
-
-.radio-title { 
-    font-size: 0.55rem; /* Texto más pequeño */
-    font-weight: 600; 
-    color: #ccc; 
-    display: flex; 
-    justify-content: space-between; 
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 3px;
-}
-
-.live-badge { 
-    font-size: 0.45rem; 
-    background: #ff4444; 
-    color: white; 
-    padding: 0px 3px; 
-    border-radius: 3px; 
-    animation: pulse 2s infinite; 
-}
+.radio-container:hover { transform: scale(1.05); background: rgba(0, 0, 0, 0.9); }
+.radio-title { font-size: 0.55rem; font-weight: 600; color: #ccc; display: flex; justify-content: space-between; font-family: 'Poppins', sans-serif; margin-bottom: 3px; }
+.live-badge { font-size: 0.45rem; background: #ff4444; color: white; padding: 0px 3px; border-radius: 3px; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
-/* --- VISTA TEMPORADA --- */
-#season-view { 
+/* --- VISTAS (Temporada y Arco) --- */
+#season-view, #arc-view { 
     display: none; 
     flex-direction: column; 
     align-items: center; 
@@ -197,8 +173,18 @@ h1 {
     padding: 40px; 
     animation: fadeIn 0.5s ease; 
 }
+
 .season-header { text-align: center; margin-bottom: 30px; }
-.season-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.season-header h2 { 
+    font-size: 2.2rem; 
+    text-transform: uppercase; 
+    letter-spacing: 3px; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+    overflow: hidden; 
+    white-space: nowrap; 
+    margin: 0 auto; 
+    animation: titleReveal 1.2s ease-out;
+}
 
 /* Caja contenedora */
 .objectives-box { 
@@ -219,7 +205,7 @@ h1 {
     margin-bottom: 20px; 
 }
 
-/* Grilla Principal (4 Columnas de tarjetas) */
+/* --- GRILLA NORMAL (Para Temporadas) --- */
 .objectives-grid { 
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
@@ -227,6 +213,25 @@ h1 {
     text-align: left; 
     align-items: start; 
 }
+
+/* --- MODO EXCEL (Solo para Arco 0) --- */
+.excel-mode {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+.excel-mode .objective-group {
+    min-width: 140px; 
+    flex-shrink: 0;
+}
+/* Scrollbar para Excel */
+.excel-mode::-webkit-scrollbar { height: 10px; }
+.excel-mode::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 5px; }
+.excel-mode::-webkit-scrollbar-thumb { background: var(--accent-2); border-radius: 5px; }
 
 /* Tarjeta individual de objetivo */
 .objective-group { 
@@ -236,29 +241,28 @@ h1 {
     border: 1px solid rgba(255,255,255,0.05); 
     transition: border-color 0.3s;
 }
+.secondary-card { border-left: 3px solid var(--accent-3); }
 
-/* --- AJUSTES ESPECÍFICOS PARA TÍTULOS Y MÉTRICAS DE OBJETIVOS --- */
 .objective-group h4 { 
-    font-size: 1rem; /* Aumentamos tamaño de título del objetivo */
-    color: var(--accent-3); /* Usamos un color diferente para destacar el título */
+    font-size: 1rem; 
+    color: var(--accent-3); 
     margin: 0 0 5px 0; 
     text-transform: uppercase; 
     font-weight: 800; 
-    border-bottom: 1px solid var(--accent-3); /* Línea de color de acento */
+    border-bottom: 1px solid var(--accent-3); 
     padding-bottom: 3px;
     margin-bottom: 8px;
     letter-spacing: 1px;
 }
 .metric { 
-    font-size: 0.75rem; /* Levemente más grande */
-    color: var(--accent-2); /* Destacamos la métrica con otro color */
-    font-style: normal; /* Quitamos itálica para más formalidad */
+    font-size: 0.75rem; 
+    color: var(--accent-2); 
     margin-bottom: 10px; 
     display: block; 
     font-weight: 600;
 }
 
-/* LISTA INTERNA (Checkboxes) - DISEÑO COMPACTO 2 COLUMNAS */
+/* Lista Checkboxes */
 .objectives-box ul { 
     list-style: none; 
     padding: 0; 
@@ -266,10 +270,12 @@ h1 {
     grid-template-columns: 1fr 1fr;
     gap: 5px 10px;
 }
+/* En modo excel, las listas deben ser de 1 sola columna */
+.excel-mode ul { grid-template-columns: 1fr; }
 
 .objectives-box li { 
     margin: 0; 
-    font-size: 0.7rem; /* Levemente más grande que antes */
+    font-size: 0.7rem; 
     line-height: 1.2; 
     color: #ddd; 
     display: flex; 
@@ -279,45 +285,30 @@ h1 {
     padding: 3px 5px;
     border-radius: 4px;
 }
-
 .objectives-box input[type="checkbox"] { 
-    margin: 0; 
-    cursor: pointer; 
-    accent-color: var(--accent-5); 
-    transform: scale(0.9);
+    margin: 0; cursor: pointer; accent-color: var(--accent-5); transform: scale(0.9); 
 }
-
 .task-completed { text-decoration: line-through; color: #666 !important; }
 
-/* Responsive para la grilla principal */
+/* Responsive Grid */
 @media (max-width: 1400px) { .objectives-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) { 
     .objectives-grid { grid-template-columns: 1fr; } 
-    /* En celular, volvemos a lista de 1 columna interna para que no se apriete */
     .objectives-box ul { grid-template-columns: 1fr; }
-    .objective-group h4 { font-size: 0.9rem; } /* Ajuste de título para móviles */
 }
 
 /* --- ARCOS --- */
 .arcs-title { 
-    font-size: 1.8rem; /* Título de Arcos más grande */
+    font-size: 1.8rem; 
     margin-bottom: 25px; 
     text-transform: uppercase; 
     letter-spacing: 3px;
-    margin-top: 40px; /* Separación de los objetivos */
-    color: var(--accent-1); /* Color del título de Arcos */
+    margin-top: 40px; 
+    color: var(--accent-1); 
     border-bottom: 2px solid var(--accent-1);
     padding-bottom: 10px;
 }
-
-.arcs-container { 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-    gap: 30px; /* Más espacio entre las tarjetas */
-    margin-bottom: 20px;
-}
-
+.arcs-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 20px; }
 .arc-card { 
     background: rgba(255, 255, 255, 0.1); 
     border: 1px solid rgba(255, 255, 255, 0.2); 
@@ -331,152 +322,50 @@ h1 {
     justify-content: center; 
     cursor: pointer; 
     transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
 }
 .arc-card:hover { 
     background: rgba(255, 255, 255, 0.2); 
-    transform: translateY(-8px); /* Más levantado */
+    transform: translateY(-8px); 
     border-color: var(--accent-1); 
-    box-shadow: 0 8px 15px rgba(255, 107, 107, 0.5); /* Sombra de color de acento */
+    box-shadow: 0 8px 15px rgba(255, 107, 107, 0.5); 
 }
-.arc-card h4 {
-    font-size: 1.1rem; /* Título del Arco más grande */
-    font-weight: 600;
-    color: white;
-    margin-bottom: 5px;
-}
-.arc-card p {
-    font-size: 0.9rem; /* Subtítulo legible */
-    color: #ccc;
-    margin: 0;
-}
-.arc-card div {
-    font-size: 2.2rem !important; /* Icono más grande */
-}
+.arc-card h4 { font-size: 1.1rem; font-weight: 600; color: white; margin-bottom: 5px; }
+.arc-card p { font-size: 0.9rem; color: #ccc; margin: 0; }
 
 /* --- BOTONES Y MODAL --- */
-.back-btn { margin-top: 50px; background: transparent; border: 1px solid white; color: white; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s; }
-.back-btn:hover { background: white; color: black; }
+/* Botón Volver Flotante */
+.back-btn-fixed {
+    position: fixed; 
+    top: 30px; left: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white; padding: 10px 25px;
+    border-radius: 50px; cursor: pointer;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+    z-index: 3000; backdrop-filter: blur(5px); transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.back-btn-fixed:hover { background: white; color: black; transform: scale(1.05); }
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
-
-/* EDITADO: Modal más ancho */
-.modal-content { 
-    background: #1e1e1e; 
-    padding: 40px; 
-    border-radius: 20px; 
-    text-align: center; 
-    width: 90%; /* Más ancho */
-    max-width: 600px; /* Límite más ancho */
-    border: 1px solid #333; 
-}
-
-/* EDITADO: Botones menos altos */
-.season-btn { 
-    display: block; 
-    width: 100%; 
-    padding: 10px 20px; /* Menos padding vertical (menos alto) */
-    margin: 10px 0; 
-    background: linear-gradient(90deg, #333, #444); 
-    border: none; 
-    color: white; 
-    border-radius: 10px; 
-    cursor: pointer; 
-    font-size: 1.1rem; 
-    font-family: 'Poppins', sans-serif; 
-    transition: 0.2s; 
-}
-
+.modal-content { background: #1e1e1e; padding: 40px; border-radius: 20px; text-align: center; width: 90%; max-width: 600px; border: 1px solid #333; }
+.season-btn { display: block; width: 100%; padding: 10px 20px; margin: 10px 0; background: linear-gradient(90deg, #333, #444); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-family: 'Poppins', sans-serif; transition: 0.2s; }
 .season-btn:hover { background: linear-gradient(90deg, #00C9FF, #92FE9D); color: black; font-weight: bold; }
 .close-btn { margin-top: 20px; background: transparent; border: 1px solid #555; color: #888; padding: 5px 20px; border-radius: 50px; cursor: pointer; font-family: 'Poppins', sans-serif; }
-/* Animación de entrada suave con desenfoque */
+
+/* Botones Desactivados */
+.disabled-btn { background: #333 !important; color: #666 !important; cursor: not-allowed; border: 1px solid #444 !important; background-image: none !important; }
+.disabled-btn:hover { background: #333 !important; color: #666 !important; transform: none !important; font-weight: normal !important; }
+
+/* --- ANIMACIONES --- */
 @keyframes modernEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-        filter: blur(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
+    0% { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
-
-/* Animación de "barrido" para el título */
-@keyframes titleReveal {
-    0% { width: 0; opacity: 0; }
-    100% { width: 100%; opacity: 1; }
-}
-
-/* Clase para aplicar a los grupos de objetivos */
-.animate-item {
-    opacity: 0; /* Empiezan invisibles */
-    animation: modernEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-/* Retardos para que salgan en orden (Staggered effect) */
+@keyframes titleReveal { 0% { width: 0; opacity: 0; } 100% { width: 100%; opacity: 1; } }
+.animate-item { opacity: 0; animation: modernEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .objective-group:nth-child(1) { animation-delay: 0.1s; }
 .objective-group:nth-child(2) { animation-delay: 0.2s; }
 .objective-group:nth-child(3) { animation-delay: 0.3s; }
 .objective-group:nth-child(4) { animation-delay: 0.4s; }
-
-/* El título de la temporada también con animación */
-.season-header h2 {
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
-    animation: titleReveal 1.2s ease-out;
-}
-
-/* --- Botón de Volver Flotante --- */
-.back-btn-fixed {
-    position: fixed; /* Fijo en la pantalla */
-    top: 30px;
-    left: 30px;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 10px 25px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    z-index: 3000; /* Por encima de todo */
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.back-btn-fixed:hover {
-    background: white;
-    color: black;
-    transform: scale(1.05);
-}
-
-/* --- Botones Desactivados (Coming Soon) --- */
-.disabled-btn {
-    background: #333 !important; /* Gris oscuro */
-    color: #666 !important; /* Texto apagado */
-    cursor: not-allowed; /* Icono de prohibido */
-    border: 1px solid #444 !important;
-    background-image: none !important;
-}
-
-.disabled-btn:hover {
-    background: #333 !important;
-    color: #666 !important;
-    transform: none !important; /* No se mueve al pasar el mouse */
-    font-weight: normal !important;
-}
-
-/* Asegura que ambas vistas tengan el mismo estilo base */
-#season-view, #arc-view { 
-    display: none; 
-    flex-direction: column; 
-    align-items: center; 
-    width: 100%; 
-    padding: 40px; 
-    animation: fadeIn 0.5s ease; 
-}
