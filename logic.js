@@ -24,34 +24,30 @@ window.toggleTask = function(checkbox, uniqueId) {
 }
 
 // --- NUEVO: GUARDADO DE PROGRESO (BARRA) ---
-window.incrementProgress = function(uniqueId, max) {
-    // 1. Obtener valor actual, protegiendo contra NaN
+// Ahora acepta el parámetro opcional 'acumulado' para actualizar el texto
+window.incrementProgress = function(uniqueId, max, acumulado = 0) {
     let stored = localStorage.getItem(uniqueId);
     let current = parseInt(stored);
     
-    // Si no es un número (ej: es "true" de la versión vieja o null), empezamos en 0
     if (isNaN(current)) current = 0;
     
-    // 2. Incrementar
     current++;
 
-    // 3. Si se pasa del máximo, volver a 0 (Reset)
     if (current > max) {
         current = 0;
-        playSfx(sfxCancel); // Sonido de reinicio
+        playSfx(sfxCancel); 
     } else if (current === max) {
-        playSfx(sfxCheck); // Sonido de victoria al completar
+        playSfx(sfxCheck); 
     } else {
-        playSfx(sfxOn); // Sonido de "tap" normal al sumar
+        playSfx(sfxOn); 
     }
 
-    // 4. Guardar y actualizar visualmente
     localStorage.setItem(uniqueId, current);
-    updateProgressBarUI(uniqueId, current, max);
+    updateProgressBarUI(uniqueId, current, max, acumulado);
 }
 
-// Helper para actualizar la barra visualmente sin recargar todo
-function updateProgressBarUI(uniqueId, current, max) {
+// Helper para actualizar visualmente
+function updateProgressBarUI(uniqueId, current, max, acumulado) {
     const barFill = document.getElementById(`bar-fill-${uniqueId}`);
     const barText = document.getElementById(`bar-text-${uniqueId}`);
     
@@ -59,13 +55,15 @@ function updateProgressBarUI(uniqueId, current, max) {
         const percent = (current / max) * 100;
         barFill.style.width = `${percent}%`;
         
-        // Texto dinámico
         if (current === max) {
             barFill.classList.add('completed-fill');
             barText.innerText = "¡COMPLETADO!";
         } else {
             barFill.classList.remove('completed-fill');
-            barText.innerText = `${current}/${max}`;
+            // AQUÍ AGREGAMOS EL ACUMULADO AL TEXTO DINÁMICO
+            let text = `${current}/${max}`;
+            if (acumulado > 0) text += ` (${acumulado})`;
+            barText.innerText = text;
         }
     }
 }
@@ -127,26 +125,29 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     tasks.forEach((tarea, i) => {
         const uniqueId = `${uniqueIdPrefix}-t${i}`;
         
-        // CASO 1: BARRA DE PROGRESO (Si tiene propiedad 'total')
+        // CASO 1: BARRA DE PROGRESO
         if (typeof tarea === 'object' && tarea.total) {
             const max = tarea.total;
+            const acumulado = tarea.acumulado || 0; // Leemos el acumulado (ej: 30)
             
-            // Protección contra NaN al renderizar
             let current = parseInt(localStorage.getItem(uniqueId));
             if (isNaN(current)) current = 0;
 
             const percent = (current / max) * 100;
             const isFull = current === max;
             
-            // Si está lleno, mostramos "COMPLETADO", sino "X/15"
-            const label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
-            const fillClass = isFull ? 'completed-fill' : '';
+            // Texto inicial
+            let label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
+            // Agregamos el acumulado si no está completo y existe
+            if (!isFull && acumulado > 0) {
+                label += ` (${acumulado})`;
+            }
 
-            // Importante: El ancho debe ser porcentual válido
+            const fillClass = isFull ? 'completed-fill' : '';
             const widthStyle = isNaN(percent) ? "0%" : `${percent}%`;
 
             html += `
-                <li class="progress-container" onclick="incrementProgress('${uniqueId}', ${max})">
+                <li class="progress-container" onclick="incrementProgress('${uniqueId}', ${max}, ${acumulado})">
                     <div class="progress-track">
                         <div id="bar-fill-${uniqueId}" class="progress-fill ${fillClass}" style="width: ${widthStyle}"></div>
                         <span id="bar-text-${uniqueId}" class="progress-text">${label}</span>
