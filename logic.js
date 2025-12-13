@@ -24,7 +24,6 @@ window.toggleTask = function(checkbox, uniqueId) {
 }
 
 // --- NUEVO: GUARDADO DE PROGRESO (BARRA) ---
-// Ahora acepta el parámetro opcional 'acumulado' para actualizar el texto
 window.incrementProgress = function(uniqueId, max, acumulado = 0) {
     let stored = localStorage.getItem(uniqueId);
     let current = parseInt(stored);
@@ -60,7 +59,6 @@ function updateProgressBarUI(uniqueId, current, max, acumulado) {
             barText.innerText = "¡COMPLETADO!";
         } else {
             barFill.classList.remove('completed-fill');
-            // AQUÍ AGREGAMOS EL ACUMULADO AL TEXTO DINÁMICO
             let text = `${current}/${max}`;
             if (acumulado > 0) text += ` (${acumulado})`;
             barText.innerText = text;
@@ -128,7 +126,7 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
         // CASO 1: BARRA DE PROGRESO
         if (typeof tarea === 'object' && tarea.total) {
             const max = tarea.total;
-            const acumulado = tarea.acumulado || 0; // Leemos el acumulado (ej: 30)
+            const acumulado = tarea.acumulado || 0; 
             
             let current = parseInt(localStorage.getItem(uniqueId));
             if (isNaN(current)) current = 0;
@@ -136,12 +134,8 @@ function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
             const percent = (current / max) * 100;
             const isFull = current === max;
             
-            // Texto inicial
             let label = isFull ? "¡COMPLETADO!" : `${current}/${max}`;
-            // Agregamos el acumulado si no está completo y existe
-            if (!isFull && acumulado > 0) {
-                label += ` (${acumulado})`;
-            }
+            if (!isFull && acumulado > 0) label += ` (${acumulado})`;
 
             const fillClass = isFull ? 'completed-fill' : '';
             const widthStyle = isNaN(percent) ? "0%" : `${percent}%`;
@@ -220,7 +214,7 @@ window.openArcView = function(seasonNum, arcIndex) {
     `;
 }
 
-// --- VISTA TEMPORADA ---
+// --- VISTA TEMPORADA (Aquí aplicamos las IMÁGENES DE FONDO) ---
 window.openSeasonView = function(seasonNum) {
     modal.style.display = 'none';
     playSfx(sfxOn);
@@ -236,11 +230,26 @@ window.openSeasonView = function(seasonNum) {
     let arcsHTML = '';
     if (arcsData) {
         arcsData.forEach((arc, index) => {
+            // Si tiene imagen, la usamos de fondo con un degradado oscuro para que se lea el texto
+            let cardStyle = '';
+            let iconHTML = '';
+            
+            if (arc.imagen) {
+                cardStyle = `
+                    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('${arc.imagen}');
+                    background-size: cover;
+                    background-position: center;
+                `;
+            } else {
+                // Si no tiene imagen, usamos el ícono emoji
+                iconHTML = `<div style="font-size:1.5rem; margin-top:5px;">${arc.icono}</div>`;
+            }
+
             arcsHTML += `
-                <div class="arc-card animate-item" onclick="openArcView(${seasonNum}, ${index})">
+                <div class="arc-card animate-item" onclick="openArcView(${seasonNum}, ${index})" style="${cardStyle}">
                     <h4>${arc.titulo}</h4>
                     <p>${arc.sub}</p>
-                    <div style="font-size:1.5rem; margin-top:5px;">${arc.icono}</div>
+                    ${iconHTML}
                 </div>`;
         });
     }
