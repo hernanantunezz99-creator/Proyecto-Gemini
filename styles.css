@@ -373,21 +373,21 @@ h1 {
 /* --- TAREAS DE SOLO LECTURA (FECHAS) --- */
 .readonly-task {
     font-weight: bold;
-    color: var(--accent-1) !important; /* Color destacado (Rojo/Coral) */
-    justify-content: center; /* Centrado */
+    color: var(--accent-1) !important; /* Rojo */
+    justify-content: center;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: rgba(255, 255, 255, 0.1) !important; /* Fondo un poco más claro */
-    cursor: default; /* Cursor normal */
+    background: rgba(255, 255, 255, 0.1) !important;
+    cursor: default;
     
-    /* IMPORTANTE: Mantener mismas medidas que 'li' normal para alinear filas */
+    /* IMPORTANTE: Mismas medidas que los items con checkbox para alinear */
     margin: 0;
     font-size: 0.7rem;
     line-height: 1.2;
     padding: 3px 5px; 
     border-radius: 4px;
-    height: 100%; /* Asegura consistencia */
-    min-height: 23px; /* Altura mínima igual a la de los checkboxes */
+    height: 100%; 
+    min-height: 23px;
     display: flex;
     align-items: center;
 }
