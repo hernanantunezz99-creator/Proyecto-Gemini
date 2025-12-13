@@ -202,7 +202,7 @@ const DATOS_ARCOS = {
             titulo: "ARCO 3: Cierre + Simulacros", 
             sub: "Sept - Dic", 
             icono: "🚀",
-            imagen: "img/arco3.png", // <--- NUEVA IMAGEN
+            imagen: "img/arcodoc.png", // <--- NUEVA IMAGEN
             objetivos: [
                 {
                     titulo: "🏥 Medicina (Finales)",
@@ -243,3 +243,4 @@ const DATOS_ARCOS = {
         { titulo: "ARCO 3: Fin 2027", sub: "Sep - Dic", icono: "🎓", objetivos: [] }
     ]
 };
+
