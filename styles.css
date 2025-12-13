@@ -391,3 +391,21 @@ h1 {
     display: flex;
     align-items: center;
 }
+
+/* =========================================
+   PARCHE FINAL: FECHAS SIN CHECKBOX
+   ========================================= */
+
+/* 1. Ocultar el cuadradito (checkbox) SOLO en la primera columna del modo Excel */
+.excel-mode .objective-group:nth-child(1) input { 
+    display: none !important; 
+}
+
+/* 2. Estilizar el texto para que quede centrado y destacado */
+.excel-mode .objective-group:nth-child(1) li { 
+    justify-content: center; /* Centrar texto */
+    color: var(--accent-1);  /* Color Rojo/Coral destacado */
+    font-weight: 800;        /* Letra gruesa */
+    pointer-events: none;    /* Evita que se pueda hacer click */
+    padding: 5px 0;          /* Un poco de aire */
+}
