@@ -74,26 +74,34 @@ window.closeArcView = function() {
     window.scrollTo(0, 0);
 }
 
-// --- RENDERIZADO TAREAS ---
-function renderTasksHTML(tasks, uniqueIdPrefix) {
+// --- RENDERIZADO TAREAS (Helper Modificado) ---
+// Ahora acepta un parámetro 'isReadOnly'
+function renderTasksHTML(tasks, uniqueIdPrefix, isReadOnly = false) {
     let html = '';
     tasks.forEach((tarea, i) => {
         const uniqueId = `${uniqueIdPrefix}-t${i}`;
-        const isChecked = localStorage.getItem(uniqueId) === 'true';
-        const checkedAttr = isChecked ? 'checked' : '';
-        const classAttr = isChecked ? 'task-completed' : '';
         const texto = typeof tarea === 'string' ? tarea : tarea.texto;
 
-        html += `
-            <li>
-                <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
-                <span class="${classAttr}">${texto}</span>
-            </li>`;
+        if (isReadOnly) {
+            // Renderizar SOLO TEXTO (para las fechas)
+            html += `<li class="readonly-task">${texto}</li>`;
+        } else {
+            // Renderizar CHECKBOX (normal)
+            const isChecked = localStorage.getItem(uniqueId) === 'true';
+            const checkedAttr = isChecked ? 'checked' : '';
+            const classAttr = isChecked ? 'task-completed' : '';
+            
+            html += `
+                <li>
+                    <input type="checkbox" ${checkedAttr} onclick="toggleTask(this, '${uniqueId}')">
+                    <span class="${classAttr}">${texto}</span>
+                </li>`;
+        }
     });
     return html;
 }
 
-// --- VISTA ARCO (Modificada para detectar Excel) ---
+// --- VISTA ARCO ---
 window.openArcView = function(seasonNum, arcIndex) {
     playSfx(sfxOn);
     seasonView.style.display = 'none';
@@ -102,16 +110,20 @@ window.openArcView = function(seasonNum, arcIndex) {
 
     const arcData = DATOS_ARCOS[seasonNum][arcIndex];
     
-    // DETECCIÓN: ¿Es el Arco 0 de la Temporada 1?
+    // DETECCIÓN: Arco 0 de la Temporada 1
     const isExcelArc = (seasonNum === 1 && arcIndex === 0);
-    // Si es Excel, usamos la clase especial 'excel-mode', si no, grilla normal
     const gridClass = isExcelArc ? 'objectives-grid excel-mode' : 'objectives-grid';
 
     let objectivesHTML = '';
     if (arcData.objetivos && arcData.objetivos.length > 0) {
         arcData.objetivos.forEach((obj, objInd) => {
             const prefix = `s${seasonNum}-a${arcIndex}-o${objInd}`;
-            const tasks = renderTasksHTML(obj.tareas, prefix);
+            
+            // Si es Excel y es la columna 0 (Fechas), activamos modo lectura
+            const isDateColumn = (isExcelArc && objInd === 0);
+            
+            const tasks = renderTasksHTML(obj.tareas, prefix, isDateColumn);
+            
             objectivesHTML += `
                 <div class="objective-group animate-item">
                     <h4 style="color: var(--accent-2); border-color: var(--accent-2);">${obj.titulo}</h4>
