@@ -393,19 +393,33 @@ h1 {
 }
 
 /* =========================================
-   PARCHE FINAL: FECHAS SIN CHECKBOX
+   CORRECCIÓN: ALINEACIÓN PERFECTA (MODO EXCEL)
    ========================================= */
 
-/* 1. Ocultar el cuadradito (checkbox) SOLO en la primera columna del modo Excel */
+/* 1. Forzar altura idéntica en TODAS las celdas del modo Excel */
+.excel-mode li {
+    height: 30px !important;       /* Altura fija obligatoria */
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 5px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05); /* Línea guía sutil */
+    font-size: 0.7rem !important;  /* Volver al tamaño pequeño original */
+    line-height: 1 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* 2. Columna 1 (Fechas): Sin checkbox y texto destacado */
 .excel-mode .objective-group:nth-child(1) input { 
     display: none !important; 
 }
 
-/* 2. Estilizar el texto para que quede centrado y destacado */
 .excel-mode .objective-group:nth-child(1) li { 
-    justify-content: center; /* Centrar texto */
-    color: var(--accent-1);  /* Color Rojo/Coral destacado */
-    font-weight: 800;        /* Letra gruesa */
-    pointer-events: none;    /* Evita que se pueda hacer click */
-    padding: 5px 0;          /* Un poco de aire */
+    justify-content: center;      /* Centrar texto */
+    color: var(--accent-1);       /* Color Rojo */
+    font-weight: 600;             /* Negrita leve (no gigante) */
+    background: rgba(255, 255, 255, 0.05); 
+    pointer-events: none;
 }
