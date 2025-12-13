@@ -26,7 +26,7 @@ const DATOS_ARCOS = {
                         "Ejercicio Día 13", "Ejercicio Día 14", "Ejercicio Día 15", "Ejercicio Día 16", "Ejercicio Día 17", "Ejercicio Día 18"
                     ]
                 },
-                // COL 3: DREMRD (EXAMENES)
+                // COL 3: DREMRD
                 {
                     titulo: "📝 DREMRD",
                     tareas: [
@@ -35,11 +35,16 @@ const DATOS_ARCOS = {
                         "156 preguntas", "168 preguntas", "180 preguntas", "192 preguntas", "204 preguntas", "216 preguntas"
                     ]
                 },
-                // COL 4: CARDIO-RESP
+                // COL 4: CARDIO (CON BARRA DE PROGRESO)
                 {
                     titulo: "🫀 CARDIO",
                     tareas: [
-                        "15 videos", "30 videos", "45 videos", "60 videos", "75 videos", "88 videos (FIN)", 
+                        { texto: "15 videos", total: 15 },
+                        { texto: "30 videos", total: 30 },
+                        { texto: "45 videos", total: 45 },
+                        { texto: "60 videos", total: 60 },
+                        { texto: "75 videos", total: 75 },
+                        { texto: "88 videos", total: 88 },
                         "---", "---", "---", "---", "---", "---", 
                         "---", "---", "---", "---", "---", "---"
                     ]
@@ -111,7 +116,7 @@ const DATOS_ARCOS = {
         },
 
         // ==========================================
-        //       ARCO 1: BASE + ARRANQUE
+        //       ARCO 1: BASE + ARRANQUE (Sin cambios)
         // ==========================================
         { 
             titulo: "ARCO 1: Base + Arranque", 
@@ -227,7 +232,7 @@ const DATOS_ARCOS = {
         }
     ],
 
-    // TEMPORADA 2 (2027) - Placeholder
+    // TEMPORADA 2
     2: [
         { titulo: "ARCO 1: Inicio 2027", sub: "Ene - Abr", icono: "🏗️", objetivos: [] },
         { titulo: "ARCO 2: Medio 2027", sub: "May - Ago", icono: "📈", objetivos: [] },
