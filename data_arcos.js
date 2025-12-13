@@ -35,17 +35,16 @@ const DATOS_ARCOS = {
                         "156 preguntas", "168 preguntas", "180 preguntas", "192 preguntas", "204 preguntas", "216 preguntas"
                     ]
                 },
-                // COL 4: CARDIO (BARRA DE PROGRESO CORREGIDA)
-                // "texto" es lo que se ve, "total" son los clics necesarios para llenar la barra
+                // COL 4: CARDIO (CON ACUMULADOS)
                 {
                     titulo: "🫀 CARDIO",
                     tareas: [
-                        { texto: "15 videos (Día 1)", total: 15 },
-                        { texto: "15 videos (Día 2)", total: 15 },
-                        { texto: "15 videos (Día 3)", total: 15 },
-                        { texto: "15 videos (Día 4)", total: 15 },
-                        { texto: "15 videos (Día 5)", total: 15 },
-                        { texto: "13 videos (Final)", total: 13 }, // El último son 13 para llegar a 88
+                        { texto: "Día 1", total: 15, acumulado: 15 },
+                        { texto: "Día 2", total: 15, acumulado: 30 },
+                        { texto: "Día 3", total: 15, acumulado: 45 },
+                        { texto: "Día 4", total: 15, acumulado: 60 },
+                        { texto: "Día 5", total: 15, acumulado: 75 },
+                        { texto: "Final", total: 13, acumulado: 88 }, 
                         "---", "---", "---", "---", "---", "---", 
                         "---", "---", "---", "---", "---", "---"
                     ]
@@ -117,7 +116,7 @@ const DATOS_ARCOS = {
         },
 
         // ==========================================
-        //       ARCO 1: BASE + ARRANQUE (Sin cambios)
+        //       ARCO 1: BASE + ARRANQUE
         // ==========================================
         { 
             titulo: "ARCO 1: Base + Arranque", 
