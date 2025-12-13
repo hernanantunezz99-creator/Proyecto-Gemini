@@ -1,139 +1,118 @@
 const DATOS_ARCOS = {
     1: [
-        // --- ARCO 0: EL PRELUDIO (13/12 - 30/12) ---
+        // ==========================================
+        //       ARCO 0: EL PRELUDIO (EXCEL)
+        // ==========================================
         { 
             titulo: "ARCO 0: El Preludio", 
             sub: "13 Dic - 30 Dic 2025", 
             icono: "✨", 
             objetivos: [
-                // COLUMNA 1: FECHAS (Referencia)
+                // COL 1: FECHAS
                 {
-                    titulo: "📅 Calendario",
+                    titulo: "📅 FECHA",
                     tareas: [
-                        "13/12 - Sábado", "14/12 - Domingo", "15/12 - Lunes", "16/12 - Martes",
-                        "17/12 - Miércoles", "18/12 - Jueves", "19/12 - Viernes", "20/12 - Sábado",
-                        "21/12 - Domingo", "22/12 - Lunes", "23/12 - Martes", "24/12 - Miércoles",
-                        "25/12 - Jueves", "26/12 - Viernes", "27/12 - Sábado", "28/12 - Domingo",
-                        "29/12 - Lunes", "30/12 - Martes"
+                        "13-dic (Sáb)", "14-dic (Dom)", "15-dic (Lun)", "16-dic (Mar)", "17-dic (Mié)", "18-dic (Jue)", 
+                        "19-dic (Vie)", "20-dic (Sáb)", "21-dic (Dom)", "22-dic (Lun)", "23-dic (Mar)", "24-dic (Mié)", 
+                        "25-dic (Jue)", "26-dic (Vie)", "27-dic (Sáb)", "28-dic (Dom)", "29-dic (Lun)", "30-dic (Mar)"
                     ]
                 },
-                // COLUMNA 2: EJERCICIO
+                // COL 2: EJERCICIO
                 {
-                    titulo: "🏋️ Ejercicio",
+                    titulo: "🏋️ EJERCICIO",
                     tareas: [
-                        "Ejercicio Día 1", "Ejercicio Día 2", "Ejercicio Día 3", "Ejercicio Día 4",
-                        "Ejercicio Día 5", "Ejercicio Día 6", "Ejercicio Día 7", "Ejercicio Día 8",
-                        "Ejercicio Día 9", "Ejercicio Día 10", "Ejercicio Día 11", "Ejercicio Día 12",
-                        "Ejercicio Día 13", "Ejercicio Día 14", "Ejercicio Día 15", "Ejercicio Día 16",
-                        "Ejercicio Día 17", "Ejercicio Día 18"
+                        "Ejercicio Día 1", "Ejercicio Día 2", "Ejercicio Día 3", "Ejercicio Día 4", "Ejercicio Día 5", "Ejercicio Día 6", 
+                        "Ejercicio Día 7", "Ejercicio Día 8", "Ejercicio Día 9", "Ejercicio Día 10", "Ejercicio Día 11", "Ejercicio Día 12", 
+                        "Ejercicio Día 13", "Ejercicio Día 14", "Ejercicio Día 15", "Ejercicio Día 16", "Ejercicio Día 17", "Ejercicio Día 18"
                     ]
                 },
-                // COLUMNA 3: DREMRD
+                // COL 3: DREMRD (EXAMENES)
                 {
                     titulo: "📝 DREMRD",
                     tareas: [
-                        "13/12: 12 Preguntas", "14/12: 12 Preguntas", "15/12: 12 Preguntas", "16/12: 12 Preguntas",
-                        "17/12: 12 Preguntas", "18/12: 12 Preguntas", "19/12: 12 Preguntas", "20/12: 12 Preguntas",
-                        "21/12: 12 Preguntas", "22/12: 12 Preguntas", "23/12: 12 Preguntas", "24/12: 12 Preguntas",
-                        "25/12: 12 Preguntas", "26/12: 12 Preguntas", "27/12: 12 Preguntas", "28/12: 12 Preguntas",
-                        "29/12: 12 Preguntas", "30/12: 12 Preguntas"
+                        "12 preguntas", "24 preguntas", "36 preguntas", "48 preguntas", "60 preguntas", "72 preguntas", 
+                        "84 preguntas", "96 preguntas", "108 preguntas", "120 preguntas", "132 preguntas", "144 preguntas", 
+                        "156 preguntas", "168 preguntas", "180 preguntas", "192 preguntas", "204 preguntas", "216 preguntas"
                     ]
                 },
-                // COLUMNA 4: CARDIO-RESP (Progresión Específica)
+                // COL 4: CARDIO-RESP
                 {
-                    titulo: "🫀 Cardio-Resp",
+                    titulo: "🫀 CARDIO",
                     tareas: [
-                        "13/12: 15 videos", 
-                        "14/12: 30 videos", 
-                        "15/12: 45 videos", 
-                        "16/12: 60 videos", 
-                        "17/12: 75 videos", 
-                        "18/12: 88 videos (FINAL)"
+                        "15 videos", "30 videos", "45 videos", "60 videos", "75 videos", "88 videos (FIN)", 
+                        "---", "---", "---", "---", "---", "---", 
+                        "---", "---", "---", "---", "---", "---"
                     ]
                 },
-                // COLUMNA 5: MKP
+                // COL 5: MKP
                 {
                     titulo: "🛒 MKP",
                     tareas: [
-                        "MKP Racha 1", "MKP Racha 2", "MKP Racha 3", "MKP Racha 4",
-                        "MKP Racha 5", "MKP Racha 6", "MKP Racha 7", "MKP Racha 8",
-                        "MKP Racha 9", "MKP Racha 10", "MKP Racha 11", "MKP Racha 12",
-                        "MKP Racha 13", "MKP Racha 14", "MKP Racha 15", "MKP Racha 16",
-                        "MKP Racha 17", "MKP Racha 18"
+                        "Racha 1", "Racha 2", "Racha 3", "Racha 4", "Racha 5", "Racha 6", 
+                        "Racha 7", "Racha 8", "Racha 9", "Racha 10", "Racha 11", "Racha 12", 
+                        "Racha 13", "Racha 14", "Racha 15", "Racha 16", "Racha 17", "Racha 18"
                     ]
                 },
-                // COLUMNA 6: HPDFa
+                // COL 6: HPDFa
                 {
                     titulo: "📄 HPDFa",
                     tareas: [
-                        "HPDFa Racha 1", "HPDFa Racha 2", "HPDFa Racha 3", "HPDFa Racha 4",
-                        "HPDFa Racha 5", "HPDFa Racha 6", "HPDFa Racha 7", "HPDFa Racha 8",
-                        "HPDFa Racha 9", "HPDFa Racha 10", "HPDFa Racha 11", "HPDFa Racha 12",
-                        "HPDFa Racha 13", "HPDFa Racha 14", "HPDFa Racha 15", "HPDFa Racha 16",
-                        "HPDFa Racha 17", "HPDFa Racha 18"
+                        "Racha 1", "Racha 2", "Racha 3", "Racha 4", "Racha 5", "Racha 6", 
+                        "Racha 7", "Racha 8", "Racha 9", "Racha 10", "Racha 11", "Racha 12", 
+                        "Racha 13", "Racha 14", "Racha 15", "Racha 16", "Racha 17", "Racha 18"
                     ]
                 },
-                // COLUMNA 7: STICKERLY (Pares)
+                // COL 7: STICKERLY
                 {
-                    titulo: "📱 Sticker.ly",
+                    titulo: "📱 STICKERLY",
                     tareas: [
-                        "13/12: Paquetes 3 y 4",
-                        "14/12: Paquetes 5 y 6",
-                        "15/12: Paquetes 7 y 8",
-                        "16/12: Paquetes 9 y 10",
-                        "17/12: Paquetes 11 y 12",
-                        "18/12: Paquetes 13 y 14",
-                        "19/12: Paquetes 15 y 16 (FINAL)"
+                        "Paquetes 3 y 4", "Paquetes 5 y 6", "Paquetes 7 y 8", "Paquetes 9 y 10", "Paquetes 11 y 12", "Paquetes 13 y 14", 
+                        "Paquetes 15 y 16", "---", "---", "---", "---", "---", 
+                        "---", "---", "---", "---", "---", "---"
                     ]
                 },
-                // COLUMNA 8: WhatStickers (K)
+                // COL 8: WS (KEVIN)
                 {
-                    titulo: "🇰🇷 WS (Kevin)",
+                    titulo: "🇰🇷 WS (K)",
                     tareas: [
-                        "13/12: 1 Pack", "14/12: 2 Packs", "15/12: 3 Packs", "16/12: 4 Packs",
-                        "17/12: 5 Packs", "18/12: 6 Packs", "19/12: 7 Packs", "20/12: 8 Packs",
-                        "21/12: 9 Packs", "22/12: 10 Packs", "23/12: 11 Packs", "24/12: 12 Packs",
-                        "25/12: 13 Packs", "26/12: 14 Packs", "27/12: 15 Packs", "28/12: 16 Packs",
-                        "29/12: 17 Packs", "30/12: 18 Packs"
+                        "Pack 1", "Pack 2", "Pack 3", "Pack 4", "Pack 5", "Pack 6", 
+                        "Pack 7", "Pack 8", "Pack 9", "Pack 10", "Pack 11", "Pack 12", 
+                        "Pack 13", "Pack 14", "Pack 15", "Pack 16", "Pack 17", "Pack 18"
                     ]
                 },
-                // COLUMNA 9: WhatStickers (S)
+                // COL 9: WS (SEBA)
                 {
-                    titulo: "🇸 WS (Seba)",
+                    titulo: "🇸 WS (S)",
                     tareas: [
-                        "13/12: 1 Pack", "14/12: 2 Packs", "15/12: 3 Packs", "16/12: 4 Packs",
-                        "17/12: 5 Packs", "18/12: 6 Packs", "19/12: 7 Packs", "20/12: 8 Packs",
-                        "21/12: 9 Packs", "22/12: 10 Packs", "23/12: 11 Packs", "24/12: 12 Packs",
-                        "25/12: 13 Packs", "26/12: 14 Packs", "27/12: 15 Packs", "28/12: 16 Packs",
-                        "29/12: 17 Packs", "30/12: 18 Packs"
+                        "Pack 1", "Pack 2", "Pack 3", "Pack 4", "Pack 5", "Pack 6", 
+                        "Pack 7", "Pack 8", "Pack 9", "Pack 10", "Pack 11", "Pack 12", 
+                        "Pack 13", "Pack 14", "Pack 15", "Pack 16", "Pack 17", "Pack 18"
                     ]
                 },
-                // COLUMNA 10: DUOLINGO
+                // COL 10: DUOLINGO
                 {
-                    titulo: "🦉 Duolingo",
+                    titulo: "🦉 DUOLINGO",
                     tareas: [
-                        "13/12: Racha 27", "14/12: Racha 28", "15/12: Racha 29", "16/12: Racha 30",
-                        "17/12: Racha 31", "18/12: Racha 32", "19/12: Racha 33", "20/12: Racha 34",
-                        "21/12: Racha 35", "22/12: Racha 36", "23/12: Racha 37", "24/12: Racha 38",
-                        "25/12: Racha 39", "26/12: Racha 40", "27/12: Racha 41", "28/12: Racha 42",
-                        "29/12: Racha 43", "30/12: Racha 44"
+                        "Racha 27", "Racha 28", "Racha 29", "Racha 30", "Racha 31", "Racha 32", 
+                        "Racha 33", "Racha 34", "Racha 35", "Racha 36", "Racha 37", "Racha 38", 
+                        "Racha 39", "Racha 40", "Racha 41", "Racha 42", "Racha 43", "Racha 44"
                     ]
                 },
-                 // COLUMNA 11: ALEMÁN (Agregada según título)
-                 {
-                    titulo: "🇩🇪 Alemán",
+                // COL 11: ALEMÁN
+                {
+                    titulo: "🇩🇪 ALEMÁN",
                     tareas: [
-                        "13/12: Práctica", "14/12: Práctica", "15/12: Práctica", "16/12: Práctica",
-                        "17/12: Práctica", "18/12: Práctica", "19/12: Práctica", "20/12: Práctica",
-                        "21/12: Práctica", "22/12: Práctica", "23/12: Práctica", "24/12: Práctica",
-                        "25/12: Práctica", "26/12: Práctica", "27/12: Práctica", "28/12: Práctica",
-                        "29/12: Práctica", "30/12: Práctica"
+                        "Práctica Día 1", "Práctica Día 2", "Práctica Día 3", "Práctica Día 4", "Práctica Día 5", "Práctica Día 6", 
+                        "Práctica Día 7", "Práctica Día 8", "Práctica Día 9", "Práctica Día 10", "Práctica Día 11", "Práctica Día 12", 
+                        "Práctica Día 13", "Práctica Día 14", "Práctica Día 15", "Práctica Día 16", "Práctica Día 17", "Práctica Día 18"
                     ]
                 }
             ]
         },
 
-        // --- ARCOS 1, 2, 3 (MANTENIDOS IGUAL) ---
+        // ==========================================
+        //       ARCO 1: BASE + ARRANQUE
+        // ==========================================
         { 
             titulo: "ARCO 1: Base + Arranque", 
             sub: "Enero - Abril", 
@@ -142,18 +121,18 @@ const DATOS_ARCOS = {
                 {
                     titulo: "🏥 Medicina (Arranque)",
                     tareas: [
-                        "02/03/2026: Inicio 4 materias (1er lunes Marzo).",
-                        "Armar 'sistema': calendario, carpeta, errores, Anki.",
-                        "Leer 20–25% de la bibliografía total.",
-                        "Hacer 200 preguntas (test/clínicas) para detectar patrones.",
-                        "1 vez/semana: mini-caso clínico (1 hoja).",
-                        "Preparar bloque evaluación (UCGYN Clínica I: 28/04)."
+                        "✅ 02/03/2026: Inicio de las 4 materias (primer lunes de marzo).",
+                        "Armar “sistema”: calendario, carpeta por materia, cuaderno de errores y Anki.",
+                        "Leer 20–25% de la bibliografía total del año (entre las 4 materias).",
+                        "Hacer 200 preguntas en total (tipo test/clínicas) para detectar patrones.",
+                        "1 vez/semana: mini-caso clínico (1 hoja: motivo consulta → hipótesis → conducta).",
+                        "Preparar el primer bloque fuerte de evaluaciones (UCGYN Clínica I: 28/04–02/05)."
                     ]
                 },
                 {
                     titulo: "🧠 Psicología (3er Semestre)",
                     tareas: [
-                        "✅ 02/03/2026: Inicio 3er Semestre.",
+                        "✅ 02/03/2026: inicio 3er semestre.",
                         "Materia: Psicología Social.",
                         "Materia: Psicología, Sujeto y Aprendizaje.",
                         "Materia: Métodos y Técnicas cualitativas.",
@@ -161,13 +140,16 @@ const DATOS_ARCOS = {
                         "Materia: Articulación de saberes III: Clínica y Subjetividad.",
                         "Materia: Idiomas.",
                         "Materia: Cooperación Institucional.",
-                        "✅ Meta 30/04: Tener 40% hecho (lecturas + apuntes + prácticos).",
-                        "✅ Semanal: 3 lecturas + 2 tareas/prácticos.",
-                        "✅ Semanal: 1 repaso (resumen de 1 hoja por tema)."
+                        "✅ Meta 30/04: tener 40% hecho del semestre (lecturas clave + apuntes + prácticos al día).",
+                        "✅ Cada semana: 3 lecturas + 2 tareas/prácticos + 1 repaso (resumen de 1 hoja por tema)."
                     ]
                 }
             ]
         },
+
+        // ==========================================
+        //       ARCO 2: PARCIALES + CONSOLIDACIÓN
+        // ==========================================
         { 
             titulo: "ARCO 2: Parciales + Consolidación", 
             sub: "Mayo - Agosto", 
@@ -176,27 +158,27 @@ const DATOS_ARCOS = {
                 {
                     titulo: "🏥 Medicina (Parciales)",
                     tareas: [
-                        "Subir a 40–60 preguntas/sem (Total: 400–600).",
-                        "Completar 60% bibliografía acumulada.",
-                        "Rutina parciales: preguntas → corregir → errores → simulacro.",
-                        "📅 07/06/2026: Parcial BCP.",
+                        "Subir a 40–60 preguntas por semana (total tramo: 400–600).",
+                        "Completar 60% de bibliografía acumulada.",
+                        "Rutina parciales: (preguntas → corregir → tarjetas de errores → mini-simulacro).",
+                        "📅 07/06/2026: Parcial Bases Científicas de la Patología (BCP).",
                         "📅 12/07/2026: Parcial MO (UCGYN).",
-                        "📅 02/08/2026: 1er Parcial (MPNA).",
-                        "Resumen maestro 10–15 págs/materia (High-Yield)."
+                        "📅 02/08/2026: 1er Parcial Medicina PNA.",
+                        "Resumen maestro de 10–15 páginas por materia (cortito, puro high-yield)."
                     ]
                 },
                 {
-                    titulo: "🧠 Psicología (Cierre 3º + Inicio 4º)",
+                    titulo: "🧠 Psicología (Transición 3º ➡ 4º)",
                     tareas: [
-                        "✅ Mayo–Junio: Cerrar 3er semestre (80–100% + entregas).",
-                        "✅ Julio: 'Limpieza' (recuperar atrasos + adelantar 10% del 4to).",
-                        "Adelantar: Clínica I / Salud / Cuantitativas / Proyectos.",
-                        "✅ Agosto: Inicio 4to Semestre.",
+                        "✅ Mayo–Junio: cerrar 3er semestre: 80–100% + entregas finales.",
+                        "✅ Julio: “limpieza”: recuperar atrasos + adelantar 10% de estas del 4to.",
+                        "Adelantar: Clínica I / Psicología y Salud / Cuantitativas / Proyectos.",
+                        "✅ Agosto: inicio 4to semestre.",
                         "Materia: Clínica I: Fundamentos psicoanalíticos.",
                         "Materia: Psicología y Salud.",
                         "Materia: Herramientas de la Psicología Social.",
                         "Materia: Diseño de proyectos.",
-                        "Materia: Articulación de saberes IV: Estado, sociedad y políticas.",
+                        "Materia: Articulación de saberes IV: Estado, sociedad y políticas públicas.",
                         "Materia: Idiomas / Cooperación Institucional.",
                         "Materia: Métodos y Técnicas cuantitativas.",
                         "Materia: Herramientas de la Psicología Clínica."
@@ -204,6 +186,10 @@ const DATOS_ARCOS = {
                 }
             ]
         },
+
+        // ==========================================
+        //       ARCO 3: CIERRE + SIMULACROS
+        // ==========================================
         { 
             titulo: "ARCO 3: Cierre + Simulacros", 
             sub: "Sept - Dic", 
@@ -212,38 +198,39 @@ const DATOS_ARCOS = {
                 {
                     titulo: "🏥 Medicina (Finales)",
                     tareas: [
-                        "Cerrar bibliografía (llegar al 85–90%).",
-                        "Integración: 2 simulacros/sem (Test + ECOE).",
-                        "Total: 600–800 preguntas + 100 críticas.",
-                        "📅 27/09: Parcial BCP.",
-                        "📅 15/10: Entrega HC (MPNA).",
-                        "📅 21/10: Encuentro clínico (MPNA).",
-                        "📅 01/11: Simulacro ECOE.",
-                        "📅 24/11: Eval. cont. final (MPNA).",
-                        "📅 29/11: Parcial BCP.",
-                        "📅 08/12: Examen UCGYN / 13/12 MPNA / 16/12 BCP."
+                        "Cerrar bibliografía: llegar a 85–90%.",
+                        "Hacer el bloque grande de integración clínica: 2 simulacros por semana.",
+                        "Objetivo numérico: 600–800 preguntas + repaso de 100 preguntas clínicas 'de vida o muerte'.",
+                        "📅 27/09/2026: Parcial BCP.",
+                        "📅 15/10/2026: Entrega HC (MPNA).",
+                        "📅 21/10/2026: Encuentro clínico (MPNA).",
+                        "📅 01/11/2026: Simulacro ECOE (MPNA).",
+                        "📅 24/11/2026: Evaluación continua final (MPNA).",
+                        "📅 29/11/2026: Parcial BCP.",
+                        "📅 08/12/2026: Examen (UCGYN).",
+                        "📅 13/12/2026: Examen (MPNA).",
+                        "📅 16/12/2026: Examen (BCP)."
                     ]
                 },
                 {
                     titulo: "🧠 Psicología (Cierre 4to Semestre)",
                     tareas: [
-                        "✅ Meta 31/10: Llevar 70% del 4to semestre.",
-                        "✅ Noviembre: Cerrar 100% + entregas grandes.",
+                        "✅ Meta 31/10: llevar 70% del 4to semestre.",
+                        "✅ Noviembre: cerrar 100% + entregas grandes.",
                         "Entregar: Diseño de proyectos.",
                         "Entregar: Articulación IV.",
                         "Entregar: Clínica I.",
-                        "✅ Diciembre: Repaso final.",
-                        "Rutina Dic: 2 simulacros/semana (preguntas guía + casos).",
-                        "Corregir errores de simulacros."
+                        "✅ Diciembre: repaso final: 2 simulacros/semana (preguntas guía + casos) + corregir errores."
                     ]
                 }
             ]
         }
     ],
-    // TEMPORADA 2
+
+    // TEMPORADA 2 (2027) - Placeholder
     2: [
-        { titulo: "ARCO 1", sub: "Enero - Abril", icono: "🏗️", objetivos: [] },
-        { titulo: "ARCO 2", sub: "Mayo - Agosto", icono: "📈", objetivos: [] },
-        { titulo: "ARCO 3", sub: "Sept - Dic", icono: "🎓", objetivos: [] }
+        { titulo: "ARCO 1: Inicio 2027", sub: "Ene - Abr", icono: "🏗️", objetivos: [] },
+        { titulo: "ARCO 2: Medio 2027", sub: "May - Ago", icono: "📈", objetivos: [] },
+        { titulo: "ARCO 3: Fin 2027", sub: "Sep - Dic", icono: "🎓", objetivos: [] }
     ]
 };
