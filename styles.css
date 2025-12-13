@@ -482,3 +482,30 @@ h1 {
     z-index: 2;
     position: relative;
 }
+
+/* =========================================
+   AJUSTE BOTONES ARCOS (Más pequeños y limpios)
+   ========================================= */
+
+.arc-card {
+    /* Hacemos la tarjeta más compacta */
+    padding: 15px !important; 
+    min-height: 130px !important; /* Altura fija menor */
+    justify-content: flex-end; /* Texto pegado abajo para tapar menos */
+    /* Sombra interna suave inferior para ayudar al texto sin tapar toda la imagen */
+    box-shadow: inset 0 -50px 60px -20px rgba(0,0,0,0.7), 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.arc-card h4 {
+    /* Título "ARCO X" más pequeño */
+    font-size: 1.3rem !important; 
+    margin-bottom: 2px !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important; /* Sombra fuerte para legibilidad */
+}
+
+.arc-card p {
+    /* Fechas más pequeñas */
+    font-size: 0.85rem !important;
+    opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1) !important;
+}
