@@ -35,16 +35,17 @@ const DATOS_ARCOS = {
                         "156 preguntas", "168 preguntas", "180 preguntas", "192 preguntas", "204 preguntas", "216 preguntas"
                     ]
                 },
-                // COL 4: CARDIO (CON BARRA DE PROGRESO)
+                // COL 4: CARDIO (BARRA DE PROGRESO CORREGIDA)
+                // "texto" es lo que se ve, "total" son los clics necesarios para llenar la barra
                 {
                     titulo: "🫀 CARDIO",
                     tareas: [
-                        { texto: "15 videos", total: 15 },
-                        { texto: "30 videos", total: 30 },
-                        { texto: "45 videos", total: 45 },
-                        { texto: "60 videos", total: 60 },
-                        { texto: "75 videos", total: 75 },
-                        { texto: "88 videos", total: 88 },
+                        { texto: "15 videos (Día 1)", total: 15 },
+                        { texto: "15 videos (Día 2)", total: 15 },
+                        { texto: "15 videos (Día 3)", total: 15 },
+                        { texto: "15 videos (Día 4)", total: 15 },
+                        { texto: "15 videos (Día 5)", total: 15 },
+                        { texto: "13 videos (Final)", total: 13 }, // El último son 13 para llegar a 88
                         "---", "---", "---", "---", "---", "---", 
                         "---", "---", "---", "---", "---", "---"
                     ]
